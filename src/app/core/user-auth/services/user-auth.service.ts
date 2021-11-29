@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs';
-import { KEY_ACCESS_TOKEN } from 'src/app/shared/constants';
-import { StorageService } from 'src/app/storage/services/storage.service';
 import { environment } from 'src/environments/environment';
+import { KEY_ACCESS_TOKEN } from '../../shared/constants';
+import { StorageService } from '../../storage/services/storage.service';
 
 @Injectable()
 export class UserAuthService {
@@ -11,24 +11,36 @@ export class UserAuthService {
   constructor(
     private readonly http: HttpClient,
     private readonly storageService: StorageService
-  ) { }
+  ) {}
 
   isFirstAccess(email: string) {
-    return this.http.get<{ result: boolean }>(`${this.BASE_URL}/is-first-login?email=${email}`);
+    return this.http.get<{ result: boolean }>(
+      `${this.BASE_URL}/is-first-login?email=${email}`
+    );
   }
 
   login(email: string, pass: string) {
     return this.http
-      .post<void>(`${this.BASE_URL}/login`, { email, pass }, {  observe: 'response' })
+      .post<void>(
+        `${this.BASE_URL}/login`,
+        { email, pass },
+        { observe: 'response' }
+      )
       .pipe(
-        tap(response => this.storageService.set(KEY_ACCESS_TOKEN, response.headers.get('x-access-token') || '')),
-        map(response => response.body)
+        tap((response) =>
+          this.storageService.set(
+            KEY_ACCESS_TOKEN,
+            response.headers.get('x-access-token') || ''
+          )
+        ),
+        map((response) => response.body)
       );
   }
 
   requestChangePass(email: string) {
-    return this.http
-      .put<void>(`${this.BASE_URL}/request-change-pass`, { email })
+    return this.http.put<void>(`${this.BASE_URL}/request-change-pass`, {
+      email,
+    });
   }
 
   changeEmail(email: string, newPass: string, oldPass: string) {

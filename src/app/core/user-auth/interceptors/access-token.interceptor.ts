@@ -6,8 +6,8 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { StorageService } from 'src/app/storage/services/storage.service';
-import { KEY_ACCESS_TOKEN } from 'src/app/shared/constants';
+import { StorageService } from '../../storage/services/storage.service';
+import { KEY_ACCESS_TOKEN } from '../../shared/constants';
 
 @Injectable()
 export class AccessTokenInterceptor implements HttpInterceptor {

@@ -4,9 +4,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserAuthModule } from './user-auth/user-auth.module';
-import { ServerModule } from './server/server.module';
-import { AccessTokenInterceptor } from './user-auth/interceptors/access-token.interceptor';
+import { UserAuthModule } from './core/user-auth/user-auth.module';
+import { ServerModule } from './core/server/server.module';
+import { AccessTokenInterceptor } from './core/user-auth/interceptors/access-token.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
