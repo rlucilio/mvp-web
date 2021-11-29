@@ -1,0 +1,76 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { filter } from 'rxjs';
+import { UserAuthService } from 'src/app/core/user-auth/services/user-auth.service';
+import { confirmPassValidator } from '../validators/confirm-pass.validator';
+
+@Component({
+  selector: 'app-auth-register-pass',
+  templateUrl: './auth-register-pass.component.html',
+  styleUrls: ['./auth-register-pass.component.scss'],
+})
+export class AuthRegisterPassComponent implements OnInit {
+  private email?: string;
+  formNewPass?: FormGroup;
+
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly userService: UserAuthService,
+    private readonly router: Router,
+    private readonly formBuilder: FormBuilder
+  ) {}
+
+  ngOnInit(): void {
+    this.getParams();
+    this.createForm();
+
+    this.verifyIsFirsAccess();
+  }
+
+  registerPass() {
+    const newPass = this.formNewPass?.get('newPass')?.value;
+    if (this.email && newPass) {
+      this.userService.createPass(this.email, newPass);
+    } else {
+      this.goBackToLoginPage();
+    }
+  }
+
+  private createForm() {
+    this.formNewPass = this.formBuilder.group({
+      newPass: this.formBuilder.control('', {
+        validators: [Validators.required, Validators.minLength(4)],
+      }),
+      newPassConfirm: this.formBuilder.control('', {
+        validators: [
+          Validators.required,
+          Validators.minLength(4),
+          confirmPassValidator,
+        ],
+      }),
+    });
+  }
+
+  private getParams() {
+    this.email = (this.route.snapshot.params as { email: string }).email;
+  }
+
+  private verifyIsFirsAccess() {
+    if (this.email) {
+      this.userService
+        .isFirstAccess(this.email)
+        .pipe(filter((response) => !response.result))
+        .subscribe({
+          next: () => this.goBackToLoginPage(),
+          error: (err) => this.goBackToLoginPage(),
+        });
+    } else {
+      this.goBackToLoginPage();
+    }
+  }
+
+  private goBackToLoginPage() {
+    this.router.navigate(['auth', 'login']);
+  }
+}

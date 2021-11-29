@@ -1,0 +1,48 @@
+<body>
+  <form *ngIf="formNewPass" [formGroup]="formNewPass">
+    <section>
+      <label for="newPass">Nova senha</label>
+      <input
+        type="password"
+        name="newPass"
+        placeholder="****"
+        formControlName="newPass"
+      />
+      <div *ngIf="formNewPass?.get('newPass')?.touched">
+        <p *ngIf="formNewPass?.get('newPass')?.hasError('required')">
+          Senha é obrigatória
+        </p>
+        <p *ngIf="formNewPass?.get('newPass')?.hasError('minlength')">
+          Senha inválida
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <label for="newPass">Confirmar nova senha</label>
+      <input
+        type="password"
+        name="newPassConfirm"
+        placeholder="****"
+        formControlName="newPassConfirm"
+      />
+      <div *ngIf="formNewPass?.get('newPassConfirm')?.touched">
+        <p *ngIf="formNewPass?.get('newPassConfirm')?.hasError('required')">
+          Senha é obrigatória
+        </p>
+        <p *ngIf="formNewPass?.get('newPassConfirm')?.hasError('minlength')">
+          Senha inválida
+        </p>
+        <p *ngIf="formNewPass?.get('newPassConfirm')?.hasError('passConfirm')">
+          Senha não são iguais
+        </p>
+      </div>
+    </section>
+  </form>
+</body>
+
+<footer>
+  <button [disabled]="!formNewPass?.valid" (click)="registerPass()">
+    Registrar senha
+  </button>
+</footer>

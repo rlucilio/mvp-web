@@ -1,0 +1,55 @@
+<body>
+  <form *ngIf="formLogin" [formGroup]="formLogin">
+    <section>
+      <label for="email">Email</label>
+      <input
+        type="email"
+        name="email"
+        placeholder="exemplo@email.com"
+        formControlName="email"
+      />
+      <div *ngIf="formLogin?.get('email')?.touched">
+        <p *ngIf="formLogin?.get('email')?.hasError('required')">
+          E-mail obrigatório
+        </p>
+        <p *ngIf="formLogin?.get('email')?.hasError('pattern')">
+          E-mail inválido
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <label for="pass">Senha</label>
+      <input
+        [type]="typePass"
+        name="pass"
+        placeholder="****"
+        formControlName="pass"
+      />
+
+      <button (click)="togglePass()">Mostrar senha</button>
+
+      <div *ngIf="formLogin?.get('pass')?.touched">
+        <p *ngIf="formLogin?.get('pass')?.hasError('required')">
+          Senha é obrigatório
+        </p>
+        <p *ngIf="formLogin?.get('pass')?.hasError('minlength')">
+          Senha deve ter no mínimo 4 caracteres
+        </p>
+      </div>
+    </section>
+  </form>
+</body>
+
+<footer>
+  <button
+    *ngIf="!formLogin?.get('email')?.hasError('firstAccess')"
+    [disabled]="!formLogin?.valid"
+  >
+    Logar
+  </button>
+  <button *ngIf="formLogin?.get('email')?.hasError('firstAccess')">
+    Cadastrar senha
+  </button>
+  <button>Redefinir senha</button>
+</footer>
