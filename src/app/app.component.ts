@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { UserAuthService } from './auth/services/user-auth.service';
+import { UserAuthService } from './user-auth/services/user-auth.service';
+import { ServerService } from './server/services/server.service';
 import { StorageService } from './storage/services/storage.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private readonly authService: UserAuthService, private readonly storageService: StorageService) {}
+  constructor(
+    private readonly authService: UserAuthService,
+    private readonly serverService: ServerService
+  ) {}
 
   ngOnInit(): void {
-    this.storageService.set('renan', 'lucilio');
-    this.storageService.get('renan').subscribe(console.log, console.log)
+    this.serverService.verifyServer().subscribe(console.log);
 
     // this.authService.isFirstAccess('renannn@email.com').subscribe({
     //   complete: console.log,

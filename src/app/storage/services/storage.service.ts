@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as CryptoJS from "crypto-js";
+import * as CryptoJS from 'crypto-js';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -7,24 +7,32 @@ import { environment } from 'src/environments/environment';
 export class StorageService {
   private storage: Storage = window.localStorage;
 
-  constructor() { }
+  constructor() {}
 
   set(key: string, value: string) {
     const keyCrypt = CryptoJS.MD5(key).toString();
-    const valueCrypt = CryptoJS.AES.encrypt(value, environment.keyEncrypt).toString();
+    const valueCrypt = CryptoJS.AES.encrypt(
+      value,
+      environment.keyEncrypt
+    ).toString();
     this.storage.setItem(keyCrypt, valueCrypt);
   }
 
-  get(key: string): Observable<string | null> {
+  get(key: string) {
     const keyCrypt = CryptoJS.MD5(key).toString();
-    const valueEncrypt: string | null = this.storage.getItem(keyCrypt.toString());
+    const valueEncrypt: string | null = this.storage.getItem(
+      keyCrypt.toString()
+    );
 
     if (valueEncrypt) {
-      const bytesDecrypt = CryptoJS.AES.decrypt(valueEncrypt, environment.keyEncrypt);
-      const originalText = bytesDecrypt.toString(CryptoJS.enc.Utf8);
-      return of(originalText);
+      const bytesDecrypt = CryptoJS.AES.decrypt(
+        valueEncrypt,
+        environment.keyEncrypt
+      );
+      const originalValue = bytesDecrypt.toString(CryptoJS.enc.Utf8);
+      return originalValue;
     } else {
-      return of(null);
+      return null;
     }
   }
 }

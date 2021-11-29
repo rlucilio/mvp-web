@@ -1,13 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs';
+import { KEY_ACCESS_TOKEN } from 'src/app/shared/constants';
+import { StorageService } from 'src/app/storage/services/storage.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class UserAuthService {
   private readonly BASE_URL = `${environment.urlServe}/users`;
   constructor(
-    private readonly http: HttpClient
+    private readonly http: HttpClient,
+    private readonly storageService: StorageService
   ) { }
 
   isFirstAccess(email: string) {
@@ -18,7 +21,7 @@ export class UserAuthService {
     return this.http
       .post<void>(`${this.BASE_URL}/login`, { email, pass }, {  observe: 'response' })
       .pipe(
-        tap(response => console.log(response.headers.get('x-access-token'))),
+        tap(response => this.storageService.set(KEY_ACCESS_TOKEN, response.headers.get('x-access-token') || '')),
         map(response => response.body)
       );
   }
