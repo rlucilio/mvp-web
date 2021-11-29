@@ -53,7 +53,7 @@ export class AuthRegisterPassComponent implements OnInit {
   }
 
   private getParams() {
-    this.email = (this.route.snapshot.params as { email: string }).email;
+    this.email = this.route.snapshot.paramMap.get('email') || '';
   }
 
   private verifyIsFirsAccess() {

@@ -46,6 +46,16 @@ export class UserAuthService {
       .pipe(first());
   }
 
+  changePass(email: string, newPass: string, oldPass: string) {
+    return this.http
+      .put<void>(`${this.BASE_URL}/change-pass`, {
+        email,
+        newPass,
+        oldPass,
+      })
+      .pipe(first());
+  }
+
   changeEmail(email: string, newPass: string, oldPass: string) {
     return this.http
       .put('/change-pass', { email, newPass, oldPass })

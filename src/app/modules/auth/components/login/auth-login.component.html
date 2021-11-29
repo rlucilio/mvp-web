@@ -51,5 +51,10 @@
   <button *ngIf="formLogin?.get('email')?.hasError('firstAccess')">
     Cadastrar senha
   </button>
-  <button>Redefinir senha</button>
+  <button
+    [disabled]="!formLogin?.get('email')?.valid"
+    (click)="requestChangePass()"
+  >
+    Redefinir senha
+  </button>
 </footer>

@@ -61,10 +61,10 @@ export class AuthLoginComponent implements OnInit {
   }
 
   requestChangePass() {
-    const email = this.formLogin?.get('email')?.value;
-    if (email) {
+    const email = this.formLogin?.get('email');
+    if (email && email.value && email?.valid) {
       this.userAuthService
-        .requestChangePass(email)
+        .requestChangePass(email.value)
         .subscribe(() => console.log('Logado'));
     }
   }
