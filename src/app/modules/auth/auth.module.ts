@@ -16,6 +16,5 @@ import { ChangePassComponent } from './components/change-pass/change-pass.compon
     ChangePassComponent,
   ],
   imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule],
-  providers: [],
 })
 export class AuthModule {}

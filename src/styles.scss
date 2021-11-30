@@ -14,7 +14,7 @@ $mvp-web-accent: mat.define-palette(
 
 $mvp-web-warn: mat.define-palette(colors.$red-palette);
 
-$mvp-web-theme: mat.define-dark-theme(
+$mvp-web-theme: mat.define-light-theme(
   (
     color: (
       primary: $mvp-web-primary,

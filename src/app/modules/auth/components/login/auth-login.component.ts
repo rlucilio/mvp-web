@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { REGEX_EMAIL } from 'src/app/core/shared/constants';
 import { UserAuthService } from 'src/app/core/user-auth/services/user-auth.service';
 import { verifyFirstAccessValidator } from '../../validators/verify-first-access.validator';
 
@@ -25,12 +26,7 @@ export class AuthLoginComponent implements OnInit {
   createForm() {
     this.formLogin = this.formBuilder.group({
       email: this.formBuilder.control('', {
-        validators: [
-          Validators.required,
-          Validators.pattern(
-            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/
-          ),
-        ],
+        validators: [Validators.required, Validators.pattern(REGEX_EMAIL)],
         asyncValidators: [verifyFirstAccessValidator(this.userAuthService)],
       }),
       pass: this.formBuilder.control('', {
