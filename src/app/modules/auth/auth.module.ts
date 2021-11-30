@@ -7,6 +7,7 @@ import { AuthLoginComponent } from './components/login/auth-login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthRegisterPassComponent } from './components/auth-register-pass/auth-register-pass.component';
 import { ChangePassComponent } from './components/change-pass/change-pass.component';
+import { SharedComponentsModule } from 'src/app/core/shared/shared-components/shared-components.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,12 @@ import { ChangePassComponent } from './components/change-pass/change-pass.compon
     AuthRegisterPassComponent,
     ChangePassComponent,
   ],
-  imports: [CommonModule, AuthRoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    AuthRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedComponentsModule,
+  ],
 })
 export class AuthModule {}

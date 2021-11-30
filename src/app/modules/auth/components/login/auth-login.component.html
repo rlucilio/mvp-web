@@ -1,11 +1,5 @@
-<main class="main-container-mobile">
-  <header class="header">
-    <img
-      src="../../../../../assets/imgs/sulamerica-logo.png"
-      alt="Logo da SulAmérica"
-      class="header__logo"
-    />
-  </header>
+<main class="main-container">
+  <app-logo class="header"></app-logo>
 
   <main class="login">
     <section class="login__welcome">
@@ -125,7 +119,10 @@
         (click)="registerPass()"
         class="actions__btn"
       >
-        <img src="../../../../../assets/icons/enter.svg" />
+        <img
+          src="../../../../../assets/icons/enter.svg"
+          class="actions__btn-icon"
+        />
         Ativar Conta
       </button>
     </section>

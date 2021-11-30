@@ -1,0 +1,11 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  padding: 1.8rem 2.5rem;
+
+  &__logo {
+    width: 100%;
+    max-width: 500px;
+  }
+}

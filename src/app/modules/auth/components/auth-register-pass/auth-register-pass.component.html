@@ -1,4 +1,5 @@
-<body>
+<app-logo class="header"></app-logo>
+<main>
   <form *ngIf="formNewPass" [formGroup]="formNewPass">
     <section>
       <label for="newPass">Nova senha</label>
@@ -39,7 +40,7 @@
       <button (click)="togglePass()">Mostrar senha</button>
     </section>
   </form>
-</body>
+</main>
 
 <footer>
   <button [disabled]="!formNewPass?.valid" (click)="registerPass()">
