@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+@use "./styles/colors.scss" as colors;
+
+@include mat.core();
+
+$mvp-web-primary: mat.define-palette(colors.$primary-palette);
+$mvp-web-accent: mat.define-palette(
+  colors.$secondary-palette,
+  A200,
+  A100,
+  A400
+);
+
+$mvp-web-warn: mat.define-palette(colors.$red-palette);
+
+$mvp-web-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $mvp-web-primary,
+      accent: $mvp-web-accent,
+      warn: $mvp-web-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($mvp-web-theme);
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
