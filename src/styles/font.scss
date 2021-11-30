@@ -1,0 +1,28 @@
+@use "@angular/material" as mat;
+
+@mixin setFont() {
+  @font-face {
+    font-family: "Poppins";
+    src: url("./types/Poppins-Thin.ttf") format("truetype");
+    font-weight: 100;
+  }
+
+  @font-face {
+    font-family: "Poppins";
+    src: url("./types/Poppins-ThinItalic.ttf") format("truetype");
+    font-weight: 100;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: "Poppins";
+    src: url("./types/Poppins-Thin.ttf") format("truetype");
+    font-weight: 100;
+  }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.25rem);
+  }
+}

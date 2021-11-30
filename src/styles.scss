@@ -1,5 +1,6 @@
 @use "@angular/material" as mat;
 @use "./styles/colors.scss" as colors;
+@use "./styles/font.scss" as font;
 
 @include mat.core();
 
@@ -24,12 +25,13 @@ $mvp-web-theme: mat.define-dark-theme(
 );
 
 @include mat.all-component-themes($mvp-web-theme);
+@include font.setFont();
 
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
