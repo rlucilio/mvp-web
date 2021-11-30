@@ -73,8 +73,6 @@ export class AuthRegisterPassComponent implements OnInit {
   }
 
   private goBackToLoginPage() {
-    console.log(1);
-
     this.router.navigate(['/auth/login']);
   }
 

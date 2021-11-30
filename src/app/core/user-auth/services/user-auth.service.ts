@@ -67,4 +67,12 @@ export class UserAuthService {
       .put(`${this.BASE_URL}/create-pass`, { email, newPass })
       .pipe(first());
   }
+
+  verifyTokenChangePass(email: string, token: string) {
+    return this.http
+      .get<{ result: boolean }>(
+        `${this.BASE_URL}/verify-token-change-pass?email=${email}&token=${token}`
+      )
+      .pipe(first());
+  }
 }

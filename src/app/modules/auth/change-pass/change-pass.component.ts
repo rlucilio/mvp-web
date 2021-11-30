@@ -26,6 +26,8 @@ export class ChangePassComponent implements OnInit {
   ngOnInit(): void {
     this.getParams();
     this.createForm();
+
+    this.verifyToken();
   }
 
   private createForm() {
@@ -39,6 +41,23 @@ export class ChangePassComponent implements OnInit {
     });
 
     this.formNewPass.addValidators(confirmPassValidator);
+  }
+
+  private verifyToken() {
+    if (this.params?.email && this.params.token) {
+      this.authUserService
+        .verifyTokenChangePass(this.params.email, this.params.token)
+        .subscribe({
+          next: (response) => {
+            if (response.result) {
+              console.log('Token ok');
+            } else {
+              this.goToLoginPage();
+            }
+          },
+          error: () => this.goToLoginPage(),
+        });
+    }
   }
 
   private getParams() {
@@ -57,7 +76,7 @@ export class ChangePassComponent implements OnInit {
     if (this.params?.email && this.params?.token && newPass) {
       this.authUserService
         .changePass(this.params.email, newPass, this.params.token)
-        .subscribe(this.goToLoginPage);
+        .subscribe(() => this.goToLoginPage());
     }
   }
 
