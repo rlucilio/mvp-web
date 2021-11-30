@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserAuthService } from 'src/app/core/user-auth/services/user-auth.service';
-import { confirmPassValidator } from '../validators/confirm-pass.validator';
+import { confirmPassValidator } from '../../validators/confirm-pass.validator';
 
 @Component({
   selector: 'app-change-pass',

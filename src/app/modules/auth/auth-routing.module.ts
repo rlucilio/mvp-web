@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthRegisterPassComponent } from './auth-register-pass/auth-register-pass.component';
-import { ChangePassComponent } from './change-pass/change-pass.component';
+import { AuthRegisterPassComponent } from './components/auth-register-pass/auth-register-pass.component';
+import { ChangePassComponent } from './components/change-pass/change-pass.component';
 import { AuthLoginComponent } from './components/login/auth-login.component';
 import { AuthComponent } from './components/root/auth.component';
 
