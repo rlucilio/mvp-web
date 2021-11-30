@@ -45,10 +45,14 @@
   <button
     *ngIf="!formLogin?.get('email')?.hasError('firstAccess')"
     [disabled]="!formLogin?.valid"
+    (click)="login()"
   >
     Logar
   </button>
-  <button *ngIf="formLogin?.get('email')?.hasError('firstAccess')">
+  <button
+    *ngIf="formLogin?.get('email')?.hasError('firstAccess')"
+    (click)="registerPass()"
+  >
     Cadastrar senha
   </button>
   <button

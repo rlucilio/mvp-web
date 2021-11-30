@@ -27,8 +27,7 @@ export const verifyFirstAccessValidator = (
                 }
               : null
           ),
-          catchError((err) => of(null)),
-          tap((response) => console.log(control))
+          catchError((err) => of(null))
         )
       ),
       first()

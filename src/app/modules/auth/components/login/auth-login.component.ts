@@ -56,7 +56,7 @@ export class AuthLoginComponent implements OnInit {
   registerPass() {
     const email = this.formLogin?.get('email')?.value;
     if (email) {
-      this.router.navigate(['login', 'register-pass', email]);
+      this.router.navigate(['/auth/register-pass', email]);
     }
   }
 
@@ -65,7 +65,7 @@ export class AuthLoginComponent implements OnInit {
     if (email && email.value && email?.valid) {
       this.userAuthService
         .requestChangePass(email.value)
-        .subscribe(() => console.log('Logado'));
+        .subscribe(() => console.log('solicitado para trocar a senha'));
     }
   }
 }

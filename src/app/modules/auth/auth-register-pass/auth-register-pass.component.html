@@ -3,7 +3,7 @@
     <section>
       <label for="newPass">Nova senha</label>
       <input
-        type="password"
+        [type]="typePass"
         name="newPass"
         placeholder="****"
         formControlName="newPass"
@@ -16,12 +16,13 @@
           Senha inválida
         </p>
       </div>
+      <button (click)="togglePass()">Mostrar senha</button>
     </section>
 
     <section>
       <label for="newPass">Confirmar nova senha</label>
       <input
-        type="password"
+        [type]="typePass"
         name="newPassConfirm"
         placeholder="****"
         formControlName="newPassConfirm"
@@ -33,10 +34,9 @@
         <p *ngIf="formNewPass?.get('newPassConfirm')?.hasError('minlength')">
           Senha inválida
         </p>
-        <p *ngIf="formNewPass?.get('newPassConfirm')?.hasError('passConfirm')">
-          Senha não são iguais
-        </p>
+        <p *ngIf="formNewPass?.hasError('passConfirm')">Senha não são iguais</p>
       </div>
+      <button (click)="togglePass()">Mostrar senha</button>
     </section>
   </form>
 </body>

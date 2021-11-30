@@ -58,11 +58,13 @@ export class UserAuthService {
 
   changeEmail(email: string, newPass: string, oldPass: string) {
     return this.http
-      .put('/change-pass', { email, newPass, oldPass })
+      .put(`${this.BASE_URL}/change-pass`, { email, newPass, oldPass })
       .pipe(first());
   }
 
   createPass(email: string, newPass: string) {
-    return this.http.put('/create-pass', { email, newPass }).pipe(first());
+    return this.http
+      .put(`${this.BASE_URL}/create-pass`, { email, newPass })
+      .pipe(first());
   }
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthRegisterPassComponent } from './auth-register-pass/auth-register-pass.component';
+import { ChangePassComponent } from './change-pass/change-pass.component';
 import { AuthLoginComponent } from './components/login/auth-login.component';
 import { AuthComponent } from './components/root/auth.component';
 
@@ -18,6 +19,10 @@ const routes: Routes = [
         component: AuthRegisterPassComponent,
       },
       {
+        path: 'change-pass',
+        component: ChangePassComponent,
+      },
+      {
         path: '',
         redirectTo: 'login',
         pathMatch: 'full',
@@ -31,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'auth/login',
+    redirectTo: '/login',
     pathMatch: 'full',
   },
 ];

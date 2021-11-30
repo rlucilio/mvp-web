@@ -11,6 +11,7 @@ import { confirmPassValidator } from '../validators/confirm-pass.validator';
   styleUrls: ['./auth-register-pass.component.scss'],
 })
 export class AuthRegisterPassComponent implements OnInit {
+  typePass: 'text' | 'password' = 'password';
   private email?: string;
   formNewPass?: FormGroup;
 
@@ -31,7 +32,10 @@ export class AuthRegisterPassComponent implements OnInit {
   registerPass() {
     const newPass = this.formNewPass?.get('newPass')?.value;
     if (this.email && newPass) {
-      this.userService.createPass(this.email, newPass);
+      this.userService.createPass(this.email, newPass).subscribe({
+        next: () => this.goBackToLoginPage(),
+        error: () => this.goBackToLoginPage(),
+      });
     } else {
       this.goBackToLoginPage();
     }
@@ -43,13 +47,11 @@ export class AuthRegisterPassComponent implements OnInit {
         validators: [Validators.required, Validators.minLength(4)],
       }),
       newPassConfirm: this.formBuilder.control('', {
-        validators: [
-          Validators.required,
-          Validators.minLength(4),
-          confirmPassValidator,
-        ],
+        validators: [Validators.required, Validators.minLength(4)],
       }),
     });
+
+    this.formNewPass.addValidators(confirmPassValidator);
   }
 
   private getParams() {
@@ -63,7 +65,7 @@ export class AuthRegisterPassComponent implements OnInit {
         .pipe(filter((response) => !response.result))
         .subscribe({
           next: () => this.goBackToLoginPage(),
-          error: (err) => this.goBackToLoginPage(),
+          error: () => this.goBackToLoginPage(),
         });
     } else {
       this.goBackToLoginPage();
@@ -71,6 +73,12 @@ export class AuthRegisterPassComponent implements OnInit {
   }
 
   private goBackToLoginPage() {
-    this.router.navigate(['auth', 'login']);
+    console.log(1);
+
+    this.router.navigate(['/auth/login']);
+  }
+
+  togglePass() {
+    this.typePass = this.typePass === 'text' ? 'password' : 'text';
   }
 }
