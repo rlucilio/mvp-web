@@ -1,0 +1,25 @@
+.form-register {
+  &__check {
+    margin-top: 15px;
+    display: flex;
+  }
+
+  &__check-input {
+    margin-right: 10px;
+  }
+
+  &__check-label {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 15px;
+
+    color: #ada4a5;
+  }
+
+  &__check-link {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

@@ -1,49 +1,240 @@
-<app-logo class="header"></app-logo>
-<main>
-  <form *ngIf="formNewPass" [formGroup]="formNewPass">
-    <section>
-      <label for="newPass">Nova senha</label>
-      <input
-        [type]="typePass"
-        name="newPass"
-        placeholder="****"
-        formControlName="newPass"
-      />
-      <div *ngIf="formNewPass?.get('newPass')?.touched">
-        <p *ngIf="formNewPass?.get('newPass')?.hasError('required')">
-          Senha é obrigatória
-        </p>
-        <p *ngIf="formNewPass?.get('newPass')?.hasError('minlength')">
-          Senha inválida
-        </p>
-      </div>
-      <button (click)="togglePass()">Mostrar senha</button>
-    </section>
+<app-layout-login class="container">
+  <app-logo layout-header class="header"></app-logo>
+  <main layout-main class="content">
+    <app-hello-and-message
+      [helloMessage]="'Ola,'"
+      [message]="'Criar conta'"
+      class="message"
+    ></app-hello-and-message>
 
-    <section>
-      <label for="newPass">Confirmar nova senha</label>
-      <input
-        [type]="typePass"
-        name="newPassConfirm"
-        placeholder="****"
-        formControlName="newPassConfirm"
-      />
-      <div *ngIf="formNewPass?.get('newPassConfirm')?.touched">
-        <p *ngIf="formNewPass?.get('newPassConfirm')?.hasError('required')">
-          Senha é obrigatória
-        </p>
-        <p *ngIf="formNewPass?.get('newPassConfirm')?.hasError('minlength')">
-          Senha inválida
-        </p>
-        <p *ngIf="formNewPass?.hasError('passConfirm')">Senha não são iguais</p>
-      </div>
-      <button (click)="togglePass()">Mostrar senha</button>
-    </section>
-  </form>
-</main>
+    <form *ngIf="formNewPass" [formGroup]="formNewPass" class="form-register">
+      <app-input-text class="form-register__field">
+        <img
+          input-prefix
+          src="../../../../../assets/icons/avatar.svg"
+          class="form-register__img"
+        />
+        <input
+          input-field
+          type="text"
+          placeholder="Primeiro nome"
+          formControlName="name"
+          class="form-register__input"
+        />
+        <section
+          input-error
+          *ngIf="formNewPass?.get('name')?.touched"
+          class="form-register__errors"
+        >
+          <p
+            *ngIf="formNewPass?.get('name')?.hasError('required')"
+            class="form-register__error-msg"
+          >
+            Primeiro nome é obrigatória
+          </p>
+          <p
+            *ngIf="formNewPass?.get('name')?.hasError('minlength')"
+            class="form-register__error-msg"
+          >
+            Primeiro nome inválida
+          </p>
+        </section>
+      </app-input-text>
 
-<footer>
-  <button [disabled]="!formNewPass?.valid" (click)="registerPass()">
-    Registrar senha
-  </button>
-</footer>
+      <app-input-text class="form-register__field">
+        <img
+          input-prefix
+          src="../../../../../assets/icons/avatar.svg"
+          class="form-register__img"
+        />
+        <input
+          input-field
+          type="text"
+          placeholder="Último nome"
+          formControlName="lastName"
+          class="form-register__input"
+        />
+        <section
+          input-error
+          *ngIf="formNewPass?.get('name')?.touched"
+          class="form-register__errors"
+        >
+          <p
+            *ngIf="formNewPass?.get('lastName')?.hasError('required')"
+            class="form-register__error-msg"
+          >
+            Último nome é obrigatório
+          </p>
+          <p
+            *ngIf="formNewPass?.get('lastName')?.hasError('minlength')"
+            class="form-register__error-msg"
+          >
+            Último nome inválido
+          </p>
+        </section>
+      </app-input-text>
+
+      <app-input-text class="form-register__field">
+        <img
+          input-prefix
+          src="../../../../../assets/icons/email.svg"
+          class="form-register__img"
+        />
+        <input
+          class="form-register__input"
+          input-field
+          type="text"
+          placeholder="Email"
+          formControlName="email"
+        />
+        <section
+          input-error
+          *ngIf="formNewPass?.get('email')?.touched"
+          class="form-register__errors"
+        >
+          <p
+            *ngIf="formNewPass?.get('email')?.hasError('required')"
+            class="form-register__error-msg"
+          >
+            Email é obrigatória
+          </p>
+          <p
+            *ngIf="formNewPass?.get('email')?.hasError('pattern')"
+            class="form-register__error-msg"
+          >
+            Email nome inválida
+          </p>
+          <p
+            *ngIf="formNewPass?.get('email')?.hasError('emailInUse')"
+            class="form-register__error-msg"
+          >
+            Email em uso
+          </p>
+        </section>
+      </app-input-text>
+
+      <app-input-text class="form-register__field">
+        <img
+          input-prefix
+          src="../../../../../assets/icons/pass.svg"
+          class="form-register__img"
+        />
+        <input
+          input-field
+          [type]="typePass"
+          placeholder="Senha"
+          formControlName="newPass"
+          class="form-register__input"
+        />
+        <section
+          input-error
+          *ngIf="formNewPass?.get('newPass')?.touched"
+          class="form-register__errors"
+        >
+          <p
+            *ngIf="formNewPass?.get('newPass')?.hasError('required')"
+            class="form-register__error-msg"
+          >
+            Senha é obrigatória
+          </p>
+          <p
+            *ngIf="formNewPass?.get('newPass')?.hasError('minlength')"
+            class="form-register__error-msg"
+          >
+            Senha inválida
+          </p>
+        </section>
+        <img
+          class="form-register__img--post"
+          input-postfix
+          [src]="
+            typePass === 'text'
+              ? '../../../../../assets/icons/hide-pass.svg'
+              : '../../../../../assets/icons/show-pass.svg'
+          "
+          (click)="togglePass()"
+        />
+      </app-input-text>
+
+      <app-input-text class="form-register__field" class="form-register__field">
+        <img
+          input-prefix
+          src="../../../../../assets/icons/pass.svg"
+          class="form-register__img"
+        />
+        <input
+          class="form-register__icon"
+          input-field
+          [type]="typePass"
+          placeholder="Confirmar nova senha"
+          formControlName="newPassConfirm"
+        />
+        <section
+          input-error
+          *ngIf="formNewPass?.get('newPassConfirm')?.touched"
+          class="form-register__errors"
+        >
+          <p
+            *ngIf="formNewPass?.get('newPassConfirm')?.hasError('required')"
+            class="form-register__error-msg"
+          >
+            Senha é obrigatória
+          </p>
+          <p
+            *ngIf="formNewPass?.get('newPassConfirm')?.hasError('minlength')"
+            class="form-register__error-msg"
+          >
+            Senha inválida
+          </p>
+          <p
+            *ngIf="formNewPass?.hasError('passConfirm')"
+            class="form-register__error-msg"
+          >
+            Senha não são iguais
+          </p>
+        </section>
+
+        <img
+          class="form-register__img--post"
+          input-postfix
+          [src]="
+            typePass === 'text'
+              ? '../../../../../assets/icons/hide-pass.svg'
+              : '../../../../../assets/icons/show-pass.svg'
+          "
+          (click)="togglePass()"
+        />
+      </app-input-text>
+
+      <section class="form-register__field" class="form-register__check">
+        <mat-checkbox
+          formControlName="acceptTerm"
+          class="form-register__check-input"
+        ></mat-checkbox>
+        <p class="form-register__check-label">
+          Ao continuar, você aceita nossa
+          <span class="form-register__check-link">Política de Privacidade</span>
+          e
+          <span class="form-register__check-link">Termos de Uso</span>
+        </p>
+      </section>
+    </form>
+  </main>
+
+  <footer layout-footer class="footer">
+    <app-btn
+      [disabled]="!formNewPass?.valid"
+      (click)="registerPass()"
+      class="footer__btn"
+      >Registrar
+    </app-btn>
+
+    <app-ask-link
+      class="footer__info"
+      [orValue]="'Ou'"
+      [message]="'Já possui uma conta?'"
+      [link]="'Entrar'"
+      (onClickLink)="goBackToLoginPage()"
+    ></app-ask-link>
+  </footer>
+</app-layout-login>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './components/root/auth.component';
@@ -22,6 +23,7 @@ import { SharedComponentsModule } from 'src/app/core/shared/shared-components/sh
     FormsModule,
     ReactiveFormsModule,
     SharedComponentsModule,
+    MatCheckboxModule,
   ],
 })
 export class AuthModule {}

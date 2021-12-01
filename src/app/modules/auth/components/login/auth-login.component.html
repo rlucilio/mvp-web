@@ -1,50 +1,58 @@
-<main class="main-container">
-  <app-logo class="header"></app-logo>
+<app-layout-login>
+  <app-logo layout-header class="header"></app-logo>
 
-  <main class="login">
-    <section class="login__welcome">
-      <h3 class="login__message login__message--simple">Ola,</h3>
-      <h3 class="login__message login__message--contrast">
-        Muito bom te ver por aqui
-      </h3>
-    </section>
+  <main layout-main class="login">
+    <app-hello-and-message
+      [helloMessage]="'Ola,'"
+      [message]="'Muito bom te ver por aqui'"
+    ></app-hello-and-message>
 
     <section class="login__form-container">
       <form *ngIf="formLogin" [formGroup]="formLogin" class="login__form">
-        <section class="login__field">
+        <app-input-text class="login__field">
           <img
-            alt="Icone de mostrar senha"
+            input-prefix
             src="../../../../../assets/icons/email.svg"
             class="login__field-icon"
-            aria-hidden="false"
-            aria-label="Icone de email"
           />
           <input
+            input-field
             class="login__field-input"
             type="email"
-            name="email"
             placeholder="Email"
             formControlName="email"
           />
-        </section>
+          <section input-error *ngIf="formLogin?.get('email')?.touched">
+            <p
+              class="login__field-error"
+              *ngIf="formLogin?.get('email')?.hasError('required')"
+            >
+              E-mail obrigatório
+            </p>
+            <p
+              class="login__field-error"
+              *ngIf="formLogin?.get('email')?.hasError('pattern')"
+            >
+              E-mail inválido
+            </p>
+            <p
+              class="login__field-error"
+              *ngIf="formLogin?.get('email')?.hasError('firstAccess')"
+            >
+              Conta não ativada verifique seu e-mail
+            </p>
+            <p
+              class="login__field-error"
+              *ngIf="formLogin?.get('email')?.hasError('notFoundEmail')"
+            >
+              E-mail não cadastrado
+            </p>
+          </section>
+        </app-input-text>
 
-        <ng-container *ngIf="formLogin?.get('email')?.touched">
-          <p
-            class="login__field-error"
-            *ngIf="formLogin?.get('email')?.hasError('required')"
-          >
-            E-mail obrigatório
-          </p>
-          <p
-            class="login__field-error"
-            *ngIf="formLogin?.get('email')?.hasError('pattern')"
-          >
-            E-mail inválido
-          </p>
-        </ng-container>
-
-        <section class="login__field">
+        <app-input-text class="login__field">
           <img
+            input-prefix
             alt="Icone de mostrar senha"
             src="../../../../../assets/icons/pass.svg"
             aria-hidden="false"
@@ -53,6 +61,7 @@
           />
 
           <input
+            input-field
             class="login__field-input"
             [type]="typePass"
             name="pass"
@@ -61,6 +70,7 @@
           />
 
           <img
+            input-postfix
             alt="Icone de mostrar senha"
             [src]="
               typePass === 'text'
@@ -70,22 +80,22 @@
             class="login__field-icon--post"
             (click)="togglePass()"
           />
-        </section>
 
-        <ng-container *ngIf="formLogin?.get('pass')?.touched">
-          <p
-            class="login__field-error"
-            *ngIf="formLogin?.get('pass')?.hasError('required')"
-          >
-            Senha é obrigatório
-          </p>
-          <p
-            class="login__field-error"
-            *ngIf="formLogin?.get('pass')?.hasError('minlength')"
-          >
-            Senha deve ter no mínimo 4 caracteres
-          </p>
-        </ng-container>
+          <section input-error *ngIf="formLogin?.get('pass')?.touched">
+            <p
+              class="login__field-error"
+              *ngIf="formLogin?.get('pass')?.hasError('required')"
+            >
+              Senha é obrigatório
+            </p>
+            <p
+              class="login__field-error"
+              *ngIf="formLogin?.get('pass')?.hasError('minlength')"
+            >
+              Senha deve ter no mínimo 4 caracteres
+            </p>
+          </section>
+        </app-input-text>
       </form>
     </section>
 
@@ -100,39 +110,23 @@
     </section>
   </main>
 
-  <footer class="actions">
+  <footer class="actions" layout-footer>
     <section class="actions__btns">
-      <button
-        *ngIf="!formLogin?.get('email')?.hasError('firstAccess')"
+      <app-btn
         [disabled]="!formLogin?.valid"
+        [icon]="'../../../../../assets/icons/enter.svg'"
         (click)="login()"
         class="actions__btn"
-      >
-        <img
-          src="../../../../../assets/icons/enter.svg"
-          class="actions__btn-icon"
-        />
-        Entrar
-      </button>
-      <button
-        *ngIf="formLogin?.get('email')?.hasError('firstAccess')"
-        (click)="registerPass()"
-        class="actions__btn"
-      >
-        <img
-          src="../../../../../assets/icons/enter.svg"
-          class="actions__btn-icon"
-        />
-        Ativar Conta
-      </button>
+        >Entrar
+      </app-btn>
     </section>
 
-    <section class="actions__info">
-      <p class="actions__label--with-border">Ou</p>
-      <p class="actions__label--with-link">
-        Ainda nao possui uma conta?
-        <span class="actions__label--link">Entrar em contato</span>
-      </p>
-    </section>
+    <app-ask-link
+      class="actions__info"
+      [orValue]="'Ou'"
+      [message]="'Ainda nao possui uma conta?'"
+      [link]="'Entrar em contato'"
+      (onClickLink)="sendEmailEnterContact()"
+    ></app-ask-link>
   </footer>
-</main>
+</app-layout-login>

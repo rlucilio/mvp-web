@@ -1,0 +1,51 @@
+@use "../../../../../../styles/colors.scss" as colors;
+
+.container {
+  width: 100%;
+  background-color: #f7f8f8;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 48px;
+  border-radius: 14px;
+
+  .input {
+    &__prefix {
+      margin: 12px;
+    }
+
+    &__field {
+      width: 100%;
+      height: 75%;
+      ::ng-deep {
+        input {
+          width: 100%;
+          height: 100%;
+          border: none;
+          background: transparent;
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 18px;
+          color: #ada4a5;
+          outline: transparent;
+          flex: 1;
+        }
+      }
+    }
+
+    &__postfix {
+      margin: 12px;
+      cursor: pointer;
+    }
+  }
+}
+.input__error {
+  margin: 0;
+  padding-left: 12px;
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: map-get($map: colors.$red-palette, $key: 500);
+}

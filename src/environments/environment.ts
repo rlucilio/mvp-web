@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   urlServe: 'http://localhost:3000',
-  keyEncrypt: '[UfYZb~RgQ},2|VsLgu-6vYR=]9=@9ELX<C@S@87H6jtRuH*"C;u/IE{W/[uC[r'
+  keyEncrypt: '[UfYZb~RgQ},2|VsLgu-6vYR=]9=@9ELX<C@S@87H6jtRuH*"C;u/IE{W/[uC[r',
+  email: 'mvpnovoproduto@gmail.com',
 };
 
 /*

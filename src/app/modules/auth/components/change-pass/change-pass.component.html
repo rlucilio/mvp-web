@@ -1,47 +1,122 @@
-<app-logo class="header"></app-logo>
-<main>
-  <form *ngIf="formNewPass" [formGroup]="formNewPass">
-    <section>
-      <label for="newPass">Nova senha</label>
-      <input
-        [type]="typePass"
-        name="newPass"
-        placeholder="****"
-        formControlName="newPass"
-      />
-      <div *ngIf="formNewPass?.get('newPass')?.touched">
-        <p *ngIf="formNewPass?.get('newPass')?.hasError('required')">
-          Senha é obrigatória
-        </p>
-        <p *ngIf="formNewPass?.get('newPass')?.hasError('minlength')">
-          Senha inválida
-        </p>
-      </div>
+<app-layout-login>
+  <app-logo layout-header></app-logo>
+  <main layout-main>
+    <app-hello-and-message
+      [helloMessage]="'Ola,'"
+      [message]="'Trocar senha'"
+    ></app-hello-and-message>
+
+    <form *ngIf="formNewPass" [formGroup]="formNewPass">
+      <app-input-text class="form-register__field">
+        <img
+          input-prefix
+          src="../../../../../assets/icons/pass.svg"
+          class="form-register__img"
+        />
+        <input
+          input-field
+          [type]="typePass"
+          placeholder="Senha"
+          formControlName="newPass"
+          class="form-register__input"
+        />
+        <section
+          input-error
+          *ngIf="formNewPass?.get('newPass')?.touched"
+          class="form-register__errors"
+        >
+          <p
+            *ngIf="formNewPass?.get('newPass')?.hasError('required')"
+            class="form-register__error-msg"
+          >
+            Senha é obrigatória
+          </p>
+          <p
+            *ngIf="formNewPass?.get('newPass')?.hasError('minlength')"
+            class="form-register__error-msg"
+          >
+            Senha inválida
+          </p>
+        </section>
+        <img
+          class="form-register__img--post"
+          input-postfix
+          [src]="
+            typePass === 'text'
+              ? '../../../../../assets/icons/hide-pass.svg'
+              : '../../../../../assets/icons/show-pass.svg'
+          "
+          (click)="togglePass()"
+        />
+      </app-input-text>
+
+      <app-input-text class="form-register__field" class="form-register__field">
+        <img
+          input-prefix
+          src="../../../../../assets/icons/pass.svg"
+          class="form-register__img"
+        />
+        <input
+          class="form-register__icon"
+          input-field
+          [type]="typePass"
+          placeholder="Confirmar nova senha"
+          formControlName="newPassConfirm"
+        />
+        <section
+          input-error
+          *ngIf="formNewPass?.get('newPassConfirm')?.touched"
+          class="form-register__errors"
+        >
+          <p
+            *ngIf="formNewPass?.get('newPassConfirm')?.hasError('required')"
+            class="form-register__error-msg"
+          >
+            Senha é obrigatória
+          </p>
+          <p
+            *ngIf="formNewPass?.get('newPassConfirm')?.hasError('minlength')"
+            class="form-register__error-msg"
+          >
+            Senha inválida
+          </p>
+          <p
+            *ngIf="formNewPass?.hasError('passConfirm')"
+            class="form-register__error-msg"
+          >
+            Senha não são iguais
+          </p>
+        </section>
+
+        <img
+          class="form-register__img--post"
+          input-postfix
+          [src]="
+            typePass === 'text'
+              ? '../../../../../assets/icons/hide-pass.svg'
+              : '../../../../../assets/icons/show-pass.svg'
+          "
+          (click)="togglePass()"
+        />
+      </app-input-text>
+    </form>
+  </main>
+
+  <footer layout-footer class="footer">
+    <section class="footer__btns">
+      <app-btn
+        [disabled]="!formNewPass?.valid"
+        (click)="changePass()"
+        [icon]="'../../../../../assets/icons/enter.svg'"
+        >Trocar senha
+      </app-btn>
     </section>
 
-    <section>
-      <label for="newPass">Confirmar nova senha</label>
-      <input
-        [type]="typePass"
-        name="newPassConfirm"
-        placeholder="****"
-        formControlName="newPassConfirm"
-      />
-      <div *ngIf="formNewPass?.get('newPassConfirm')?.touched">
-        <p *ngIf="formNewPass?.get('newPassConfirm')?.hasError('required')">
-          Senha é obrigatória
-        </p>
-        <p *ngIf="formNewPass?.get('newPassConfirm')?.hasError('minlength')">
-          Senha inválida
-        </p>
-        <p *ngIf="formNewPass?.hasError('passConfirm')">Senha não são iguais</p>
-      </div>
-    </section>
-  </form>
-</main>
-
-<footer>
-  <button [disabled]="!formNewPass?.valid" (click)="changePass()">
-    Registrar senha
-  </button>
-</footer>
+    <app-ask-link
+      [orValue]="'Ou'"
+      [message]="'Já possui uma conta?'"
+      [link]="'Entrar'"
+      (onClickLink)="goToLoginPage()"
+    ></app-ask-link>
+  </footer>
+</app-layout-login>

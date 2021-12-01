@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { REGEX_EMAIL } from 'src/app/core/shared/constants';
 import { UserAuthService } from 'src/app/core/user-auth/services/user-auth.service';
+import { environment } from 'src/environments/environment';
 import { verifyFirstAccessValidator } from '../../validators/verify-first-access.validator';
 
 @Component({
@@ -49,11 +50,8 @@ export class AuthLoginComponent implements OnInit {
     }
   }
 
-  registerPass() {
-    const email = this.formLogin?.get('email')?.value;
-    if (email) {
-      this.router.navigate(['/auth/register-pass', email]);
-    }
+  sendEmailEnterContact() {
+    window.location.href = `mailto:${environment.email}?subject=Solicitaçao de Cadastro`;
   }
 
   requestChangePass() {

@@ -67,7 +67,7 @@ export class ChangePassComponent implements OnInit {
     };
   }
 
-  private goToLoginPage() {
+  goToLoginPage() {
     this.router.navigate(['/auth/login']);
   }
 

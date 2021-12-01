@@ -12,7 +12,7 @@ import {
 } from 'rxjs';
 import { UserAuthService } from 'src/app/core/user-auth/services/user-auth.service';
 
-export const verifyFirstAccessValidator = (
+export const verifyEmailNotUsedValidator = (
   userAuthService: UserAuthService
 ) => {
   return (control: AbstractControl) =>
@@ -21,17 +21,10 @@ export const verifyFirstAccessValidator = (
       distinctUntilChanged(),
       switchMap((valueInput) =>
         userAuthService.isFirstAccess(control.value).pipe(
-          map((response) =>
-            response.result
-              ? {
-                  firstAccess: true,
-                }
-              : null
-          ),
-          catchError((err) => {
-            if ((err as HttpErrorResponse).status === HttpStatusCode.NotFound) {
-              return of({ notFoundEmail: true });
-            }
+          map((response) => ({
+            emailInUse: true,
+          })),
+          catchError(() => {
             return of(null);
           })
         )

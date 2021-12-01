@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { REGEX_EMAIL } from 'src/app/core/shared/constants';
 import { UserAuthService } from 'src/app/core/user-auth/services/user-auth.service';
 import { confirmPassValidator } from '../../validators/confirm-pass.validator';
+import { verifyEmailNotUsedValidator } from '../../validators/verify-email-not-used.validator';
 
 @Component({
   selector: 'app-auth-register-pass',
@@ -49,6 +51,19 @@ export class AuthRegisterPassComponent implements OnInit {
       newPassConfirm: this.formBuilder.control('', {
         validators: [Validators.required, Validators.minLength(4)],
       }),
+      name: this.formBuilder.control('', {
+        validators: [Validators.required, Validators.minLength(4)],
+      }),
+      lastName: this.formBuilder.control('', {
+        validators: [Validators.required, Validators.minLength(4)],
+      }),
+      email: this.formBuilder.control('', {
+        validators: [Validators.required, Validators.pattern(REGEX_EMAIL)],
+      }),
+      acceptTerm: this.formBuilder.control('', {
+        validators: [Validators.required, Validators.requiredTrue],
+        asyncValidators: [verifyEmailNotUsedValidator(this.userService)],
+      }),
     });
 
     this.formNewPass.addValidators(confirmPassValidator);
@@ -72,7 +87,7 @@ export class AuthRegisterPassComponent implements OnInit {
     }
   }
 
-  private goBackToLoginPage() {
+  goBackToLoginPage() {
     this.router.navigate(['/auth/login']);
   }
 
