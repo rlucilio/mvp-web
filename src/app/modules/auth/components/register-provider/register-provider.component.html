@@ -29,9 +29,12 @@
             input-prefix
             src="../../../../../assets/icons/two-avatar.svg"
             class="textarea__icon"
-            formControlName="bio"
           />
-          <textarea class="textarea__input" placeholder="Biografia"></textarea>
+          <textarea
+            class="textarea__input"
+            formControlName="bio"
+            placeholder="Biografia"
+          ></textarea>
         </section>
         <section input-error *ngIf="formProvider?.get('bio')?.touched">
           <p

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BenefitService } from 'src/app/core/benefit/services/benefit.service';
-import { UserAuthService } from 'src/app/core/user-auth/services/user-auth.service';
 
 @Component({
   selector: 'app-register-benefit',
@@ -55,11 +54,18 @@ export class RegisterBenefitComponent implements OnInit {
     if (this.email && this.formBenefit?.valid) {
       this.benefitService
         .updateBenefit(this.email, dateBirth, weight, height)
-        .subscribe(console.log);
+        .subscribe({
+          next: () => this.goToRegisterForm(),
+          error: () => this.goToLoginPage(),
+        });
     }
   }
 
   goToLoginPage() {
     this.router.navigate(['/auth/login']);
+  }
+
+  goToRegisterForm() {
+    this.router.navigate(['/auth/register-form', this.email]);
   }
 }

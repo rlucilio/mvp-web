@@ -30,9 +30,10 @@ export class RegisterProviderComponent implements OnInit {
     const bio = this.formProvider?.get('bio')?.value;
 
     if (bio && this.email) {
-      this.providerService
-        .updateProvider(this.email, bio)
-        .subscribe(console.log);
+      this.providerService.updateProvider(this.email, bio).subscribe({
+        next: () => this.goToRegisteSuccess(),
+        error: () => this.goToLoginPage(),
+      });
     }
   }
 
@@ -46,6 +47,10 @@ export class RegisterProviderComponent implements OnInit {
 
   private goToLoginPage() {
     this.router.navigate(['/auth/login']);
+  }
+
+  private goToRegisteSuccess() {
+    this.router.navigate(['/auth/register-success']);
   }
 
   private createForm() {
