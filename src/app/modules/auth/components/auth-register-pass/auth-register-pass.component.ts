@@ -14,6 +14,7 @@ import { verifyEmailNotUsedValidator } from '../../validators/verify-email-not-u
 })
 export class AuthRegisterPassComponent implements OnInit {
   typePass: 'text' | 'password' = 'password';
+  private userType?: string | null;
   private email?: string;
   formNewPass?: FormGroup;
 
@@ -53,7 +54,10 @@ export class AuthRegisterPassComponent implements OnInit {
         )
         .pipe(switchMap(() => this.userService.login(newEmail, newPass)))
         .subscribe({
-          next: () => this.goToRegisterBenefit(),
+          next: () =>
+            this.userType === 'BENEFIT'
+              ? this.goToRegisterBenefit()
+              : this.goToRegisterProvider(),
           error: () => this.goBackToLoginPage(),
         });
     } else {
@@ -63,6 +67,10 @@ export class AuthRegisterPassComponent implements OnInit {
 
   private goToRegisterBenefit() {
     this.router.navigate(['/auth/register-benefit', this.email]);
+  }
+
+  private goToRegisterProvider() {
+    this.router.navigate(['/auth/register-provider', this.email]);
   }
 
   private createForm() {
@@ -95,6 +103,11 @@ export class AuthRegisterPassComponent implements OnInit {
 
   private getParams() {
     this.email = this.route.snapshot.paramMap.get('email') || '';
+    this.userType = this.route.snapshot.queryParamMap.get('user');
+
+    if (!this.userType && this.email) {
+      this.goBackToLoginPage();
+    }
   }
 
   private verifyIsFirsAccess() {

@@ -13,13 +13,13 @@
 
   <main layout-main class="content">
     <main>
-      <form>
+      <form *ngIf="formProvider" [formGroup]="formProvider">
         <app-input-text class="form__input">
           <img input-prefix src="../../../../../assets/icons/two-avatar.svg" />
           <input
             input-field
             type="number"
-            placeholder="Nutricionista"
+            [placeholder]="specialty"
             [readonly]="true"
           />
         </app-input-text>
@@ -29,13 +29,27 @@
             input-prefix
             src="../../../../../assets/icons/two-avatar.svg"
             class="textarea__icon"
+            formControlName="bio"
           />
           <textarea class="textarea__input" placeholder="Biografia"></textarea>
+        </section>
+        <section input-error *ngIf="formProvider?.get('bio')?.touched">
+          <p
+            class="login__field-error"
+            *ngIf="formProvider?.get('bio')?.hasError('required')"
+          >
+            Biografia é obrigatório
+          </p>
         </section>
       </form>
     </main>
   </main>
   <footer layout-footer class="footer">
-    <app-btn class="footer__btn">Avançar</app-btn>
+    <app-btn
+      class="footer__btn"
+      [disabled]="!formProvider?.valid"
+      (click)="updateProvider()"
+      >Avançar</app-btn
+    >
   </footer>
 </app-layout-login>

@@ -53,7 +53,9 @@ export class RegisterBenefitComponent implements OnInit {
     const weight = this.formBenefit?.get('weight')?.value();
     const height = this.formBenefit?.get('wheighteight')?.value();
     if (this.email && this.formBenefit?.valid) {
-      this.benefitService.updateBenefit(this.email, dateBirth, weight, height);
+      this.benefitService
+        .updateBenefit(this.email, dateBirth, weight, height)
+        .subscribe(console.log);
     }
   }
 

@@ -42,6 +42,14 @@
               placeholder="Seu peso"
               formControlName="weight"
             />
+            <section input-error *ngIf="formBenefit?.get('weight')?.touched">
+              <p
+                class="login__field-error"
+                *ngIf="formBenefit?.get('weight')?.hasError('required')"
+              >
+                Peso é obrigatório
+              </p>
+            </section>
           </app-input-text>
 
           <app-btn class="form__btn" [color]="'SECONDARY'">KG</app-btn>
@@ -56,6 +64,15 @@
               placeholder="Sua altura"
               formControlName="height"
             />
+
+            <section input-error *ngIf="formBenefit?.get('height')?.touched">
+              <p
+                class="login__field-error"
+                *ngIf="formBenefit?.get('height')?.hasError('required')"
+              >
+                Altura é obrigatória
+              </p>
+            </section>
           </app-input-text>
 
           <app-btn class="form__btn" [color]="'SECONDARY'">CM</app-btn>
@@ -64,7 +81,10 @@
     </main>
   </main>
   <footer layout-footer class="footer">
-    <app-btn class="footer__btn" [disabled]="!formBenefit?.valid"
+    <app-btn
+      class="footer__btn"
+      [disabled]="!formBenefit?.valid"
+      (click)="updateBenefit()"
       >Avançar</app-btn
     >
   </footer>
