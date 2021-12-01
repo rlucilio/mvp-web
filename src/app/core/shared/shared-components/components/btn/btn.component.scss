@@ -18,7 +18,20 @@
     background-color: #7b6f72;
   }
 
-  &:not(:disabled) {
+  &--secondary {
+    background: linear-gradient(270deg, #c58bf2 0%, #eea4ce 100%);
+  }
+
+  &--secondary-flat {
+    background: #98bffd;
+  }
+
+  &--focus {
+    background: linear-gradient(272.69deg, #c58bf2 -59.92%, #92a3fd 86.39%);
+  }
+
+  &--primary {
     background: linear-gradient(270deg, #c66720 0%, #f0a508 100%);
+    box-shadow: 0px 10px 22px rgba(149, 173, 254, 0.3);
   }
 }

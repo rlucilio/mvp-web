@@ -1,0 +1,71 @@
+<app-layout-login>
+  <header layout-header class="header">
+    <h4 class="header__step">Step 1/2</h4>
+    <img
+      src="../../../../../assets/imgs/personoids/pessoa-sentada.svg"
+      class="header__img"
+    />
+    <h3 class="header__title">Complete seu perfil</h3>
+    <h4 class="header__description">
+      Dessa maneira voce nos ajuda a conhecer mais sobre voce e como podemos te
+      ajudar
+    </h4>
+  </header>
+
+  <main layout-main class="content">
+    <main>
+      <form *ngIf="formBenefit" [formGroup]="formBenefit">
+        <section class="form__field datepick" (click)="picker.open()">
+          <img
+            src="../../../../../assets/icons/calendar.svg"
+            class="datepick__icon"
+          />
+          <input
+            class="datepick__input"
+            [matDatepicker]="picker"
+            placeholder="Data de nascimento"
+            formControlName="dateBirth"
+            readonly
+          />
+          <mat-datepicker #picker class="datepick__pick"></mat-datepicker>
+        </section>
+
+        <section class="form__field">
+          <app-input-text class="form__input">
+            <img
+              input-prefix
+              src="../../../../../assets/icons/weight-scale.svg"
+            />
+            <input
+              input-field
+              type="number"
+              placeholder="Seu peso"
+              formControlName="weight"
+            />
+          </app-input-text>
+
+          <app-btn class="form__btn" [color]="'SECONDARY'">KG</app-btn>
+        </section>
+
+        <section class="form__field">
+          <app-input-text class="form__input">
+            <img input-prefix src="../../../../../assets/icons/swap.svg" />
+            <input
+              input-field
+              type="number"
+              placeholder="Sua altura"
+              formControlName="height"
+            />
+          </app-input-text>
+
+          <app-btn class="form__btn" [color]="'SECONDARY'">CM</app-btn>
+        </section>
+      </form>
+    </main>
+  </main>
+  <footer layout-footer class="footer">
+    <app-btn class="footer__btn" [disabled]="!formBenefit?.valid"
+      >Avançar</app-btn
+    >
+  </footer>
+</app-layout-login>

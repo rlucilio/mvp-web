@@ -8,6 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class BtnComponent implements OnInit {
   @Input() disabled?: boolean;
   @Input() icon?: string;
+  @Input() color?: 'SECONDARY_FLAT' | 'FOCUS' | 'SECONDARY' | 'PRIMARY' =
+    'PRIMARY';
 
   constructor() {}
 

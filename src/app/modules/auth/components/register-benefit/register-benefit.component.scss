@@ -1,0 +1,90 @@
+.header {
+  text-align: center;
+
+  &__step {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    color: #1d1617;
+    text-align: center;
+    margin: 40px 0;
+  }
+
+  &__img {
+    width: 100%;
+  }
+
+  &__title {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    color: #1d1617;
+    margin: 40px 0 8px 0;
+  }
+
+  &__description {
+    margin: 0 0 40px 0;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    color: #7b6f72;
+  }
+}
+
+.form {
+  &__field {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+  }
+
+  &__input {
+    flex: 1;
+  }
+
+  &__btn ::ng-deep {
+    button {
+      height: 48px;
+      border-radius: 14px;
+      margin-left: 15px;
+      width: 48px;
+    }
+  }
+}
+
+.datepick {
+  background: #f7f8f8;
+  height: 48px;
+  align-items: center;
+  border-radius: 14px;
+
+  &__icon {
+    margin: 12px;
+  }
+
+  &__input {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    color: #7e797a;
+    flex: 1;
+  }
+}
+
+.footer {
+  &__btn button {
+    margin-top: 45px;
+  }
+}

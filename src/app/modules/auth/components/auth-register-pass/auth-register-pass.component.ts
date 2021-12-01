@@ -37,8 +37,9 @@ export class AuthRegisterPassComponent implements OnInit {
       this.formNewPass?.get('lastName')?.value
     }`;
     const newEmail = this.formNewPass?.get('email')?.value || this.email;
-    const mobilePhone = this.formNewPass?.get('email')?.value || this.email;
-    const acceptTerm = this.formNewPass?.get('email')?.value || this.email;
+    const mobilePhone = this.formNewPass?.get('mobilePhone')?.value;
+    const acceptTerm = this.formNewPass?.get('acceptTerm')?.value;
+    const gender = this.formNewPass?.get('gender')?.value;
     if (this.email && newPass) {
       this.userService
         .updateUser(
@@ -47,10 +48,11 @@ export class AuthRegisterPassComponent implements OnInit {
           newEmail,
           name,
           mobilePhone,
-          acceptTerm
+          acceptTerm,
+          gender
         )
         .subscribe({
-          next: () => this.goBackToLoginPage(),
+          next: () => this.goToRegisterBenefit(),
           error: () => this.goBackToLoginPage(),
         });
     } else {
@@ -58,12 +60,13 @@ export class AuthRegisterPassComponent implements OnInit {
     }
   }
 
+  private goToRegisterBenefit() {
+    this.router.navigate(['/auth/register-benefit', this.email]);
+  }
+
   private createForm() {
     this.formNewPass = this.formBuilder.group({
       newPass: this.formBuilder.control('', {
-        validators: [Validators.required, Validators.minLength(4)],
-      }),
-      newPassConfirm: this.formBuilder.control('', {
         validators: [Validators.required, Validators.minLength(4)],
       }),
       name: this.formBuilder.control('', {
@@ -82,9 +85,10 @@ export class AuthRegisterPassComponent implements OnInit {
         validators: [Validators.required, Validators.requiredTrue],
         asyncValidators: [verifyEmailNotUsedValidator(this.userService)],
       }),
+      gender: this.formBuilder.control('', {
+        validators: [Validators.required],
+      }),
     });
-
-    this.formNewPass.addValidators(confirmPassValidator);
     this.formNewPass.get('email')?.setValue(this.email);
   }
 

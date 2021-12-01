@@ -68,7 +68,8 @@ export class UserAuthService {
     newEmail: string,
     name: string,
     mobilePhone: string,
-    acceptTerm: boolean
+    acceptTerm: boolean,
+    gender: string
   ) {
     return this.http
       .put<void>(`${this.BASE_URL}/create-benefit`, {
@@ -78,6 +79,7 @@ export class UserAuthService {
         name,
         mobilePhone,
         acceptTerm,
+        gender,
       })
       .pipe(first());
   }
@@ -87,6 +89,22 @@ export class UserAuthService {
       .get<{ result: boolean }>(
         `${this.BASE_URL}/verify-token-change-pass?email=${email}&token=${token}`
       )
+      .pipe(first());
+  }
+
+  updateBenefit(
+    email: string,
+    dateBirth: Date,
+    weight: number,
+    height: number
+  ) {
+    return this.http
+      .put<void>(`${this.BASE_URL}/update-benefit`, {
+        email,
+        dateBirth,
+        weight,
+        height,
+      })
       .pipe(first());
   }
 }

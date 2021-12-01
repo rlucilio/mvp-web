@@ -1,4 +1,13 @@
-<button [disabled]="disabled" class="btn">
+<button
+  [disabled]="disabled"
+  class="btn"
+  [ngClass]="{
+    'btn--secondary': color === 'SECONDARY',
+    'btn--secondary-flat': color === 'SECONDARY_FLAT',
+    'btn--focus': color === 'FOCUS',
+    'btn--primary': color === 'PRIMARY'
+  }"
+>
   <img *ngIf="icon" [src]="icon" class="btn__icon" />
   <ng-content></ng-content>
 </button>

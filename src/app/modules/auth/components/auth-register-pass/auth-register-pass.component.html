@@ -179,55 +179,33 @@
         />
       </app-input-text>
 
-      <app-input-text class="form-register__field" class="form-register__field">
+      <section class="form-register__select">
         <img
-          input-prefix
-          src="../../../../../assets/icons/pass.svg"
-          class="form-register__img"
+          class="form-register__select-icon"
+          src="../../../../../assets/icons/two-avatar.svg"
         />
-        <input
-          class="form-register__icon"
-          input-field
-          [type]="typePass"
-          placeholder="Confirmar nova senha"
-          formControlName="newPassConfirm"
-        />
+        <mat-select
+          [placeholder]="'Escolha seu gênero'"
+          formControlName="gender"
+        >
+          <mat-option [value]="'MALE'">Masculino</mat-option>
+          <mat-option [value]="'FEMALE'">Feminino</mat-option>
+          <mat-option [value]="'UNINFORMED'">Prefiro não informar</mat-option>
+        </mat-select>
+
         <section
           input-error
-          *ngIf="formNewPass?.get('newPassConfirm')?.touched"
+          *ngIf="formNewPass?.get('newPass')?.touched"
           class="form-register__errors"
         >
           <p
-            *ngIf="formNewPass?.get('newPassConfirm')?.hasError('required')"
+            *ngIf="formNewPass?.get('newPass')?.hasError('required')"
             class="form-register__error-msg"
           >
-            Senha é obrigatória
-          </p>
-          <p
-            *ngIf="formNewPass?.get('newPassConfirm')?.hasError('minlength')"
-            class="form-register__error-msg"
-          >
-            Senha inválida
-          </p>
-          <p
-            *ngIf="formNewPass?.hasError('passConfirm')"
-            class="form-register__error-msg"
-          >
-            Senha não são iguais
+            Genero é obrigatório
           </p>
         </section>
-
-        <img
-          class="form-register__img--post"
-          input-postfix
-          [src]="
-            typePass === 'text'
-              ? '../../../../../assets/icons/hide-pass.svg'
-              : '../../../../../assets/icons/show-pass.svg'
-          "
-          (click)="togglePass()"
-        />
-      </app-input-text>
+      </section>
 
       <section class="form-register__field" class="form-register__check">
         <mat-checkbox
@@ -245,12 +223,14 @@
   </main>
 
   <footer layout-footer class="footer">
-    <app-btn
-      [disabled]="!formNewPass?.valid"
-      (click)="registerPass()"
-      class="footer__btn"
-      >Registrar
-    </app-btn>
+    <section class="footer__btns">
+      <app-btn
+        [disabled]="!formNewPass?.valid"
+        (click)="registerPass()"
+        class="footer__btn"
+        >Registrar
+      </app-btn>
+    </section>
 
     <app-ask-link
       class="footer__info"

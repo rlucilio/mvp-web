@@ -35,9 +35,6 @@ export class ChangePassComponent implements OnInit {
       newPass: this.formBuilder.control('', {
         validators: [Validators.required, Validators.minLength(4)],
       }),
-      newPassConfirm: this.formBuilder.control('', {
-        validators: [Validators.required, Validators.minLength(4)],
-      }),
     });
 
     this.formNewPass.addValidators(confirmPassValidator);

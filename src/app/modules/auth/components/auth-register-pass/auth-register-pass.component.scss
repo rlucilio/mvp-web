@@ -29,4 +29,25 @@
       color: #7b6f72;
     }
   }
+
+  &__select {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+    border-radius: 14px;
+    background: #f7f8f8;
+    margin-top: 15px;
+    padding-right: 12px;
+  }
+
+  &__select-icon {
+    margin: 12px;
+  }
+}
+
+.footer {
+  &__btns {
+    margin-bottom: 10px;
+  }
 }

@@ -49,56 +49,6 @@
           (click)="togglePass()"
         />
       </app-input-text>
-
-      <app-input-text class="form-register__field" class="form-register__field">
-        <img
-          input-prefix
-          src="../../../../../assets/icons/pass.svg"
-          class="form-register__img"
-        />
-        <input
-          class="form-register__icon"
-          input-field
-          [type]="typePass"
-          placeholder="Confirmar nova senha"
-          formControlName="newPassConfirm"
-        />
-        <section
-          input-error
-          *ngIf="formNewPass?.get('newPassConfirm')?.touched"
-          class="form-register__errors"
-        >
-          <p
-            *ngIf="formNewPass?.get('newPassConfirm')?.hasError('required')"
-            class="form-register__error-msg"
-          >
-            Senha é obrigatória
-          </p>
-          <p
-            *ngIf="formNewPass?.get('newPassConfirm')?.hasError('minlength')"
-            class="form-register__error-msg"
-          >
-            Senha inválida
-          </p>
-          <p
-            *ngIf="formNewPass?.hasError('passConfirm')"
-            class="form-register__error-msg"
-          >
-            Senha não são iguais
-          </p>
-        </section>
-
-        <img
-          class="form-register__img--post"
-          input-postfix
-          [src]="
-            typePass === 'text'
-              ? '../../../../../assets/icons/hide-pass.svg'
-              : '../../../../../assets/icons/show-pass.svg'
-          "
-          (click)="togglePass()"
-        />
-      </app-input-text>
     </form>
   </main>
 
