@@ -5,15 +5,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   templateUrl: './ask-link.component.html',
   styleUrls: ['./ask-link.component.scss'],
 })
-export class AskLinkComponent implements OnInit {
+export class AskLinkComponent {
   @Input() orValue?: string;
   @Input() message?: string;
   @Input() link?: string;
   @Output() onClickLink = new EventEmitter();
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   emitLink() {
     this.onClickLink.emit();

@@ -1,0 +1,53 @@
+.header {
+  &__img {
+    width: 100%;
+    margin: 30px 0;
+  }
+
+  &__title {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    color: #1d1617;
+    text-align: center;
+    margin: 0 0 8px 0;
+  }
+
+  &__description {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    color: #7b6f72;
+    margin: 0 0 24px 0;
+  }
+}
+
+.textarea {
+  display: flex;
+  justify-content: space-between;
+  background: #f7f8f8;
+  border-radius: 14px;
+  margin-top: 15px;
+  align-items: baseline;
+  &__icon {
+    margin: 12px;
+
+    transform: translateY(4px);
+  }
+
+  &__input {
+    flex: 1 1 0%;
+    background: transparent;
+    border: none;
+    outline: none;
+    margin: 12px 0px;
+    height: 193px;
+    width: 273px;
+    resize: none;
+  }
+}

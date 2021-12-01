@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BenefitService } from 'src/app/core/benefit/services/benefit.service';
 import { UserAuthService } from 'src/app/core/user-auth/services/user-auth.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class RegisterBenefitComponent implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,
-    private readonly userService: UserAuthService,
+    private readonly benefitService: BenefitService,
     private readonly router: Router,
     private readonly formBuilder: FormBuilder
   ) {}
@@ -52,7 +53,7 @@ export class RegisterBenefitComponent implements OnInit {
     const weight = this.formBenefit?.get('weight')?.value();
     const height = this.formBenefit?.get('wheighteight')?.value();
     if (this.email && this.formBenefit?.valid) {
-      this.userService.updateBenefit(this.email, dateBirth, weight, height);
+      this.benefitService.updateBenefit(this.email, dateBirth, weight, height);
     }
   }
 

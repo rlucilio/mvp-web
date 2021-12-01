@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, switchMap } from 'rxjs';
 import { REGEX_CELL, REGEX_EMAIL } from 'src/app/core/shared/constants';
 import { UserAuthService } from 'src/app/core/user-auth/services/user-auth.service';
-import { confirmPassValidator } from '../../validators/confirm-pass.validator';
+
 import { verifyEmailNotUsedValidator } from '../../validators/verify-email-not-used.validator';
 
 @Component({
@@ -51,6 +51,7 @@ export class AuthRegisterPassComponent implements OnInit {
           acceptTerm,
           gender
         )
+        .pipe(switchMap(() => this.userService.login(newEmail, newPass)))
         .subscribe({
           next: () => this.goToRegisterBenefit(),
           error: () => this.goBackToLoginPage(),

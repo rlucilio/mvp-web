@@ -91,20 +91,4 @@ export class UserAuthService {
       )
       .pipe(first());
   }
-
-  updateBenefit(
-    email: string,
-    dateBirth: Date,
-    weight: number,
-    height: number
-  ) {
-    return this.http
-      .put<void>(`${this.BASE_URL}/update-benefit`, {
-        email,
-        dateBirth,
-        weight,
-        height,
-      })
-      .pipe(first());
-  }
 }

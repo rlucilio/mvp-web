@@ -5,7 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './btn.component.html',
   styleUrls: ['./btn.component.scss'],
 })
-export class BtnComponent implements OnInit {
+export class BtnComponent {
   @Input() disabled?: boolean;
   @Input() icon?: string;
   @Input() color?: 'SECONDARY_FLAT' | 'FOCUS' | 'SECONDARY' | 'PRIMARY' =

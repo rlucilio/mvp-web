@@ -1,0 +1,41 @@
+<app-layout-login>
+  <header layout-header class="header">
+    <img
+      src="../../../../../assets/imgs/personoids/pessoa-sentada.svg"
+      class="header__img"
+    />
+    <h3 class="header__title">Complete seu perfil</h3>
+    <h4 class="header__description">
+      Dessa maneira voce nos ajuda a conhecer mais sobre voce e como podemos te
+      ajudar
+    </h4>
+  </header>
+
+  <main layout-main class="content">
+    <main>
+      <form>
+        <app-input-text class="form__input">
+          <img input-prefix src="../../../../../assets/icons/two-avatar.svg" />
+          <input
+            input-field
+            type="number"
+            placeholder="Nutricionista"
+            [readonly]="true"
+          />
+        </app-input-text>
+
+        <section class="textarea">
+          <img
+            input-prefix
+            src="../../../../../assets/icons/two-avatar.svg"
+            class="textarea__icon"
+          />
+          <textarea class="textarea__input" placeholder="Biografia"></textarea>
+        </section>
+      </form>
+    </main>
+  </main>
+  <footer layout-footer class="footer">
+    <app-btn class="footer__btn">Avançar</app-btn>
+  </footer>
+</app-layout-login>

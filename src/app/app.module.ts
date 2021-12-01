@@ -19,13 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ServerModule,
     BrowserAnimationsModule,
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AccessTokenInterceptor,
-      multi: true,
-    },
-  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

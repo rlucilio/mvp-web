@@ -14,6 +14,8 @@ import { AuthRegisterPassComponent } from './components/auth-register-pass/auth-
 import { ChangePassComponent } from './components/change-pass/change-pass.component';
 import { SharedComponentsModule } from 'src/app/core/shared/shared-components/shared-components.module';
 import { RegisterBenefitComponent } from './components/register-benefit/register-benefit.component';
+import { RegisterProviderComponent } from './components/register-provider/register-provider.component';
+import { BenefitModule } from 'src/app/core/benefit/benefit.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { RegisterBenefitComponent } from './components/register-benefit/register
     AuthRegisterPassComponent,
     ChangePassComponent,
     RegisterBenefitComponent,
+    RegisterProviderComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +37,7 @@ import { RegisterBenefitComponent } from './components/register-benefit/register
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    BenefitModule,
   ],
 })
 export class AuthModule {}

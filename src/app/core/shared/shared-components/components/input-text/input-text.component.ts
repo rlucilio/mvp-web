@@ -5,8 +5,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './input-text.component.html',
   styleUrls: ['./input-text.component.scss'],
 })
-export class InputTextComponent implements OnInit {
+export class InputTextComponent {
   constructor() {}
-
-  ngOnInit(): void {}
 }
