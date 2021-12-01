@@ -114,6 +114,29 @@
       </app-input-text>
 
       <app-input-text class="form-register__field">
+        <mat-icon input-prefix class="form-register__img--icon">aod</mat-icon>
+        <input
+          class="form-register__input"
+          input-field
+          type="number"
+          placeholder="Celular"
+          formControlName="mobilePhone"
+        />
+        <section
+          input-error
+          *ngIf="formNewPass?.get('mobilePhone')?.touched"
+          class="form-register__errors"
+        >
+          <p
+            *ngIf="formNewPass?.get('email')?.hasError('pattern')"
+            class="form-register__error-msg"
+          >
+            Celular inválido nome inválida
+          </p>
+        </section>
+      </app-input-text>
+
+      <app-input-text class="form-register__field">
         <img
           input-prefix
           src="../../../../../assets/icons/pass.svg"

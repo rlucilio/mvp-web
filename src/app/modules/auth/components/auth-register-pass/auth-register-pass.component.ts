@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { REGEX_EMAIL } from 'src/app/core/shared/constants';
+import { REGEX_CELL, REGEX_EMAIL } from 'src/app/core/shared/constants';
 import { UserAuthService } from 'src/app/core/user-auth/services/user-auth.service';
 import { confirmPassValidator } from '../../validators/confirm-pass.validator';
 import { verifyEmailNotUsedValidator } from '../../validators/verify-email-not-used.validator';
@@ -33,11 +33,26 @@ export class AuthRegisterPassComponent implements OnInit {
 
   registerPass() {
     const newPass = this.formNewPass?.get('newPass')?.value;
+    const name = `${this.formNewPass?.get('name')?.value} ${
+      this.formNewPass?.get('lastName')?.value
+    }`;
+    const newEmail = this.formNewPass?.get('email')?.value || this.email;
+    const mobilePhone = this.formNewPass?.get('email')?.value || this.email;
+    const acceptTerm = this.formNewPass?.get('email')?.value || this.email;
     if (this.email && newPass) {
-      this.userService.createPass(this.email, newPass).subscribe({
-        next: () => this.goBackToLoginPage(),
-        error: () => this.goBackToLoginPage(),
-      });
+      this.userService
+        .updateUser(
+          this.email,
+          newPass,
+          newEmail,
+          name,
+          mobilePhone,
+          acceptTerm
+        )
+        .subscribe({
+          next: () => this.goBackToLoginPage(),
+          error: () => this.goBackToLoginPage(),
+        });
     } else {
       this.goBackToLoginPage();
     }
@@ -60,6 +75,9 @@ export class AuthRegisterPassComponent implements OnInit {
       email: this.formBuilder.control('', {
         validators: [Validators.required, Validators.pattern(REGEX_EMAIL)],
       }),
+      mobilePhone: this.formBuilder.control('', {
+        validators: [Validators.pattern(REGEX_CELL)],
+      }),
       acceptTerm: this.formBuilder.control('', {
         validators: [Validators.required, Validators.requiredTrue],
         asyncValidators: [verifyEmailNotUsedValidator(this.userService)],
@@ -67,6 +85,7 @@ export class AuthRegisterPassComponent implements OnInit {
     });
 
     this.formNewPass.addValidators(confirmPassValidator);
+    this.formNewPass.get('email')?.setValue(this.email);
   }
 
   private getParams() {

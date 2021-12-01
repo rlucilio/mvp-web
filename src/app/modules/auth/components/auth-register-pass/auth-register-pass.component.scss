@@ -22,4 +22,11 @@
     text-decoration: underline;
     cursor: pointer;
   }
+
+  &__img {
+    &--icon {
+      font-size: 20px;
+      color: #7b6f72;
+    }
+  }
 }

@@ -62,9 +62,23 @@ export class UserAuthService {
       .pipe(first());
   }
 
-  createPass(email: string, newPass: string) {
+  updateUser(
+    email: string,
+    newPass: string,
+    newEmail: string,
+    name: string,
+    mobilePhone: string,
+    acceptTerm: boolean
+  ) {
     return this.http
-      .put(`${this.BASE_URL}/create-pass`, { email, newPass })
+      .put<void>(`${this.BASE_URL}/create-benefit`, {
+        oldEmail: email,
+        newPass,
+        newEmail,
+        name,
+        mobilePhone,
+        acceptTerm,
+      })
       .pipe(first());
   }
 
