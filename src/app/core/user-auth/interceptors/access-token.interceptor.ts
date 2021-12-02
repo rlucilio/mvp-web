@@ -25,7 +25,7 @@ export class AccessTokenInterceptor implements HttpInterceptor {
       !request.headers.get(KEY_ACCESS_TOKEN)
     ) {
       const access_token = this.storageService.get(KEY_ACCESS_TOKEN);
-      newRequest.headers.set(KEY_ACCESS_TOKEN, access_token || '');
+      newRequest.headers.set(`Bearer ${access_token}`, access_token || '');
     }
 
     return next.handle(request);

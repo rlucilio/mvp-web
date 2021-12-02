@@ -72,7 +72,7 @@ export class UserAuthService {
     gender: string
   ) {
     return this.http
-      .put<void>(`${this.BASE_URL}/create-benefit`, {
+      .put<void>(`${this.BASE_URL}/update`, {
         oldEmail: email,
         newPass,
         newEmail,
