@@ -6,6 +6,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './components/root/auth.component';
@@ -46,6 +47,7 @@ import { ServicesModule } from 'src/app/core/shared/services/services.module';
     BenefitModule,
     ProviderModule,
     ServicesModule,
+    NgxMaskModule.forRoot(),
   ],
 })
 export class AuthModule {}

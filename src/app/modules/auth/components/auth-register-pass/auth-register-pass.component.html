@@ -118,9 +118,9 @@
         <input
           class="form-register__input"
           input-field
-          type="number"
           placeholder="Celular"
           formControlName="mobilePhone"
+          [mask]="'(00) 00000-0000'"
         />
         <section
           input-error
@@ -206,7 +206,7 @@
           </p>
         </section>
       </section>
-
+      <!--
       <section class="form-register__field" class="form-register__check">
         <mat-checkbox
           formControlName="acceptTerm"
@@ -218,7 +218,7 @@
           e
           <span class="form-register__check-link">Termos de Uso</span>
         </p>
-      </section>
+      </section> -->
     </form>
   </main>
 

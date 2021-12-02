@@ -45,15 +45,7 @@ export class AuthRegisterPassComponent implements OnInit {
     const gender = this.formNewPass?.get('gender')?.value;
     if (this.email && newPass) {
       this.userService
-        .updateUser(
-          this.email,
-          newPass,
-          newEmail,
-          name,
-          mobilePhone,
-          acceptTerm,
-          gender
-        )
+        .updateUser(this.email, newPass, newEmail, name, mobilePhone, gender)
         .pipe(switchMap(() => this.userService.login(newEmail, newPass)))
         .subscribe({
           next: () =>
@@ -95,10 +87,6 @@ export class AuthRegisterPassComponent implements OnInit {
       }),
       mobilePhone: this.formBuilder.control('', {
         validators: [Validators.pattern(REGEX_CELL)],
-      }),
-      acceptTerm: this.formBuilder.control('', {
-        validators: [Validators.required, Validators.requiredTrue],
-        asyncValidators: [verifyEmailNotUsedValidator(this.userService)],
       }),
       gender: this.formBuilder.control('', {
         validators: [Validators.required],

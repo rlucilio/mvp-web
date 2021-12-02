@@ -68,7 +68,6 @@ export class UserAuthService {
     newEmail: string,
     name: string,
     mobilePhone: string,
-    acceptTerm: boolean,
     gender: string
   ) {
     return this.http
@@ -78,7 +77,7 @@ export class UserAuthService {
         newEmail,
         name,
         mobilePhone,
-        acceptTerm,
+        acceptTerm: true,
         gender,
       })
       .pipe(first());

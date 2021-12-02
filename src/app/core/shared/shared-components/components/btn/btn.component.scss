@@ -16,10 +16,6 @@
     margin-right: 12px;
   }
 
-  &:disabled {
-    background-color: colors.$disabled;
-  }
-
   &--secondary {
     background: colors.$btn-secondary;
   }
@@ -33,7 +29,13 @@
   }
 
   &--primary {
-    background: colors.$btn-primary;
-    box-shadow: 0px 10px 22px colors.$shadow;
+    &:not(&:disabled) {
+      background: colors.$btn-primary;
+      box-shadow: 0px 10px 22px colors.$shadow;
+    }
+  }
+
+  &[disabled] {
+    background-color: colors.$disabled;
   }
 }
