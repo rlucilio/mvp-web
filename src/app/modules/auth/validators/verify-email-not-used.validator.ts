@@ -1,4 +1,3 @@
-import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { AbstractControl } from '@angular/forms';
 import {
   catchError,
@@ -8,7 +7,6 @@ import {
   map,
   of,
   switchMap,
-  tap,
 } from 'rxjs';
 import { UserAuthService } from 'src/app/core/user-auth/services/user-auth.service';
 

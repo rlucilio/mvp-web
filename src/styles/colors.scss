@@ -1,5 +1,19 @@
 $dark-primary-text: rgba(black, 0.87);
 $light-primary-text: white;
+$line-text: #dddada;
+$disabled: #7b6f72;
+
+$btn-secondary: linear-gradient(270deg, #c58bf2 0%, #eea4ce 100%);
+$btn-secondary-light: linear-gradient(
+  272.69deg,
+  #c58bf2 -59.92%,
+  #92a3fd 86.39%
+);
+$btn-flat: #98bffd;
+$btn-primary: linear-gradient(270deg, #c66720 0%, #f0a508 100%);
+$shadow: rgba(149, 173, 254, 0.3);
+$input-background: #f7f8f8;
+$input: #ada4a5;
 
 $primary-palette: (
   50: #fef3e2,

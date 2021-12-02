@@ -1,3 +1,5 @@
+@use "../../../../../styles/colors.scss" as colors;
+
 .header {
   text-align: center;
 
@@ -7,7 +9,7 @@
     font-weight: bold;
     font-size: 20px;
     line-height: 30px;
-    color: #1d1617;
+    color: colors.$dark-primary-text;
     text-align: center;
     margin: 40px 0;
   }
@@ -22,7 +24,7 @@
     font-weight: bold;
     font-size: 20px;
     line-height: 30px;
-    color: #1d1617;
+    color: colors.$dark-primary-text;
     margin: 40px 0 8px 0;
   }
 
@@ -34,7 +36,7 @@
     font-size: 12px;
     line-height: 18px;
     text-align: center;
-    color: #7b6f72;
+    color: colors.$disabled;
   }
 }
 
@@ -60,7 +62,7 @@
 }
 
 .datepick {
-  background: #f7f8f8;
+  background: colors.$input-background;
   height: 48px;
   align-items: center;
   border-radius: 14px;
@@ -78,7 +80,7 @@
     font-weight: normal;
     font-size: 12px;
     line-height: 18px;
-    color: #7e797a;
+    color: colors.$input;
     flex: 1;
   }
 }

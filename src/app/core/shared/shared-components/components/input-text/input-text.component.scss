@@ -2,7 +2,7 @@
 
 .container {
   width: 100%;
-  background-color: #f7f8f8;
+  background-color: colors.$input-background;
   margin-top: 15px;
   display: flex;
   justify-content: space-between;
@@ -26,12 +26,11 @@
           height: 100%;
           border: none;
           background: transparent;
-          font-family: Poppins;
           font-style: normal;
           font-weight: normal;
           font-size: 12px;
           line-height: 18px;
-          color: #ada4a5;
+          color: colors.$input;
           outline: transparent;
           flex: 1;
         }

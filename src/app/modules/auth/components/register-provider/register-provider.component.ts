@@ -11,7 +11,7 @@ import { ProviderService } from 'src/app/core/provider/services/provider.service
 export class RegisterProviderComponent implements OnInit {
   private email?: string;
   formProvider?: FormGroup;
-  specialty?: string;
+  specialty?: string = 'Não encontrado';
   constructor(
     private readonly route: ActivatedRoute,
     private readonly providerService: ProviderService,
@@ -63,9 +63,9 @@ export class RegisterProviderComponent implements OnInit {
 
   private getProvider() {
     if (this.email) {
-      this.providerService
-        .findProvider(this.email)
-        .subscribe((result) => (this.specialty = result.specialty));
+      this.providerService.findProvider(this.email).subscribe({
+        next: (result) => (this.specialty = result.specialty),
+      });
     }
   }
 }

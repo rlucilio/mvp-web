@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { first, map, tap } from 'rxjs';
+import { first } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { KEY_ACCESS_TOKEN } from '../../shared/constants';
 
 @Injectable()
 export class BenefitService {

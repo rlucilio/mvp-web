@@ -8,7 +8,6 @@ import {
   map,
   of,
   switchMap,
-  tap,
 } from 'rxjs';
 import { UserAuthService } from 'src/app/core/user-auth/services/user-auth.service';
 

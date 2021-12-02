@@ -59,7 +59,12 @@ export class AuthLoginComponent implements OnInit {
     if (email && email.value && email?.valid) {
       this.userAuthService
         .requestChangePass(email.value)
-        .subscribe(() => console.log('solicitado para trocar a senha'));
+        .subscribe(() => this.goToHome());
     }
+  }
+
+  private goToHome() {
+    //TODO: add quando tiver home
+    this.router.navigate([]);
   }
 }

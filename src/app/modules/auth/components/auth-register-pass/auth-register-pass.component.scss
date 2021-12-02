@@ -1,3 +1,4 @@
+@use "../../../../../styles/colors.scss" as colors;
 .form-register {
   &__check {
     margin-top: 15px;
@@ -9,13 +10,12 @@
   }
 
   &__check-label {
-    font-family: Poppins;
     font-style: normal;
     font-weight: normal;
     font-size: 10px;
     line-height: 15px;
 
-    color: #ada4a5;
+    color: colors.$input;
   }
 
   &__check-link {
@@ -26,7 +26,7 @@
   &__img {
     &--icon {
       font-size: 20px;
-      color: #7b6f72;
+      color: colors.$disabled;
     }
   }
 
@@ -36,7 +36,7 @@
     align-items: center;
     height: 48px;
     border-radius: 14px;
-    background: #f7f8f8;
+    background: colors.$input-background;
     margin-top: 15px;
     padding-right: 12px;
   }

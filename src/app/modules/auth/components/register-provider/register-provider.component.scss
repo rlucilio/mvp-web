@@ -1,3 +1,5 @@
+@use "../../../../../styles/colors.scss" as colors;
+
 .header {
   &__img {
     width: 100%;
@@ -10,7 +12,7 @@
     font-weight: bold;
     font-size: 20px;
     line-height: 30px;
-    color: #1d1617;
+    color: colors.$dark-primary-text;
     text-align: center;
     margin: 0 0 8px 0;
   }
@@ -22,7 +24,7 @@
     font-size: 12px;
     line-height: 18px;
     text-align: center;
-    color: #7b6f72;
+    color: colors.$disabled;
     margin: 0 0 24px 0;
   }
 }
@@ -30,7 +32,7 @@
 .textarea {
   display: flex;
   justify-content: space-between;
-  background: #f7f8f8;
+  background: colors.$input-background;
   border-radius: 14px;
   margin-top: 15px;
   align-items: baseline;
