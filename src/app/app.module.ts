@@ -8,6 +8,7 @@ import { UserAuthModule } from './core/user-auth/user-auth.module';
 import { ServerModule } from './core/server/server.module';
 import { AccessTokenInterceptor } from './core/user-auth/interceptors/access-token.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServicesModule } from './core/shared/services/services.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserAuthModule,
     ServerModule,
     BrowserAnimationsModule,
+    ServicesModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
