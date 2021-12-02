@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastService } from 'src/app/core/shared/services/services/toast.service';
 import { UserAuthService } from 'src/app/core/user-auth/services/user-auth.service';
 import { confirmPassValidator } from '../../validators/confirm-pass.validator';
 
@@ -20,7 +21,8 @@ export class ChangePassComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly authUserService: UserAuthService,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly toast: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -49,10 +51,14 @@ export class ChangePassComponent implements OnInit {
             if (response.result) {
               console.log('Token ok');
             } else {
+              this.toast.show('Não foi autorizado o acesso a essa página');
               this.goToLoginPage();
             }
           },
-          error: () => this.goToLoginPage(),
+          error: () => {
+            this.toast.showErrorSystem();
+            this.goToLoginPage();
+          },
         });
     }
   }
@@ -73,7 +79,13 @@ export class ChangePassComponent implements OnInit {
     if (this.params?.email && this.params?.token && newPass) {
       this.authUserService
         .changePass(this.params.email, newPass, this.params.token)
-        .subscribe(() => this.goToLoginPage());
+        .subscribe({
+          next: () => {
+            this.toast.show('Senha trocada com sucesso! 🎉');
+            this.goToLoginPage();
+          },
+          error: () => this.toast.showErrorSystem(),
+        });
     }
   }
 

@@ -19,6 +19,7 @@ import { BenefitModule } from 'src/app/core/benefit/benefit.module';
 import { RegisterSuccessComponent } from './components/register-success/register-success.component';
 import { ProviderModule } from 'src/app/core/provider/provider.module';
 import { RegisterBenefitFormComponent } from './components/register-benefit-form/register-benefit-form.component';
+import { ServicesModule } from 'src/app/core/shared/services/services.module';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { RegisterBenefitFormComponent } from './components/register-benefit-form
     MatNativeDateModule,
     BenefitModule,
     ProviderModule,
+    ServicesModule,
   ],
 })
 export class AuthModule {}

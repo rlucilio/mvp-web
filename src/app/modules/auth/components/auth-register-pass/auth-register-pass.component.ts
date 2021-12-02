@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, switchMap } from 'rxjs';
 import { REGEX_CELL, REGEX_EMAIL } from 'src/app/core/shared/constants';
+import { ToastService } from 'src/app/core/shared/services/services/toast.service';
 import { UserAuthService } from 'src/app/core/user-auth/services/user-auth.service';
 
 import { verifyEmailNotUsedValidator } from '../../validators/verify-email-not-used.validator';
@@ -22,7 +23,8 @@ export class AuthRegisterPassComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly userService: UserAuthService,
     private readonly router: Router,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly toast: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -58,18 +60,22 @@ export class AuthRegisterPassComponent implements OnInit {
             this.userType === 'BENEFIT'
               ? this.goToRegisterBenefit()
               : this.goToRegisterProvider(),
-          error: () => this.goBackToLoginPage(),
+          error: () => {
+            this.toast.showErrorSystem();
+          },
         });
     } else {
-      this.goBackToLoginPage();
+      this.toast.show('Falta dados para atualizar o cadastro');
     }
   }
 
   private goToRegisterBenefit() {
+    this.toast.show('Falta pouco agora ⌛️');
     this.router.navigate(['/auth/register-benefit', this.email]);
   }
 
   private goToRegisterProvider() {
+    this.toast.show('Falta pouco agora ⌛️');
     this.router.navigate(['/auth/register-provider', this.email]);
   }
 
@@ -106,6 +112,7 @@ export class AuthRegisterPassComponent implements OnInit {
     this.userType = this.route.snapshot.queryParamMap.get('user');
 
     if (!this.userType && this.email) {
+      this.toast.show('Acesso negado a essa página');
       this.goBackToLoginPage();
     }
   }
@@ -116,8 +123,14 @@ export class AuthRegisterPassComponent implements OnInit {
         .isFirstAccess(this.email)
         .pipe(filter((response) => !response.result))
         .subscribe({
-          next: () => this.goBackToLoginPage(),
-          error: () => this.goBackToLoginPage(),
+          next: () => {
+            this.toast.show('Acesso negado a essa página');
+            this.goBackToLoginPage();
+          },
+          error: () => {
+            this.toast.showErrorSystem();
+            this.goBackToLoginPage();
+          },
         });
     } else {
       this.goBackToLoginPage();

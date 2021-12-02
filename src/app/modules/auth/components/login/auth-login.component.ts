@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { REGEX_EMAIL } from 'src/app/core/shared/constants';
+import { ToastService } from 'src/app/core/shared/services/services/toast.service';
 import { UserAuthService } from 'src/app/core/user-auth/services/user-auth.service';
 import { environment } from 'src/environments/environment';
 import { verifyFirstAccessValidator } from '../../validators/verify-first-access.validator';
@@ -17,7 +18,8 @@ export class AuthLoginComponent implements OnInit {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly userAuthService: UserAuthService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly toast: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -44,9 +46,13 @@ export class AuthLoginComponent implements OnInit {
     const email = this.formLogin?.get('email')?.value;
     const pass = this.formLogin?.get('pass')?.value;
     if (email && pass) {
-      this.userAuthService
-        .login(email, pass)
-        .subscribe(() => console.log('Logado'));
+      this.userAuthService.login(email, pass).subscribe({
+        next: () => {
+          this.toast.show('Bem vindo! ✌🏻');
+          this.goToHome();
+        },
+        error: () => this.toast.show('Email ou senha inválidos ❌'),
+      });
     }
   }
 
@@ -57,9 +63,13 @@ export class AuthLoginComponent implements OnInit {
   requestChangePass() {
     const email = this.formLogin?.get('email');
     if (email && email.value && email?.valid) {
-      this.userAuthService
-        .requestChangePass(email.value)
-        .subscribe(() => this.goToHome());
+      this.userAuthService.requestChangePass(email.value).subscribe({
+        next: () =>
+          this.toast.show(
+            'Enviamos um link para a troca de senha para o seu email 📧'
+          ),
+        error: () => this.toast.showErrorSystem(),
+      });
     }
   }
 

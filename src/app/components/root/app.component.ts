@@ -8,13 +8,19 @@ import { ServerService } from '../../core/server/services/server.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private readonly serverService: ServerService) {}
+  constructor(
+    private readonly serverService: ServerService,
+    private readonly toast: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.verifyServer();
   }
 
   private verifyServer() {
-    this.serverService.verifyServer().subscribe(console.log);
+    this.serverService.verifyServer().subscribe({
+      next: () => console.log('Servidor pronto'),
+      error: () => this.toast.showErrorSystem(),
+    });
   }
 }

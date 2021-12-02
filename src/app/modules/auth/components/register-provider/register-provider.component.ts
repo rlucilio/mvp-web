@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProviderService } from 'src/app/core/provider/services/provider.service';
+import { ToastService } from 'src/app/core/shared/services/services/toast.service';
 
 @Component({
   selector: 'app-register-provider',
@@ -16,7 +17,8 @@ export class RegisterProviderComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly providerService: ProviderService,
     private readonly router: Router,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly toast: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -32,7 +34,9 @@ export class RegisterProviderComponent implements OnInit {
     if (bio && this.email) {
       this.providerService.updateProvider(this.email, bio).subscribe({
         next: () => this.goToRegisteSuccess(),
-        error: () => this.goToLoginPage(),
+        error: () => {
+          this.toast.show('Erro ao atualizar os dados');
+        },
       });
     }
   }
@@ -65,6 +69,7 @@ export class RegisterProviderComponent implements OnInit {
     if (this.email) {
       this.providerService.findProvider(this.email).subscribe({
         next: (result) => (this.specialty = result.specialty),
+        error: () => this.toast.show('Não foi possível pegar a especialidade'),
       });
     }
   }
