@@ -28,8 +28,62 @@
       flex: 1;
       display: flex;
       justify-content: center;
+      height: 100%;
       &--main {
-        transform: translateY(-16px);
+        transform: translateY(-29px);
+      }
+
+      &--home .menu__link {
+        background-image: url("../../../../../assets/icons/home.svg");
+      }
+
+      &--home .menu__link.menu__link--active {
+        background-image: url("../../../../../assets/icons/home-selected.svg");
+      }
+
+      &--dash .menu__link {
+        background-image: url("../../../../../assets/icons/dash.svg");
+      }
+
+      &--dash .menu__link.menu__link--active {
+        background-image: url("../../../../../assets/icons/dash-selected.svg");
+      }
+
+      &--chat .menu__link {
+        background-image: url("../../../../../assets/icons/chat.svg");
+      }
+
+      &--chat .menu__link.menu__link--active {
+        background-image: url("../../../../../assets/icons/chat.svg");
+      }
+
+      &--profile .menu__link {
+        background-image: url("../../../../../assets/icons/profile.svg");
+      }
+
+      &--profile .menu__link.menu__link--active {
+        background-image: url("../../../../../assets/icons/avatar-selected.svg");
+      }
+    }
+
+    &__link {
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+      position: relative;
+
+      &--active {
+        &::before {
+          content: "";
+          position: absolute;
+          width: 4px;
+          height: 4px;
+          border-radius: 70%;
+          background: linear-gradient(270deg, #c66720 0%, #f0a508 100%);
+          bottom: 29%;
+          left: 47%;
+        }
       }
     }
   }
