@@ -1,0 +1,36 @@
+.container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+
+  .content {
+    flex: 1;
+  }
+
+  .menu {
+    background-color: #fbfbfb;
+    height: 80px;
+
+    &__container {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      justify-content: space-around;
+      align-items: center;
+      height: 100%;
+    }
+
+    &__item {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      &--main {
+        transform: translateY(-16px);
+      }
+    }
+  }
+}

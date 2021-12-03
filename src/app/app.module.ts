@@ -8,6 +8,7 @@ import { UserAuthModule } from './core/user-auth/user-auth.module';
 import { ServerModule } from './core/server/server.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServicesModule } from './core/shared/services/services.module';
+import { LayoutModule } from './modules/layout/layout.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { ServicesModule } from './core/shared/services/services.module';
     ServerModule,
     BrowserAnimationsModule,
     ServicesModule,
+    LayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
