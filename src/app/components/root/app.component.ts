@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { REGEX_MOBILE } from 'src/app/core/shared/constants';
 import { ToastService } from 'src/app/core/shared/services/services/toast.service';
 import { ServerService } from '../../core/server/services/server.service';
 
@@ -8,6 +9,7 @@ import { ServerService } from '../../core/server/services/server.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  isMobile = true;
   constructor(
     private readonly serverService: ServerService,
     private readonly toast: ToastService
@@ -15,6 +17,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.verifyServer();
+    this.isMobile = REGEX_MOBILE.test(navigator.userAgent);
   }
 
   private verifyServer() {

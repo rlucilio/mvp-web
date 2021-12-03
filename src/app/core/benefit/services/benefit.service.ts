@@ -27,4 +27,10 @@ export class BenefitService {
       )
       .pipe(first());
   }
+
+  findBenefit(email: string) {
+    return this.http
+      .get<void>(`${this.BASE_URL}/find?email=${email}`)
+      .pipe(first());
+  }
 }

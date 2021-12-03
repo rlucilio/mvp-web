@@ -20,6 +20,7 @@ export class UserAuthService {
   }
 
   login(email: string, pass: string) {
+    this.storageService.set('user', JSON.stringify({ email, pass }));
     return this.http
       .post<void>(
         `${this.BASE_URL}/login`,

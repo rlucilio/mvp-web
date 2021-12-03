@@ -1,1 +1,19 @@
-<router-outlet></router-outlet>
+<ng-container *ngIf="isMobile">
+  <router-outlet></router-outlet>
+</ng-container>
+
+<ng-container *ngIf="!isMobile">
+  <main class="message-desktop">
+    <img
+      src="../../../assets/imgs/sulamerica-logo.png"
+      class="message-desktop__img"
+    />
+    <h2 class="message-desktop__text--title">Em desenvolvimento</h2>
+    <h3 class="message-desktop__text--sub-title">
+      Infelizmente nosso portal não tem suporte para desktop ainda!
+    </h3>
+    <h3 class="message-desktop__text--sub-title">
+      Por favor acessar pelo o celular
+    </h3>
+  </main>
+</ng-container>
