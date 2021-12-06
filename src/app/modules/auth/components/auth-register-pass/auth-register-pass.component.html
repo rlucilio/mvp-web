@@ -192,19 +192,18 @@
           <mat-option [value]="'FEMALE'">Feminino</mat-option>
           <mat-option [value]="'UNINFORMED'">Prefiro não informar</mat-option>
         </mat-select>
-
-        <section
-          input-error
-          *ngIf="formNewPass?.get('newPass')?.touched"
-          class="form-register__errors"
+      </section>
+      <section
+        input-error
+        *ngIf="formNewPass?.get('gender')?.touched"
+        class="form-register__errors"
+      >
+        <p
+          *ngIf="formNewPass?.get('gender')?.hasError('required')"
+          class="form-register__error-msg"
         >
-          <p
-            *ngIf="formNewPass?.get('newPass')?.hasError('required')"
-            class="form-register__error-msg"
-          >
-            Genero é obrigatório
-          </p>
-        </section>
+          Genero é obrigatório
+        </p>
       </section>
       <!--
       <section class="form-register__field" class="form-register__check">

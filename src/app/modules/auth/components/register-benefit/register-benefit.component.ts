@@ -50,12 +50,15 @@ export class RegisterBenefitComponent implements OnInit {
   }
 
   updateBenefit() {
-    const dateBirth = this.formBenefit?.get('dateBirth')?.value();
-    const weight = this.formBenefit?.get('weight')?.value();
-    const height = this.formBenefit?.get('wheighteight')?.value();
+    const dateBirth = this.formBenefit?.controls['dateBirth'].value;
+    const weight = this.formBenefit?.controls['weight'].value;
+    const height = this.formBenefit?.controls['height'].value;
+    const dateBirthForm = `${dateBirth.getDay()}/${
+      dateBirth.getMonth() + 1
+    }/${dateBirth.getFullYear()}`;
     if (this.email && this.formBenefit?.valid) {
       this.benefitService
-        .updateBenefit(this.email, dateBirth, weight, height)
+        .updateBenefit(this.email, dateBirthForm, weight, height)
         .subscribe({
           next: () => this.goToRegisterForm(),
           error: () => this.toast.show('Erro ao atualizar os dados'),

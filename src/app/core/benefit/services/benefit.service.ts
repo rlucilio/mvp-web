@@ -10,7 +10,7 @@ export class BenefitService {
 
   updateBenefit(
     email: string,
-    dateBirth: Date,
+    dateBirth: string,
     weight: number,
     height: number
   ) {
