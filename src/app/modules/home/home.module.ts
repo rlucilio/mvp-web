@@ -8,6 +8,7 @@ import { LayoutModule } from '../layout/layout.module';
 import { SharedComponentsModule } from 'src/app/core/shared/shared-components/shared-components.module';
 import { BenefitModule } from 'src/app/core/benefit/benefit.module';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ProviderModule } from 'src/app/core/provider/provider.module';
 
 @NgModule({
   declarations: [HomeComponent, RegisterSuccessComponent, ProfileComponent],
@@ -17,6 +18,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     LayoutModule,
     SharedComponentsModule,
     BenefitModule,
+    ProviderModule,
   ],
 })
 export class HomeModule {}

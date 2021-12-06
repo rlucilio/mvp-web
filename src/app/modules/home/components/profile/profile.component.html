@@ -8,9 +8,12 @@
   <header class="profile">
     <section class="profile__description">
       <img class="profile__img" src="../../../../../assets/imgs/profile.svg" />
-      <p class="profile__text">{{ pageModel?.name }}</p>
+      <div>
+        <p class="profile__text">{{ pageModel?.name }}</p>
+        <p class="profile__text--minor">{{ pageModel?.specialty }}</p>
+      </div>
     </section>
-    <section class="profile__infos">
+    <section class="profile__infos" *ngIf="pageModel?.dateBirth">
       <div class="profile__bio-item">
         <p class="profile__text--major">{{ pageModel?.height }}cm</p>
         <span class="profile__text--minor">Altura</span>
@@ -23,6 +26,10 @@
         <p class="profile__text--major">{{ pageModel?.dateBirthFormat }}</p>
         <span class="profile__text--minor">Anos</span>
       </div>
+    </section>
+
+    <section *ngIf="pageModel?.bio" class="profile__bio">
+      <p class="profile__text--minor">{{ pageModel?.bio }}</p>
     </section>
   </header>
 </main>
