@@ -1,12 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { first } from 'rxjs';
+import { first, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { StorageService } from '../../storage/services/storage.service';
 
 @Injectable()
 export class BenefitService {
   private readonly BASE_URL = `${environment.urlServe}/benefit`;
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly storage: StorageService
+  ) {}
 
   updateBenefit(
     email: string,

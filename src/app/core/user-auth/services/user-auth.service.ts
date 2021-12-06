@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { first, map, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { KEY_ACCESS_TOKEN } from '../../shared/constants';
+import { KEY_ACCESS_TOKEN, KEY_USER } from '../../shared/constants';
 import { StorageService } from '../../storage/services/storage.service';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class UserAuthService {
   }
 
   login(email: string, pass: string) {
-    this.storageService.set('user', JSON.stringify({ email, pass }));
+    this.storageService.set(KEY_USER, JSON.stringify({ email, pass }));
     return this.http
       .post<void>(
         `${this.BASE_URL}/login`,

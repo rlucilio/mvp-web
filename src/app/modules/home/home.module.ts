@@ -7,9 +7,10 @@ import { RegisterSuccessComponent } from './components/register-success/register
 import { LayoutModule } from '../layout/layout.module';
 import { SharedComponentsModule } from 'src/app/core/shared/shared-components/shared-components.module';
 import { BenefitModule } from 'src/app/core/benefit/benefit.module';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
-  declarations: [HomeComponent, RegisterSuccessComponent],
+  declarations: [HomeComponent, RegisterSuccessComponent, ProfileComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,

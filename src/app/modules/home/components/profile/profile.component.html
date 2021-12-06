@@ -1,0 +1,28 @@
+<main class="content">
+  <nav class="nav">
+    <button class="nav__btn">
+      <img src="../../../../../assets/icons/back-arrow.svg" class="nav__icon" />
+    </button>
+  </nav>
+
+  <header class="profile">
+    <section class="profile__description">
+      <img class="profile__img" src="../../../../../assets/imgs/profile.svg" />
+      <p class="profile__text">{{ pageModel?.name }}</p>
+    </section>
+    <section class="profile__infos">
+      <div class="profile__bio-item">
+        <p class="profile__text--major">{{ pageModel?.height }}cm</p>
+        <span class="profile__text--minor">Altura</span>
+      </div>
+      <div class="profile__bio-item" (click)="updateWeight()">
+        <p class="profile__text--major">{{ pageModel?.weight }}kg</p>
+        <span class="profile__text--minor">Peso</span>
+      </div>
+      <div class="profile__bio-item">
+        <p class="profile__text--major">{{ pageModel?.dateBirthFormat }}</p>
+        <span class="profile__text--minor">Anos</span>
+      </div>
+    </section>
+  </header>
+</main>
