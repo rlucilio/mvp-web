@@ -26,3 +26,24 @@
     color: colors.$disabled;
   }
 }
+
+.header-benefit {
+  &__text {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    color: #ada4a5;
+    margin: 0;
+
+    &--focus {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 30px;
+      color: #1d1617;
+    }
+  }
+}

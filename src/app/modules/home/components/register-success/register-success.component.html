@@ -1,0 +1,23 @@
+<app-layout-login>
+  <header layout-header class="header-benefit">
+    <h3 class="header-benefit__text">Bem-vindo de volta,</h3>
+    <h3 class="header-benefit__text--focus">
+      {{ nameBenefit }}
+    </h3>
+  </header>
+  <main layout-main class="content">
+    <img
+      src="../../../../../assets/imgs/personoids/pessoa-sentada.svg"
+      class="header__img"
+    />
+    <h3 class="header__title">Bora la</h3>
+    <h4 class="header__description">
+      Chegou a hora de marcar sua primeira consulta de imersao
+      iofudspijfsandofij asbifjnads
+    </h4>
+  </main>
+
+  <footer layout-footer class="footer">
+    <app-btn class="footer__btn" (click)="goToHome()">Agendar consulta</app-btn>
+  </footer>
+</app-layout-login>
