@@ -27,11 +27,11 @@ const routes: Routes = [
         component: ChangePassComponent,
       },
       {
-        path: 'register-benefit',
+        path: 'register-benefit/:email',
         component: RegisterBenefitComponent,
       },
       {
-        path: 'register-provider',
+        path: 'register-provider/:email',
         component: RegisterProviderComponent,
       },
       {
