@@ -68,6 +68,7 @@ export class RegisterBenefitComponent implements OnInit {
   }
 
   goToRegisterForm() {
-    this.router.navigate(['/auth/register-form', this.email]);
+    document.location.href =
+      'https://docs.google.com/forms/d/e/1FAIpQLSctK0cyxGS0shgEeha0Lf9iVNgul0gY_gEr5ncWz4OU64HPCw/viewform';
   }
 }
