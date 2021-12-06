@@ -18,7 +18,6 @@ import { RegisterBenefitComponent } from './components/register-benefit/register
 import { RegisterProviderComponent } from './components/register-provider/register-provider.component';
 import { BenefitModule } from 'src/app/core/benefit/benefit.module';
 import { ProviderModule } from 'src/app/core/provider/provider.module';
-import { RegisterBenefitFormComponent } from './components/register-benefit-form/register-benefit-form.component';
 import { ServicesModule } from 'src/app/core/shared/services/services.module';
 import { LayoutModule } from '../layout/layout.module';
 
@@ -30,7 +29,6 @@ import { LayoutModule } from '../layout/layout.module';
     ChangePassComponent,
     RegisterBenefitComponent,
     RegisterProviderComponent,
-    RegisterBenefitFormComponent,
   ],
   imports: [
     CommonModule,

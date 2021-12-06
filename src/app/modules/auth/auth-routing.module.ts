@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthRegisterPassComponent } from './components/auth-register-pass/auth-register-pass.component';
 import { ChangePassComponent } from './components/change-pass/change-pass.component';
 import { AuthLoginComponent } from './components/login/auth-login.component';
-import { RegisterBenefitFormComponent } from './components/register-benefit-form/register-benefit-form.component';
 import { RegisterBenefitComponent } from './components/register-benefit/register-benefit.component';
 import { RegisterProviderComponent } from './components/register-provider/register-provider.component';
 import { RegisterSuccessComponent } from '../home/components/register-success/register-success.component';
@@ -33,10 +32,6 @@ const routes: Routes = [
       {
         path: 'register-provider/:email',
         component: RegisterProviderComponent,
-      },
-      {
-        path: 'register-form',
-        component: RegisterBenefitFormComponent,
       },
       {
         path: '',

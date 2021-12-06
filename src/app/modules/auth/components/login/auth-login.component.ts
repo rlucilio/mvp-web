@@ -74,7 +74,6 @@ export class AuthLoginComponent implements OnInit {
   }
 
   private goToHome() {
-    //TODO: add quando tiver home
-    this.router.navigate([]);
+    this.router.navigate(['/home/first-access']);
   }
 }
