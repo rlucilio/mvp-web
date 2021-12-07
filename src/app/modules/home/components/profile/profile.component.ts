@@ -46,31 +46,31 @@ export class ProfileComponent implements OnInit {
       .subscribe({
         error: () => this.toast.showErrorSystem(),
         next: (response) => {
-          // if ('body' in response) {
-          //   const height =
-          //     response?.body[response?.body?.length - 1]?.height.toFixed(0);
-          //   const weight =
-          //     response?.body[response?.body?.length - 1]?.weight.toFixed(0);
+          if ('body' in response) {
+            const height =
+              response?.body[response?.body?.length - 1]?.height.toFixed(0);
+            const weight =
+              response?.body[response?.body?.length - 1]?.weight.toFixed(0);
 
-          //   const dateBirthMoment = moment(response.birthDate, 'D/M/YYYY');
-          //   const dateBirthFormat =
-          //     Math.abs(dateBirthMoment.diff(moment(), 'year')) + '';
+            const dateBirthMoment = moment(response.birthDate, 'D/M/YYYY');
+            const dateBirthFormat =
+              Math.abs(dateBirthMoment.diff(moment(), 'year')) + '';
 
-          //   this.pageModel = {
-          //     name: response.name,
-          //     height,
-          //     weight,
-          //     dateBirthFormat,
-          //     dateBirth: response.birthDate,
-          //     email: user.email,
-          //   };
-          // } else {
-          this.pageModel = {
-            name: 'response.name',
-            bio: 'response.bio',
-            specialty: 'response.specialty',
-          };
-          // }
+            this.pageModel = {
+              name: response.name,
+              height,
+              weight,
+              dateBirthFormat,
+              dateBirth: response.birthDate,
+              email: user.email,
+            };
+          } else {
+            this.pageModel = {
+              name: response.name,
+              bio: response.bio,
+              specialty: response.specialty,
+            };
+          }
         },
       });
   }
@@ -88,6 +88,7 @@ export class ProfileComponent implements OnInit {
       this.pageModel?.dateBirth &&
       this.pageModel?.height
     ) {
+      this.pageModel.weight = newWeight;
       this.benefitService
         .updateBenefit(
           this.pageModel?.email,
