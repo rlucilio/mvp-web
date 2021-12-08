@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./btn.component.scss'],
 })
 export class BtnComponent {
+  @Input() outline?: boolean;
   @Input() disabled?: boolean;
   @Input() icon?: string;
   @Input() color?: 'SECONDARY_FLAT' | 'FOCUS' | 'SECONDARY' | 'PRIMARY' =
