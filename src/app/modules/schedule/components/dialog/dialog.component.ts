@@ -20,7 +20,7 @@ import { Component, OnInit } from '@angular/core';
       </main>
 
       <footer>
-        <app-btn [outline]="true">Cancelar</app-btn>
+        <app-btn [color]="'SECONDARY'">Cancelar</app-btn>
         <app-btn>Agendar consulta</app-btn>
       </footer>
     </main>
