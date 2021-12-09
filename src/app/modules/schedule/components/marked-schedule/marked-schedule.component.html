@@ -1,7 +1,7 @@
 <main class="container">
   <header class="header">
     <nav class="nav">
-      <button class="nav__btn">
+      <button class="nav__btn" (click)="backPage()">
         <img
           src="../../../../../assets/icons/back-arrow.svg"
           class="nav__icon"
@@ -31,7 +31,7 @@
         <p class="schedules__text">Enfermeiro(a)</p>
         <p class="schedules__text--right">{{ nurseSchedule?.dateTime }}</p>
       </li>
-      <li
+      <!-- <li
         (click)="openRoom(doctorSchedule)"
         [class]="{
           'schedules__item--disabled': !doctorSchedule,
@@ -52,7 +52,7 @@
           (click)="goToSchedule('schedule/list?specialty=DOCTOR&first=false')"
           >clique aqui para escolher a data</a
         >
-      </li>
+      </li> -->
 
       <li
         (click)="openRoom(nutriSchedule)"

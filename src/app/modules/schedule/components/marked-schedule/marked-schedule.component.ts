@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -62,7 +63,8 @@ export class MarkedScheduleComponent implements OnInit {
     private readonly router: Router,
     private readonly storage: StorageService,
     private readonly schedule: ScheduleService,
-    private readonly toast: ToastService
+    private readonly toast: ToastService,
+    private readonly _location: Location
   ) {}
 
   ngOnInit(): void {
@@ -94,20 +96,16 @@ export class MarkedScheduleComponent implements OnInit {
   }
 
   private verifyAttendance(response: Response[], specialty: string) {
-    const schedulesNurses = response.filter(
+    const schedulesNurse = response.filter(
       (res) => res.provider.specialty === specialty
-    );
-
-    const scheduleNurse = schedulesNurses.filter(
-      (res) => res.schedule.status !== 'CRIADO'
     )[0];
 
-    if (scheduleNurse) {
+    if (schedulesNurse) {
       return {
-        dateTime: moment(scheduleNurse.schedule.dateTime).format(
+        dateTime: moment(schedulesNurse.schedule.dateTime).format(
           'DD/MM, hh:mm'
         ),
-        link: scheduleNurse.schedule.room,
+        link: schedulesNurse.schedule.room,
       };
     } else {
       return undefined;
@@ -122,5 +120,9 @@ export class MarkedScheduleComponent implements OnInit {
     if (url) {
       document.location.href = url.link;
     }
+  }
+
+  backPage() {
+    this._location.back();
   }
 }
