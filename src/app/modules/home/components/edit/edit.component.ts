@@ -75,7 +75,7 @@ export class EditComponent implements OnInit {
             };
 
             this.formBenefit?.get('weight')?.setValue(weight);
-            this.formBenefit?.get('bio')?.clearValidators();
+            this.formBenefit?.removeControl('bio');
           } else {
             const names = response.name.split(' ');
             this.pageModel = {
@@ -87,7 +87,7 @@ export class EditComponent implements OnInit {
             };
 
             this.formBenefit?.get('bio')?.setValue(response.bio);
-            this.formBenefit?.get('weight')?.clearValidators();
+            this.formBenefit?.removeControl('weight');
           }
         },
       });
@@ -116,7 +116,7 @@ export class EditComponent implements OnInit {
           .updateBenefit(
             this.pageModel?.email,
             this.pageModel?.dateBirth,
-            +newWeight,
+            newWeight,
             +this.pageModel?.height
           )
           .subscribe({

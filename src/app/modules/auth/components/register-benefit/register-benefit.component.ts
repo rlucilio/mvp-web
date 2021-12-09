@@ -58,7 +58,7 @@ export class RegisterBenefitComponent implements OnInit {
     }/${dateBirth.getFullYear()}`;
     if (this.email && this.formBenefit?.valid) {
       this.benefitService
-        .updateBenefit(this.email, dateBirthForm, weight, height)
+        .updateBenefit(this.email, dateBirthForm, weight, +height)
         .subscribe({
           next: () => this.goToRegisterForm(),
           error: () => this.toast.show('Erro ao atualizar os dados'),

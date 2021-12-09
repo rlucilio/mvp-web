@@ -88,4 +88,8 @@ export class ProfileComponent implements OnInit {
   backPage() {
     this._location.back();
   }
+
+  goToEdit() {
+    this.router.navigate(['/home/profile/edit']);
+  }
 }

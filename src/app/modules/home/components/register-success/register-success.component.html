@@ -17,7 +17,9 @@
     </h4>
   </main>
 
-  <footer layout-footer class="footer">
-    <app-btn class="footer__btn" (click)="goToHome()">Agendar consulta</app-btn>
+  <footer layout-footer class="footer" *ngIf="isBenefit">
+    <app-btn class="footer__btn" (click)="goToSchedule()"
+      >Agendar consulta</app-btn
+    >
   </footer>
 </app-layout-login>

@@ -137,6 +137,8 @@
     </form>
   </main>
   <footer class="footer">
-    <app-btn [disabled]="!formBenefit?.valid">Guardar alterações</app-btn>
+    <app-btn [disabled]="!formBenefit?.valid" (click)="edit()"
+      >Guardar alterações</app-btn
+    >
   </footer>
 </main>

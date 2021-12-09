@@ -17,7 +17,7 @@ export class BenefitService {
   updateBenefit(
     email: string,
     dateBirth: string,
-    weight: number,
+    weight: string,
     height: number
   ) {
     this.spinner.show();

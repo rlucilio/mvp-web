@@ -38,8 +38,6 @@ export class ChangePassComponent implements OnInit {
         validators: [Validators.required, Validators.minLength(4)],
       }),
     });
-
-    this.formNewPass.addValidators(confirmPassValidator);
   }
 
   private verifyToken() {

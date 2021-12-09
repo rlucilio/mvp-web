@@ -12,6 +12,7 @@ import { StorageService } from 'src/app/core/storage/services/storage.service';
 })
 export class RegisterSuccessComponent implements OnInit {
   public nameBenefit?: string;
+  isBenefit = false;
   constructor(
     private readonly router: Router,
     private readonly storage: StorageService,
@@ -33,16 +34,18 @@ export class RegisterSuccessComponent implements OnInit {
         this.goToLogin();
         this.toast.showErrorSystem();
       },
-      next: (response) => (this.nameBenefit = response.name),
+      next: (response) => {
+        this.isBenefit = !!response.birthDate;
+        this.nameBenefit = response.name;
+      },
     });
-  }
-
-  goToHome() {
-    //TODO: Add navegação
-    this.router.navigate([]);
   }
 
   goToLogin() {
     this.router.navigate(['/auth']);
+  }
+
+  goToSchedule() {
+    this.router.navigate(['/schedule/list?specialty=NURSE&first=true']);
   }
 }

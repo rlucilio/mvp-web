@@ -12,6 +12,7 @@
         <p class="profile__text">{{ pageModel?.name }}</p>
         <p class="profile__text--minor">{{ pageModel?.specialty }}</p>
       </div>
+      <button (click)="goToEdit()">Editar</button>
     </section>
     <section class="profile__infos" *ngIf="pageModel?.dateBirth">
       <div class="profile__bio-item">
