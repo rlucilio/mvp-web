@@ -9,6 +9,7 @@ export interface ResponseSchedule {
   room: string;
   dateTime: string;
   status: string;
+  updateDate: Date;
   provider: {
     specialty: string;
     email: string;

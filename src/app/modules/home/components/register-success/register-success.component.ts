@@ -61,6 +61,8 @@ export class RegisterSuccessComponent implements OnInit {
   }
 
   goToSchedule() {
-    this.router.navigateByUrl('/schedule/list?specialty=NURSE&first=true');
+    this.router.navigateByUrl(
+      '/schedule/list?specialty=Enfermeira(o)&first=true'
+    );
   }
 }

@@ -23,7 +23,7 @@ import {
 
       <main class="main">
         <p class="main__text">
-          {{ data.provider.specialty === 'DOCTOR' ? 'Dr(a). ' : ''
+          {{ data.provider.specialty === 'Médica(o)' ? 'Dr(a). ' : ''
           }}{{ data.provider.name }}
         </p>
         <div class="main__info">
@@ -142,6 +142,8 @@ export class DialogComponent implements OnInit {
   }
 
   getDate() {
-    return moment(this.data.dateTime).format('DD/MM/YYYY | hh:mm');
+    return moment(this.data.dateTime, 'DD/MM/YYYY HH:mm').format(
+      'DD/MM/YYYY | hh:mm'
+    );
   }
 }

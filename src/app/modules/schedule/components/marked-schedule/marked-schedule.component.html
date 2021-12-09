@@ -73,7 +73,7 @@
           *ngIf="passedWithCoach"
           class="schedules__text--link"
           (click)="
-            goToSchedule('/schedule/list?specialty=NUTRITIONIST&first=false')
+            goToSchedule('/schedule/list?specialty=Nutricionista&first=false')
           "
           >clique aqui para escolher a data</a
         >
@@ -95,11 +95,10 @@
           {{ educatorSchedule?.dateTime }}
         </p>
         <a
-          *ngIf="passedWithCoach"
           class="schedules__text--link"
           (click)="
             goToSchedule(
-              '/schedule/list?specialty=PHYSICAL_EDUCATOR&first=false'
+              '/schedule/list?specialty=Educador%20físico&first=false'
             )
           "
           >clique aqui para escolher a data</a

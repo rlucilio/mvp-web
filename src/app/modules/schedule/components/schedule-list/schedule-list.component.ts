@@ -23,6 +23,7 @@ export class ScheduleListComponent implements OnInit {
     date: string;
     hour: string;
     src: ResponseSchedule;
+    dateSrc: Date;
   }[];
   constructor(
     private readonly dialog: MatDialog,
@@ -51,17 +52,27 @@ export class ScheduleListComponent implements OnInit {
             }
             this.toast.showErrorSystem();
           },
-          next: (response) =>
-            (this.schedules = response.map((schedule) => ({
+          next: (response) => {
+            const schedules = response.map((schedule) => ({
               name: `${schedule.provider.name.slice(0, 15)}.`,
-              specialty: this.getSpecialty(schedule.provider.specialty),
+              specialty: schedule.provider.specialty,
               dayExtension: this.getWeekDay(
-                moment(schedule.dateTime).isoWeekday()
+                moment(schedule.dateTime, 'DD/MM/YYYY HH:mm').isoWeekday()
               ),
-              date: moment(schedule.dateTime).format('DD/MM/YY'),
-              hour: moment(schedule.dateTime).format('hh:mm'),
+              date: moment(schedule.dateTime, 'DD/MM/YYYY HH:mm').format(
+                'DD/MM/YY'
+              ),
+              hour: moment(schedule.dateTime, 'DD/MM/YYYY HH:mm').format(
+                'hh:mm'
+              ),
               src: schedule,
-            }))),
+              dateSrc: schedule.updateDate,
+            }));
+
+            this.schedules = schedules.sort(
+              (a, b) => (b.dateSrc as any) - (a.dateSrc as any)
+            );
+          },
         });
     } else {
       this.router.navigate(['/auth/login']);
@@ -73,21 +84,6 @@ export class ScheduleListComponent implements OnInit {
       width: '315px',
       data: schedule,
     });
-  }
-
-  private getSpecialty(specialty: string) {
-    switch (specialty) {
-      case 'DOCTOR':
-        return 'Médico(a)';
-      case 'NURSE':
-        return 'Enfermeiro(a)';
-      case 'NUTRITIONIST':
-        return 'Nutricionista';
-      case 'DOCTOR':
-        return 'Educador físico';
-      default:
-        return 'Especialidade';
-    }
   }
 
   private getWeekDay(day: number) {

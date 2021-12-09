@@ -81,15 +81,15 @@ export class MarkedScheduleComponent implements OnInit {
       },
       next: (response) => {
         this.passedWithCoach = !!response
-          .filter((res) => res.provider.specialty === 'NURSE')
+          .filter((res) => res.provider.specialty === 'Enfermeira(o)')
           .filter((res) => res.schedule.status === 'FINALIZADO').length;
 
-        this.nurseSchedule = this.verifyAttendance(response, 'NURSE');
-        this.nutriSchedule = this.verifyAttendance(response, 'NUTRITIONIST');
-        this.doctorSchedule = this.verifyAttendance(response, 'DOCTOR');
+        this.nurseSchedule = this.verifyAttendance(response, 'Enfermeira(o)');
+        this.nutriSchedule = this.verifyAttendance(response, 'Nutricionista');
+        this.doctorSchedule = this.verifyAttendance(response, 'Médica(o)');
         this.educatorSchedule = this.verifyAttendance(
           response,
-          'PHYSICAL_EDUCATOR'
+          'Educador físico'
         );
       },
     });
@@ -102,9 +102,10 @@ export class MarkedScheduleComponent implements OnInit {
 
     if (schedulesNurse) {
       return {
-        dateTime: moment(schedulesNurse.schedule.dateTime).format(
-          'DD/MM, hh:mm'
-        ),
+        dateTime: moment(
+          schedulesNurse.schedule.dateTime,
+          'DD/MM/YYYY HH:mm'
+        ).format('DD/MM, hh:mm'),
         link: schedulesNurse.schedule.room,
       };
     } else {
