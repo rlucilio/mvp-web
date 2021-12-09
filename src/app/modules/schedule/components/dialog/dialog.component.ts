@@ -136,6 +136,7 @@ export class DialogComponent implements OnInit {
       next: () => {
         this.toast.show('Agendamento criado 👍🏻');
         this.router.navigate(['/schedule/marked']);
+        this.close();
       },
     });
   }

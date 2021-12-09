@@ -1,11 +1,11 @@
-<app-layout-login>
-  <header layout-header class="header-benefit">
+<main class="container">
+  <header class="header-benefit">
     <h3 class="header-benefit__text">Bem-vindo de volta,</h3>
     <h3 class="header-benefit__text--focus">
       {{ nameBenefit }}
     </h3>
   </header>
-  <main layout-main class="content">
+  <main class="content">
     <img
       src="../../../../../assets/imgs/personoids/pessoa-sentada.svg"
       class="header__img"
@@ -17,9 +17,9 @@
     </h4>
   </main>
 
-  <footer layout-footer class="footer" *ngIf="isBenefit">
+  <footer class="footer" *ngIf="isBenefit">
     <app-btn class="footer__btn" (click)="goToSchedule()"
       >Agendar consulta</app-btn
     >
   </footer>
-</app-layout-login>
+</main>
