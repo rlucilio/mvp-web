@@ -44,9 +44,14 @@ export class HomeComponent implements OnInit {
             if (!response.birthDate) {
               this.router.navigate(['/auth/register-benefit', user.email]);
             }
+
+            if (!response.answeredForm) {
+              document.location.href =
+                'https://docs.google.com/forms/d/e/1FAIpQLSctK0cyxGS0shgEeha0Lf9iVNgul0gY_gEr5ncWz4OU64HPCw/viewform';
+            }
           } else {
             if (!response.bio) {
-              this.router.navigate(['/auth/register-benefit', user.email]);
+              this.router.navigate(['/authregister-provider', user.email]);
             }
           }
         },

@@ -11,9 +11,11 @@ const routes: Routes = [
     children: [
       { path: 'list', component: ScheduleListComponent },
       { path: 'marked', component: MarkedScheduleComponent },
+      { path: '', redirectTo: 'marked', pathMatch: 'full' },
+      { path: '**', redirectTo: 'marked', pathMatch: 'full' },
     ],
   },
-  { path: '**', redirectTo: '/list', pathMatch: 'full' },
+  { path: '**', redirectTo: 'marked', pathMatch: 'full' },
 ];
 
 @NgModule({

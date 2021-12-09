@@ -1,7 +1,9 @@
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { catchError } from 'rxjs';
 import { BenefitService } from 'src/app/core/benefit/services/benefit.service';
+import { ProviderService } from 'src/app/core/provider/services/provider.service';
 import { KEY_USER } from 'src/app/core/shared/constants';
 import { ToastService } from 'src/app/core/shared/services/services/toast.service';
 import { StorageService } from 'src/app/core/storage/services/storage.service';
@@ -13,11 +15,12 @@ import { StorageService } from 'src/app/core/storage/services/storage.service';
 })
 export class RegisterSuccessComponent implements OnInit {
   public nameBenefit?: string;
-  isBenefit = false;
+  isBenefit = true;
   constructor(
     private readonly router: Router,
     private readonly storage: StorageService,
     private readonly benefitService: BenefitService,
+    private readonly providerService: ProviderService,
     private readonly toast: ToastService
   ) {}
 
@@ -29,21 +32,28 @@ export class RegisterSuccessComponent implements OnInit {
     }
 
     const user: { email: string } = JSON.parse(userStorage);
-    this.benefitService.findBenefit(user.email).subscribe({
-      error: (error: HttpErrorResponse) => {
-        if (error.status === HttpStatusCode.NotFound) {
+    this.benefitService
+      .findBenefit(user.email)
+      .pipe(
+        catchError(() => {
           this.isBenefit = false;
-        } else {
-          this.storage.clear();
-          this.goToLogin();
-          this.toast.showErrorSystem();
-        }
-      },
-      next: (response) => {
-        this.isBenefit = true;
-        this.nameBenefit = response.name;
-      },
-    });
+          return this.providerService.findProvider(user.email);
+        })
+      )
+      .subscribe({
+        error: (error: HttpErrorResponse) => {
+          if (error.status === HttpStatusCode.NotFound) {
+            this.isBenefit = false;
+          } else {
+            this.storage.clear();
+            this.goToLogin();
+            this.toast.showErrorSystem();
+          }
+        },
+        next: (response) => {
+          this.nameBenefit = response.name;
+        },
+      });
   }
 
   goToLogin() {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastService } from 'src/app/core/shared/services/services/toast.service';
 
 @Component({
@@ -7,11 +8,14 @@ import { ToastService } from 'src/app/core/shared/services/services/toast.servic
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit {
-  constructor(private readonly toast: ToastService) {}
+  constructor(
+    private readonly toast: ToastService,
+    private readonly router: Router
+  ) {}
 
   ngOnInit(): void {}
 
-  showInDevelopment() {
-    this.toast.show('Em desenvolvimento');
+  goToSchedule() {
+    this.router.navigateByUrl('/schedule/marked');
   }
 }

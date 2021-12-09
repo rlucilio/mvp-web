@@ -108,5 +108,15 @@
       line-height: 18px;
       color: #000;
     }
+
+    &--link {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 10px;
+      line-height: 15px;
+      text-align: right;
+      text-decoration-line: underline;
+      color: #000;
+    }
   }
 }

@@ -42,6 +42,8 @@ export class BenefitService {
     this.spinner.show();
     return this.http
       .get<{
+        answeredForm: boolean;
+        questions: { question: string; answer: string }[];
         birthDate: string;
         body: {
           weight: number;
