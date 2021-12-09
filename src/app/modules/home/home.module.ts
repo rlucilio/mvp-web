@@ -9,9 +9,17 @@ import { SharedComponentsModule } from 'src/app/core/shared/shared-components/sh
 import { BenefitModule } from 'src/app/core/benefit/benefit.module';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProviderModule } from 'src/app/core/provider/provider.module';
+import { EditComponent } from './components/edit/edit.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [HomeComponent, RegisterSuccessComponent, ProfileComponent],
+  declarations: [
+    HomeComponent,
+    RegisterSuccessComponent,
+    ProfileComponent,
+    EditComponent,
+  ],
   imports: [
     CommonModule,
     HomeRoutingModule,
@@ -19,6 +27,9 @@ import { ProviderModule } from 'src/app/core/provider/provider.module';
     SharedComponentsModule,
     BenefitModule,
     ProviderModule,
+    NgxMaskModule.forChild(),
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class HomeModule {}

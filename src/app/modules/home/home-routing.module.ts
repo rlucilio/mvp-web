@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/root/home.component';
 import { RegisterSuccessComponent } from './components/register-success/register-success.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { EditComponent } from './components/edit/edit.component';
 const routes: Routes = [
   {
     path: '',
@@ -14,7 +15,16 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        component: ProfileComponent,
+        children: [
+          {
+            path: 'edit',
+            component: EditComponent,
+          },
+          {
+            path: '',
+            component: ProfileComponent,
+          },
+        ],
       },
       {
         path: '',

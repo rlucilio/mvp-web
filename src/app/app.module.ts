@@ -9,6 +9,7 @@ import { ServerModule } from './core/server/server.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServicesModule } from './core/shared/services/services.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BrowserAnimationsModule,
     ServicesModule,
     NgxSpinnerModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

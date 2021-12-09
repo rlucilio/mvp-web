@@ -1,0 +1,70 @@
+.form {
+  &__field {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    &--btn {
+      margin-right: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+  }
+
+  &__input {
+    flex: 1;
+  }
+
+  &__btn ::ng-deep {
+    button {
+      height: 48px;
+      border-radius: 14px;
+      margin-left: 15px;
+      width: 48px;
+      margin-top: 16px;
+    }
+  }
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 15px;
+}
+
+.content {
+  flex: 1;
+}
+
+.footer {
+  flex: 1;
+  padding-bottom: 50px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.header {
+  text-align: center;
+  &__title {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    color: #1d1617;
+
+    &--sub {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 18px;
+      text-align: center;
+      color: #7b6f72;
+    }
+  }
+}

@@ -85,30 +85,6 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/auth']);
   }
 
-  updateWeight() {
-    const newWeight = prompt('Novo peso', '');
-
-    if (
-      newWeight &&
-      this.pageModel?.email &&
-      this.pageModel?.dateBirth &&
-      this.pageModel?.height
-    ) {
-      this.pageModel.weight = newWeight;
-      this.benefitService
-        .updateBenefit(
-          this.pageModel?.email,
-          this.pageModel?.dateBirth,
-          +newWeight,
-          +this.pageModel?.height
-        )
-        .subscribe({
-          error: () => this.toast.showErrorSystem(),
-          next: () => this.toast.show('Peso atualizado'),
-        });
-    }
-  }
-
   backPage() {
     this._location.back();
   }

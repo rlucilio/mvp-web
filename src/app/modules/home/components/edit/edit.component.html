@@ -1,0 +1,142 @@
+<main class="container">
+  <header class="header">
+    <h2 class="header__title">Editar seu perfil</h2>
+    <p class="header__title--sub">
+      Dessa maneira voce nos ajuda a conhecer mais sobre voce e como podemos te
+      ajudar
+    </p>
+  </header>
+
+  <main class="content">
+    <form *ngIf="formBenefit" [formGroup]="formBenefit" class="form">
+      <app-input-text class="form__field">
+        <img
+          input-prefix
+          src="../../../../../assets/icons/avatar.svg"
+          class="form__img"
+        />
+        <input
+          input-field
+          type="text"
+          [placeholder]="pageModel?.name"
+          class="form__input"
+          readonly
+        />
+      </app-input-text>
+
+      <app-input-text class="form__field" *ngIf="pageModel?.specialty">
+        <img
+          input-prefix
+          src="../../../../../assets/icons/two-avatar.svg"
+          class="form__img"
+        />
+        <input
+          input-field
+          type="text"
+          [placeholder]="pageModel?.specialty"
+          class="form__input"
+          readonly
+        />
+      </app-input-text>
+
+      <app-input-text class="form__field">
+        <img
+          input-prefix
+          src="../../../../../assets/icons/avatar.svg"
+          class="form__img"
+        />
+        <input
+          input-field
+          type="text"
+          [placeholder]="pageModel?.lastName"
+          class="form__input"
+          readonly
+        />
+      </app-input-text>
+
+      <app-input-text class="form__field">
+        <img
+          input-prefix
+          src="../../../../../assets/icons/email.svg"
+          class="form__img"
+        />
+        <input
+          input-field
+          type="text"
+          [placeholder]="pageModel?.email"
+          class="form__input"
+          readonly
+        />
+      </app-input-text>
+
+      <section class="form__field--btn">
+        <app-input-text class="form__input">
+          <img input-prefix src="../../../../../assets/icons/swap.svg" />
+          <input
+            *ngIf="pageModel?.height"
+            [placeholder]="pageModel?.height"
+            input-field
+            readonly
+            placeholder="180"
+          />
+        </app-input-text>
+
+        <app-btn class="form__btn" [color]="'SECONDARY_FLAT'">CM</app-btn>
+      </section>
+
+      <section class="form__field--btn">
+        <app-input-text class="form__input">
+          <img
+            input-prefix
+            src="../../../../../assets/icons/weight-scale.svg"
+          />
+          <input
+            input-field
+            type="number"
+            placeholder="Seu peso"
+            formControlName="weight"
+            *ngIf="pageModel?.weight"
+            [placeholder]="pageModel?.weight"
+          />
+
+          <section input-error *ngIf="formBenefit?.get('weight')?.touched">
+            <p
+              class="login__field-error"
+              *ngIf="formBenefit?.get('weight')?.hasError('required')"
+            >
+              Peso é obrigatória
+            </p>
+          </section>
+        </app-input-text>
+
+        <app-btn class="form__btn" [color]="'SECONDARY_FLAT'">KG</app-btn>
+      </section>
+
+      <ng-container *ngIf="pageModel?.bio">
+        <section class="textarea">
+          <img
+            input-prefix
+            src="../../../../../assets/icons/two-avatar.svg"
+            class="textarea__icon"
+          />
+          <textarea
+            class="textarea__input"
+            formControlName="bio"
+            placeholder="Biografia"
+          ></textarea>
+        </section>
+        <section input-error *ngIf="formBenefit?.get('bio')?.touched">
+          <p
+            class="login__field-error"
+            *ngIf="formBenefit?.get('bio')?.hasError('required')"
+          >
+            Biografia é obrigatório
+          </p>
+        </section>
+      </ng-container>
+    </form>
+  </main>
+  <footer class="footer">
+    <app-btn [disabled]="!formBenefit?.valid">Guardar alterações</app-btn>
+  </footer>
+</main>
