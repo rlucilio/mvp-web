@@ -34,4 +34,8 @@ export class StorageService {
       return null;
     }
   }
+
+  clear() {
+    this.storage.clear();
+  }
 }

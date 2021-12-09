@@ -28,7 +28,11 @@ export class RegisterSuccessComponent implements OnInit {
 
     const user: { email: string } = JSON.parse(userStorage);
     this.benefitService.findBenefit(user.email).subscribe({
-      error: () => this.toast.showErrorSystem(),
+      error: () => {
+        this.storage.clear();
+        this.goToLogin();
+        this.toast.showErrorSystem();
+      },
       next: (response) => (this.nameBenefit = response.name),
     });
   }

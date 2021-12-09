@@ -4,48 +4,41 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { finalize, first } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-interface ResponseFindProvider {
-  name: string;
-  specialty: string;
-  bio: string;
-  email: string;
-  state: string;
-  urlPhoto: string;
-  phone: string;
-  gender: string;
+export interface ResponseSchedule {
+  cod: string;
+  room: string;
+  dateTime: string;
+  status: string;
+  provider: {
+    specialty: string;
+    email: string;
+    name: string;
+    state: string;
+  };
 }
 
 @Injectable()
-export class ProviderService {
-  private readonly BASE_URL = `${environment.urlServe}/provider`;
+export class ScheduleService {
+  private readonly URL = `${environment.urlServe}/schedule`;
   constructor(
     private readonly http: HttpClient,
     private readonly spinner: NgxSpinnerService
   ) {}
 
-  updateProvider(email: string, bio: Date) {
+  getSchedules(specialty: string = 'ALL') {
     this.spinner.show();
     return this.http
-      .put<void>(
-        `${this.BASE_URL}/update`,
-        {
-          email,
-          bio,
-        },
-        { headers: { KEY_ACCESS_TOKEN: '' } }
-      )
+      .get<ResponseSchedule[]>(`${this.URL}?specialty=${specialty}`)
       .pipe(
         first(),
         finalize(() => this.spinner.hide())
       );
   }
 
-  findProvider(email: string) {
+  createSchedule(schedule: ResponseSchedule, benefitEmail: string) {
     this.spinner.show();
     return this.http
-      .get<ResponseFindProvider>(`${this.BASE_URL}/find?email=${email}`, {
-        headers: { KEY_ACCESS_TOKEN: '' },
-      })
+      .post(`${this.URL}`, { cod: schedule.cod, email: benefitEmail })
       .pipe(
         first(),
         finalize(() => this.spinner.hide())

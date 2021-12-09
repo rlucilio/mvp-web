@@ -1,7 +1,7 @@
 <main class="content">
   <header class="header">
     <nav class="nav">
-      <button class="nav__btn">
+      <button class="nav__btn" (click)="backPage()">
         <img
           src="../../../../../assets/icons/back-arrow.svg"
           class="nav__icon"
@@ -17,24 +17,28 @@
   </header>
 
   <ul class="schedule">
-    <li class="schedule__item">
+    <li
+      class="schedule__item"
+      *ngFor="let schedule of schedules"
+      (click)="scheduling(schedule.src)"
+    >
       <section>
-        <p class="schedule__text">Abigail Rich.</p>
-        <span class="schedule__text--sub">Enfermeira</span>
+        <p class="schedule__text">{{ schedule.name }}</p>
+        <span class="schedule__text--sub">{{ schedule.specialty }}</span>
       </section>
       <section>
         <div class="schedule__text--container">
           <img src="../../../../../assets/icons/calendar-white.svg" />
-          <p class="schedule__text--icon">Terça</p>
+          <p class="schedule__text--icon">{{ schedule.dayExtension }}</p>
         </div>
-        <span class="schedule__text--sub">11/12/21</span>
+        <span class="schedule__text--sub">{{ schedule.date }}</span>
       </section>
       <section>
         <div class="schedule__text--container">
           <img src="../../../../../assets/icons/watch-white.svg" />
           <p class="schedule__text--icon">Horário</p>
         </div>
-        <span class="schedule__text--sub">09:00</span>
+        <span class="schedule__text--sub">{{ schedule.hour }}</span>
       </section>
     </li>
   </ul>

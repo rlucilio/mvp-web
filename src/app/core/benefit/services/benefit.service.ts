@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { first, tap } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { finalize, first, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { StorageService } from '../../storage/services/storage.service';
 
@@ -9,7 +10,8 @@ export class BenefitService {
   private readonly BASE_URL = `${environment.urlServe}/benefit`;
   constructor(
     private readonly http: HttpClient,
-    private readonly storage: StorageService
+    private readonly storage: StorageService,
+    private readonly spinner: NgxSpinnerService
   ) {}
 
   updateBenefit(
@@ -18,6 +20,7 @@ export class BenefitService {
     weight: number,
     height: number
   ) {
+    this.spinner.show();
     return this.http
       .put<void>(
         `${this.BASE_URL}/update`,
@@ -29,10 +32,14 @@ export class BenefitService {
         },
         { headers: { KEY_ACCESS_TOKEN: '' } }
       )
-      .pipe(first());
+      .pipe(
+        first(),
+        finalize(() => this.spinner.hide())
+      );
   }
 
   findBenefit(email: string) {
+    this.spinner.show();
     return this.http
       .get<{
         birthDate: string;
@@ -45,6 +52,9 @@ export class BenefitService {
         name: string;
         phone: string;
       }>(`${this.BASE_URL}/find?email=${email}`)
-      .pipe(first());
+      .pipe(
+        first(),
+        finalize(() => this.spinner.hide())
+      );
   }
 }

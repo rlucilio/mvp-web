@@ -7,6 +7,7 @@ import { StorageService } from 'src/app/core/storage/services/storage.service';
 import * as moment from 'moment';
 import { catchError } from 'rxjs';
 import { ProviderService } from 'src/app/core/provider/services/provider.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +30,8 @@ export class ProfileComponent implements OnInit {
     private readonly router: Router,
     private readonly benefitService: BenefitService,
     private readonly providerService: ProviderService,
-    private readonly toast: ToastService
+    private readonly toast: ToastService,
+    private readonly _location: Location
   ) {}
 
   ngOnInit(): void {
@@ -44,7 +46,10 @@ export class ProfileComponent implements OnInit {
       .findBenefit(user.email)
       .pipe(catchError(() => this.providerService.findProvider(user.email)))
       .subscribe({
-        error: () => this.toast.showErrorSystem(),
+        error: () => {
+          this.goToLogin();
+          this.toast.showErrorSystem();
+        },
         next: (response) => {
           if ('body' in response) {
             const height =
@@ -76,6 +81,7 @@ export class ProfileComponent implements OnInit {
   }
 
   goToLogin() {
+    this.storage.clear();
     this.router.navigate(['/auth']);
   }
 
@@ -101,5 +107,9 @@ export class ProfileComponent implements OnInit {
           next: () => this.toast.show('Peso atualizado'),
         });
     }
+  }
+
+  backPage() {
+    this._location.back();
   }
 }

@@ -5,6 +5,10 @@
       [helloMessage]="'Ola,'"
       [message]="'Trocar senha'"
     ></app-hello-and-message>
+    <p class="message">
+      Como é o seu primeiro acesso, o que acha de trocar a sua senha para uma
+      que seja do seu gosto e mais segura?
+    </p>
 
     <form *ngIf="formNewPass" [formGroup]="formNewPass">
       <app-input-text class="form-register__field">
