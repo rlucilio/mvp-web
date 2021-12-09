@@ -1,3 +1,4 @@
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BenefitService } from 'src/app/core/benefit/services/benefit.service';
@@ -29,13 +30,17 @@ export class RegisterSuccessComponent implements OnInit {
 
     const user: { email: string } = JSON.parse(userStorage);
     this.benefitService.findBenefit(user.email).subscribe({
-      error: () => {
-        this.storage.clear();
-        this.goToLogin();
-        this.toast.showErrorSystem();
+      error: (error: HttpErrorResponse) => {
+        if (error.status === HttpStatusCode.NotFound) {
+          this.isBenefit = false;
+        } else {
+          this.storage.clear();
+          this.goToLogin();
+          this.toast.showErrorSystem();
+        }
       },
       next: (response) => {
-        this.isBenefit = !!response.birthDate;
+        this.isBenefit = true;
         this.nameBenefit = response.name;
       },
     });

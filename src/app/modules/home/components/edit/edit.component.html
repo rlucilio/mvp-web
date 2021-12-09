@@ -24,21 +24,6 @@
         />
       </app-input-text>
 
-      <app-input-text class="form__field" *ngIf="pageModel?.specialty">
-        <img
-          input-prefix
-          src="../../../../../assets/icons/two-avatar.svg"
-          class="form__img"
-        />
-        <input
-          input-field
-          type="text"
-          [placeholder]="pageModel?.specialty"
-          class="form__input"
-          readonly
-        />
-      </app-input-text>
-
       <app-input-text class="form__field">
         <img
           input-prefix
@@ -49,6 +34,21 @@
           input-field
           type="text"
           [placeholder]="pageModel?.lastName"
+          class="form__input"
+          readonly
+        />
+      </app-input-text>
+
+      <app-input-text class="form__field" *ngIf="pageModel?.specialty">
+        <img
+          input-prefix
+          src="../../../../../assets/icons/two-avatar.svg"
+          class="form__img"
+        />
+        <input
+          input-field
+          type="text"
+          [placeholder]="pageModel?.specialty"
           class="form__input"
           readonly
         />
@@ -69,11 +69,10 @@
         />
       </app-input-text>
 
-      <section class="form__field--btn">
+      <section class="form__field--btn" *ngIf="pageModel?.height">
         <app-input-text class="form__input">
           <img input-prefix src="../../../../../assets/icons/swap.svg" />
           <input
-            *ngIf="pageModel?.height"
             [placeholder]="pageModel?.height"
             input-field
             readonly
@@ -84,7 +83,7 @@
         <app-btn class="form__btn" [color]="'SECONDARY_FLAT'">CM</app-btn>
       </section>
 
-      <section class="form__field--btn">
+      <section class="form__field--btn" *ngIf="pageModel?.weight">
         <app-input-text class="form__input">
           <img
             input-prefix
@@ -95,7 +94,6 @@
             type="number"
             placeholder="Seu peso"
             formControlName="weight"
-            *ngIf="pageModel?.weight"
             [placeholder]="pageModel?.weight"
           />
 

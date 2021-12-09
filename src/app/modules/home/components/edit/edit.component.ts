@@ -65,6 +65,7 @@ export class EditComponent implements OnInit {
             const weight = response?.body[response?.body?.length - 1]?.weight;
 
             const names = response.name.split(' ');
+            names.shift();
             this.pageModel = {
               name: response.name.split(' ')[0],
               lastName: names.join(' '),
@@ -78,6 +79,7 @@ export class EditComponent implements OnInit {
             this.formBenefit?.removeControl('bio');
           } else {
             const names = response.name.split(' ');
+            names.shift();
             this.pageModel = {
               name: response.name.split(' ')[0],
               lastName: names.join(' '),
