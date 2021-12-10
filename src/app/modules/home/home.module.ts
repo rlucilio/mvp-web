@@ -12,6 +12,7 @@ import { ProviderModule } from 'src/app/core/provider/provider.module';
 import { EditComponent } from './components/edit/edit.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ScheduleService } from '../schedule/services/schedule.service';
 
 @NgModule({
   declarations: [
@@ -31,5 +32,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
+  providers: [ScheduleService],
 })
 export class HomeModule {}

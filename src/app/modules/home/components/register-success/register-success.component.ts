@@ -7,6 +7,7 @@ import { ProviderService } from 'src/app/core/provider/services/provider.service
 import { KEY_USER } from 'src/app/core/shared/constants';
 import { ToastService } from 'src/app/core/shared/services/services/toast.service';
 import { StorageService } from 'src/app/core/storage/services/storage.service';
+import { ScheduleService } from 'src/app/modules/schedule/services/schedule.service';
 
 @Component({
   selector: 'app-register-success',
@@ -15,13 +16,14 @@ import { StorageService } from 'src/app/core/storage/services/storage.service';
 })
 export class RegisterSuccessComponent implements OnInit {
   public nameBenefit?: string;
-  isBenefit = true;
+  hiddenMarkSchedule = false;
   constructor(
     private readonly router: Router,
     private readonly storage: StorageService,
     private readonly benefitService: BenefitService,
     private readonly providerService: ProviderService,
-    private readonly toast: ToastService
+    private readonly toast: ToastService,
+    private readonly schedule: ScheduleService
   ) {}
 
   ngOnInit(): void {
@@ -36,14 +38,14 @@ export class RegisterSuccessComponent implements OnInit {
       .findBenefit(user.email)
       .pipe(
         catchError(() => {
-          this.isBenefit = false;
+          this.hiddenMarkSchedule = true;
           return this.providerService.findProvider(user.email);
         })
       )
       .subscribe({
         error: (error: HttpErrorResponse) => {
           if (error.status === HttpStatusCode.NotFound) {
-            this.isBenefit = false;
+            this.hiddenMarkSchedule = true;
           } else {
             this.storage.clear();
             this.goToLogin();
@@ -54,6 +56,12 @@ export class RegisterSuccessComponent implements OnInit {
           this.nameBenefit = response.name;
         },
       });
+
+    this.schedule
+      .getScheduleByBenefit(user.email)
+      .subscribe(
+        (response) => (this.hiddenMarkSchedule = !!(response.length > 0))
+      );
   }
 
   goToLogin() {

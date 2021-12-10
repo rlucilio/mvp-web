@@ -17,7 +17,7 @@
     </h4>
   </main>
 
-  <footer class="footer" *ngIf="isBenefit">
+  <footer class="footer" *ngIf="!hiddenMarkSchedule">
     <app-btn class="footer__btn" (click)="goToSchedule()"
       >Agendar consulta</app-btn
     >

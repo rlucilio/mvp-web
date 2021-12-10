@@ -105,7 +105,7 @@ export class MarkedScheduleComponent implements OnInit {
         dateTime: moment(
           schedulesNurse.schedule.dateTime,
           'DD/MM/YYYY HH:mm'
-        ).format('DD/MM, hh:mm'),
+        ).format('DD/MM, HH:mm'),
         link: schedulesNurse.schedule.room,
       };
     } else {

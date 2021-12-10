@@ -63,15 +63,15 @@ export class ScheduleListComponent implements OnInit {
                 'DD/MM/YY'
               ),
               hour: moment(schedule.dateTime, 'DD/MM/YYYY HH:mm').format(
-                'hh:mm'
+                'HH:mm'
               ),
               src: schedule,
               dateSrc: schedule.updateDate,
             }));
 
-            this.schedules = schedules.sort(
-              (a, b) => (b.dateSrc as any) - (a.dateSrc as any)
-            );
+            this.schedules = schedules
+              .sort((a, b) => (b.dateSrc as any) - (a.dateSrc as any))
+              .reverse();
           },
         });
     } else {
