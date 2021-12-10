@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs';
+import { catchError, tap } from 'rxjs';
 import { BenefitService } from 'src/app/core/benefit/services/benefit.service';
 import { ProviderService } from 'src/app/core/provider/services/provider.service';
 import { KEY_USER } from 'src/app/core/shared/constants';
@@ -39,7 +39,9 @@ export class RegisterSuccessComponent implements OnInit {
       .pipe(
         catchError(() => {
           this.hiddenMarkSchedule = true;
-          return this.providerService.findProvider(user.email);
+          return this.providerService
+            .findProvider(user.email)
+            .pipe(tap(() => (this.hiddenMarkSchedule = true)));
         })
       )
       .subscribe({
