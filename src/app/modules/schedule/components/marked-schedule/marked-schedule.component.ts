@@ -42,21 +42,25 @@ export class MarkedScheduleComponent implements OnInit {
   nurseSchedule?: {
     link: string;
     dateTime: string;
+    status: string;
   };
 
   doctorSchedule?: {
     link: string;
     dateTime: string;
+    status: string;
   };
 
   nutriSchedule?: {
     link: string;
     dateTime: string;
+    status: string;
   };
 
   educatorSchedule?: {
     link: string;
     dateTime: string;
+    status: string;
   };
 
   constructor(
@@ -96,17 +100,18 @@ export class MarkedScheduleComponent implements OnInit {
   }
 
   private verifyAttendance(response: Response[], specialty: string) {
-    const schedulesNurse = response.filter(
+    const lastScheduleBySpecialty = response.filter(
       (res) => res.provider.specialty === specialty
     )[0];
 
-    if (schedulesNurse) {
+    if (lastScheduleBySpecialty) {
       return {
         dateTime: moment(
-          schedulesNurse.schedule.dateTime,
+          lastScheduleBySpecialty.schedule.dateTime,
           'DD/MM/YYYY HH:mm'
         ).format('DD/MM, HH:mm'),
-        link: schedulesNurse.schedule.room,
+        link: lastScheduleBySpecialty.schedule.room,
+        status: lastScheduleBySpecialty.schedule.status,
       };
     } else {
       return undefined;
@@ -117,8 +122,8 @@ export class MarkedScheduleComponent implements OnInit {
     this.router.navigateByUrl(route);
   }
 
-  openRoom(url?: { link: string; dateTime: string }) {
-    if (url) {
+  openRoom(url?: { link: string; dateTime: string; status: string }) {
+    if (url?.link && url?.status === 'CRIADO') {
       document.location.href = url.link;
     }
   }

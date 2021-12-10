@@ -23,7 +23,6 @@ export class RegisterProviderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getParams();
-
     this.createForm();
     this.getProvider();
   }

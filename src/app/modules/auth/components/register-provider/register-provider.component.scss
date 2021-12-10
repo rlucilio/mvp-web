@@ -37,6 +37,7 @@
   margin-top: 15px;
   font-family: Poppins;
   align-items: baseline;
+  overflow: hidden;
 
   &__icon {
     margin: 12px;
@@ -45,13 +46,11 @@
   }
 
   &__input {
-    flex: 1 1 0%;
     background: transparent;
     border: none;
     outline: none;
-    margin: 12px 0px;
-    height: 193px;
-    width: 273px;
+    height: 100px;
+    width: 100%;
     resize: none;
     font-family: "Poppins";
   }
