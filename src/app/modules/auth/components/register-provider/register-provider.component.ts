@@ -54,7 +54,7 @@ export class RegisterProviderComponent implements OnInit {
   }
 
   private goToRegisteSuccess() {
-    this.router.navigate(['/auth/register-success']);
+    this.router.navigate(['/home']);
   }
 
   private createForm() {

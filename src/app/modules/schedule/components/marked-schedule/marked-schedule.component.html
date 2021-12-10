@@ -95,6 +95,7 @@
           {{ educatorSchedule?.dateTime }}
         </p>
         <a
+          *ngIf="passedWithCoach"
           class="schedules__text--link"
           (click)="
             goToSchedule(
