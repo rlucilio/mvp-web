@@ -1,3 +1,4 @@
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -132,7 +133,15 @@ export class DialogComponent implements OnInit {
 
     const user: { email: string } = JSON.parse(userStorage);
     this.scheduleService.createSchedule(this.data, user.email).subscribe({
-      error: () => this.toast.showErrorSystem(),
+      error: (res: HttpErrorResponse) => {
+        if (res.status === HttpStatusCode.Conflict) {
+          this.toast.show(
+            `Já tem um agendamento para a mesma data ${this.data.dateTime}`
+          );
+        } else {
+          this.toast.showErrorSystem();
+        }
+      },
       next: () => {
         this.toast.show('Agendamento criado 👍🏻');
         this.router.navigate(['/schedule/marked']);
