@@ -4,13 +4,14 @@ import { HomeComponent } from './components/root/home.component';
 import { RegisterSuccessComponent } from './components/register-success/register-success.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditComponent } from './components/edit/edit.component';
+import { HomeBenefitComponent } from './components/home-benefit/home-benefit.component';
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     children: [
       {
-        path: 'first-access',
+        path: 'main/first-access',
         component: RegisterSuccessComponent,
       },
       {
@@ -27,20 +28,29 @@ const routes: Routes = [
         ],
       },
       {
+        path: 'main/benefit',
+        component: HomeBenefitComponent,
+      },
+      {
+        path: 'tasks',
+        loadChildren: () =>
+          import('../tasks/tasks.module').then((m) => m.TasksModule),
+      },
+      {
         path: '',
-        redirectTo: 'first-access',
+        redirectTo: 'main/first-access',
         pathMatch: 'full',
       },
       {
         path: '**',
-        redirectTo: 'first-access',
+        redirectTo: 'main/first-access',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '**',
-    redirectTo: '/first-access',
+    redirectTo: '/main/first-access',
     pathMatch: 'full',
   },
 ];

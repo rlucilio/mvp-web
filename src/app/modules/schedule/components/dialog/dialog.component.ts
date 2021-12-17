@@ -115,9 +115,7 @@ export class DialogComponent implements OnInit {
     private readonly toast: ToastService
   ) {}
 
-  ngOnInit(): void {
-    console.log(this.data);
-  }
+  ngOnInit(): void {}
 
   close() {
     this.dialogRef.close();

@@ -46,7 +46,7 @@ export class ScheduleListComponent implements OnInit {
         .subscribe({
           error: () => {
             if (this.route.snapshot.queryParamMap.get('first')) {
-              this.router.navigate(['/home/first-access']);
+              this.router.navigate(['/home/main/first-access']);
             } else {
               this._location.back();
             }

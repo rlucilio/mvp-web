@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './components/root/home.component';
@@ -13,6 +14,7 @@ import { EditComponent } from './components/edit/edit.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScheduleService } from '../schedule/services/schedule.service';
+import { HomeBenefitComponent } from './components/home-benefit/home-benefit.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import { ScheduleService } from '../schedule/services/schedule.service';
     RegisterSuccessComponent,
     ProfileComponent,
     EditComponent,
+    HomeBenefitComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,7 @@ import { ScheduleService } from '../schedule/services/schedule.service';
     NgxMaskModule.forChild(),
     FormsModule,
     ReactiveFormsModule,
+    MatProgressBarModule,
   ],
   providers: [ScheduleService],
 })

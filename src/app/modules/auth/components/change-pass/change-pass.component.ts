@@ -47,7 +47,7 @@ export class ChangePassComponent implements OnInit {
         .subscribe({
           next: (response) => {
             if (response.result) {
-              console.log('Token ok');
+              this.toast.show('Tudo ok!');
             } else {
               this.toast.show('Não foi autorizado o acesso a essa página');
               this.goToLoginPage();

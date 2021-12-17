@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
 
   private verifyServer() {
     this.serverService.verifyServer().subscribe({
-      next: () => console.log('Servidor pronto'),
+      next: () => this.toast.show('Tudo ok!'),
       error: () => this.toast.showErrorSystem(),
     });
   }
