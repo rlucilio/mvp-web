@@ -5,6 +5,7 @@ import { RegisterSuccessComponent } from './components/register-success/register
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditComponent } from './components/edit/edit.component';
 import { HomeBenefitComponent } from './components/home-benefit/home-benefit.component';
+import { HomeProviderComponent } from './components/home-provider/home-provider.component';
 const routes: Routes = [
   {
     path: '',
@@ -30,6 +31,10 @@ const routes: Routes = [
       {
         path: 'main/benefit',
         component: HomeBenefitComponent,
+      },
+      {
+        path: 'main/provider',
+        component: HomeProviderComponent,
       },
       {
         path: 'tasks',

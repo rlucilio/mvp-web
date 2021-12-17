@@ -15,6 +15,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScheduleService } from '../schedule/services/schedule.service';
 import { HomeBenefitComponent } from './components/home-benefit/home-benefit.component';
+import { HomeProviderComponent } from './components/home-provider/home-provider.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HomeBenefitComponent } from './components/home-benefit/home-benefit.com
     ProfileComponent,
     EditComponent,
     HomeBenefitComponent,
+    HomeProviderComponent,
   ],
   imports: [
     CommonModule,
