@@ -34,7 +34,7 @@ import {
       </main>
 
       <footer>
-        <app-btn [color]="'SECONDARY'" (click)="close()">Cancelar</app-btn>
+        <app-btn [color]="'SECONDARY_FLAT'" (click)="close()">Cancelar</app-btn>
         <app-btn (click)="scheduling()">Agendar consulta</app-btn>
       </footer>
     </main>

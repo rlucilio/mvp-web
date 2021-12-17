@@ -4,7 +4,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AuthRoutingModule } from './auth-routing.module';
@@ -47,5 +47,6 @@ import { NgxMaskModule } from 'ngx-mask';
     LayoutModule,
     NgxMaskModule.forChild(),
   ],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }],
 })
 export class AuthModule {}
