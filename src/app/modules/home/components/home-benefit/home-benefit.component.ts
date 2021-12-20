@@ -68,18 +68,22 @@ export class HomeBenefitComponent implements OnInit, AfterViewInit {
     this.schedule.getScheduleByBenefit(user.email).subscribe({
       error: () => this.toast.showErrorSystem(),
       next: (res) => {
-        this.pageModel.schedules = res.map((scheduleResponse) => {
-          const dateTime = moment(
-            scheduleResponse.schedule.dateTime,
-            'DD/MM/YYYY HH:mm'
-          ).format('DD/MM, HH:mm');
+        this.pageModel.schedules = res
+          .filter(
+            (scheduleResponse) => scheduleResponse.schedule.status === 'CRIADO'
+          )
+          .map((scheduleResponse) => {
+            const dateTime = moment(
+              scheduleResponse.schedule.dateTime,
+              'DD/MM/YYYY HH:mm'
+            ).format('DD/MM, HH:mm');
 
-          return {
-            specialty: scheduleResponse.provider.specialty,
-            dateTime,
-            link: scheduleResponse.schedule.room,
-          };
-        });
+            return {
+              specialty: scheduleResponse.provider.specialty,
+              dateTime,
+              link: scheduleResponse.schedule.room,
+            };
+          });
       },
     });
   }
@@ -273,6 +277,12 @@ export class HomeBenefitComponent implements OnInit, AfterViewInit {
         width: '315px',
         data: task,
       });
+    }
+  }
+
+  goToRoom(url?: { specialty: string; dateTime: string; link: string }) {
+    if (url?.link) {
+      document.location.href = url.link;
     }
   }
 }

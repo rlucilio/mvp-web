@@ -9,7 +9,7 @@
   <main class="content">
     <section class="benefit-section schedules" *ngIf="pageModel.schedules">
       <ng-container *ngFor="let schedule of pageModel.schedules">
-        <li class="schedules__item">
+        <li class="schedules__item" (click)="goToRoom(schedule)">
           <img src="../../../../../assets/icons/calendar.svg" class="schedules__icon" />
           <p class="schedules__text">{{schedule.specialty}}</p>
           <p class="schedules__text--right">{{schedule.dateTime}}</p>
