@@ -1,0 +1,56 @@
+<main class="container" *ngIf="pageModel">
+  <header class="header-benefit" *ngIf="pageModel.name">
+    <h3 class="header-benefit__text">Bem-vindo de volta,</h3>
+    <h3 class="header-benefit__text--focus">
+      {{pageModel.name}}
+    </h3>
+  </header>
+
+  <main class="content">
+    <section class="benefit-section schedules" *ngIf="pageModel.schedules">
+      <ng-container *ngFor="let schedule of pageModel.schedules">
+        <li class="schedules__item">
+          <img src="../../../../../assets/icons/calendar.svg" class="schedules__icon" />
+          <p class="schedules__text">{{schedule.specialty}}</p>
+          <p class="schedules__text--right">{{schedule.dateTime}}</p>
+          <img src="../../../../../assets/icons/arrow-right.svg" class="schedules__icon--right" />
+        </li>
+      </ng-container>
+    </section>
+
+    <section class="benefit-section tasks" *ngIf="pageModel.tasks">
+      <header class="tasks__header">
+        <h3 class="tasks__title">Metas diárias</h3>
+        <span class="tasks__title--link" (click)="goToPageTask()">ver todas</span>
+      </header>
+      <main class="tasks_content">
+        <ul class="tasks__list">
+          <ng-container *ngFor="let task of pageModel.tasks">
+            <li class="tasks__item" (click)="markDone(task)">
+              <img *ngIf="task.type === 'WORKOUTS'" src="../../../../../assets/imgs/personoids/phy1.svg"
+                class="tasks__img">
+              <img *ngIf="task.type === 'FOOD'" src="../../../../../assets/icons/food.svg" class="tasks__img">
+              <img *ngIf="task.type === 'LIFESTYLE'" src="../../../../../assets/imgs/personoids/phy2.svg"
+                class="tasks__img">
+              <div class="tasks__infos">
+                <p class="tasks__text--name">{{task.title}}</p>
+                <p class="tasks__text--sub">{{task.gain}} | {{task.execLabel}}</p>
+                <mat-progress-bar mode="determinate" [value]="task.percent"></mat-progress-bar>
+              </div>
+              <img src="../../../../../assets/icons/btn-arrow.svg" class="tasks__icon">
+            </li>
+          </ng-container>
+        </ul>
+      </main>
+    </section>
+
+    <section class="benefit-section chart">
+      <header class="chart__header">
+        <h3 class="chart__title">Progresso das atividades</h3>
+      </header>
+      <main class="chart__content">
+        <canvas #chart></canvas>
+      </main>
+    </section>
+  </main>
+</main>

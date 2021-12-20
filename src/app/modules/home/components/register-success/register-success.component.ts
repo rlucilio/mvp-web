@@ -39,9 +39,18 @@ export class RegisterSuccessComponent implements OnInit {
       .pipe(
         catchError(() => {
           this.hiddenMarkSchedule = true;
-          return this.providerService
-            .findProvider(user.email)
-            .pipe(tap(() => (this.hiddenMarkSchedule = true)));
+          return this.providerService.findProvider(user.email).pipe(
+            tap(() => {
+              this.storage.set(
+                KEY_USER,
+                JSON.stringify({
+                  ...user,
+                  provider: true,
+                })
+              );
+              this.router.navigate(['/main/provider']);
+            })
+          );
         })
       )
       .subscribe({
@@ -55,15 +64,23 @@ export class RegisterSuccessComponent implements OnInit {
           }
         },
         next: (response) => {
+          this.storage.set(
+            KEY_USER,
+            JSON.stringify({
+              ...user,
+              benefit: true,
+            })
+          );
           this.nameBenefit = response.name;
         },
       });
 
-    this.schedule
-      .getScheduleByBenefit(user.email)
-      .subscribe(
-        (response) => (this.hiddenMarkSchedule = !!(response.length > 0))
-      );
+    this.schedule.getScheduleByBenefit(user.email).subscribe((response) => {
+      this.hiddenMarkSchedule = !!(response.length > 0);
+      if (this.hiddenMarkSchedule) {
+        this.router.navigate(['/main/benefit']);
+      }
+    });
   }
 
   goToLogin() {

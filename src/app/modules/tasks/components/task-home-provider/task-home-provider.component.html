@@ -1,0 +1,102 @@
+<app-tasks-home>
+  <header task-header class="head">
+    <img src="../../../../../assets/imgs/profile.svg" class="head__img">
+  </header>
+
+  <main task-content>
+    <header class="profile">
+      <section class="profile__description">
+        <div>
+          <p class="profile__text">Esther Howard</p>
+        </div>
+        <button>Ver perfil</button>
+      </section>
+      <section class="profile__infos">
+        <div class="profile__bio-item">
+          <p class="profile__text--major">123cm</p>
+          <span class="profile__text--minor">Altura</span>
+        </div>
+        <div class="profile__bio-item">
+          <p class="profile__text--major">60kg</p>
+          <span class="profile__text--minor">Peso</span>
+        </div>
+        <div class="profile__bio-item">
+          <p class="profile__text--major">22</p>
+          <span class="profile__text--minor">Anos</span>
+        </div>
+      </section>
+    </header>
+
+    <main class="benefit">
+      <header class="benefit__header">
+        <h2 class="benefit__text--title">Progresso do plano</h2>
+        <mat-progress-bar mode="determinate" color="accent" value="40"></mat-progress-bar>
+      </header>
+
+      <section class="benefit__section schedules">
+        <li class="schedules__item">
+          <img src="../../../../../assets/icons/calendar.svg" class="schedules__icon" />
+          <p class="schedules__text">Enfermeiro(a)</p>
+          <p class="schedules__text--right">27/11, 09:00 AM</p>
+          <img src="../../../../../assets/icons/arrow-right.svg" class="schedules__icon--right" />
+        </li>
+      </section>
+
+      <section class="benefit__section warning" *ngIf="false">
+        <p class="warning__main">Voce ainda nao registrou nenhuma tarefa para esse paciente</p>
+        <p class="warning__btn">Para cadastrar uma nova tarefa <span class="warning__btn--primary">clique aqui</span>
+        </p>
+      </section>
+
+      <section class="benefit__section tasks">
+        <section class="tasks__group">
+          <div class="tasks__text--container">
+            <p class="tasks__text--title">Alimentaçao</p>
+            <p class="tasks__text--btn">Editar</p>
+          </div>
+          <ul class="tasks__list">
+            <li class="tasks__item">
+              <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
+              <div class="tasks__infos">
+                <p class="tasks__text--name">Beber 8 copos de agua</p>
+                <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="tasks__group">
+          <div class="tasks__text--container">
+            <p class="tasks__text--title">Hobbies & lifestyle</p>
+            <p class="tasks__text--btn">Editar</p>
+          </div>
+          <ul class="tasks__list">
+            <li class="tasks__item">
+              <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
+              <div class="tasks__infos">
+                <p class="tasks__text--name">Beber 8 copos de agua</p>
+                <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="tasks__group">
+          <div class="tasks__text--container">
+            <p class="tasks__text--title">Exercicios</p>
+            <p class="tasks__text--btn">Editar</p>
+          </div>
+          <ul class="tasks__list">
+            <li class="tasks__item">
+              <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
+              <div class="tasks__infos">
+                <p class="tasks__text--name">Beber 8 copos de agua</p>
+                <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </section>
+    </main>
+  </main>
+</app-tasks-home>

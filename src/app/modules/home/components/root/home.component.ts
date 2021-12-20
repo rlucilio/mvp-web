@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  isProvider = false;
   constructor(
     private readonly storage: StorageService,
     private readonly router: Router,
@@ -23,35 +24,36 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // const userStorage = this.storage.get(KEY_USER) || '';
-    // if (!userStorage) {
-    //   this.storage.clear();
-    //   this.router.navigate(['/auth']);
-    // }
-    // const user: { email: string } = JSON.parse(userStorage);
-    // this.benefitService
-    //   .findBenefit(user.email)
-    //   .pipe(catchError(() => this.providerService.findProvider(user.email)))
-    //   .subscribe({
-    //     error: () => {
-    //       this.storage.clear();
-    //       this.router.navigate(['/auth']);
-    //       this.toast.showErrorSystem();
-    //     },
-    //     next: (response) => {
-    //       if ('body' in response) {
-    //         if (!response.birthDate) {
-    //           this.router.navigate(['/auth/register-benefit', user.email]);
-    //         }
-    //         if (!response.answeredForm) {
-    //           document.location.href = environment.form;
-    //         }
-    //       } else {
-    //         if (!response.bio) {
-    //           this.router.navigate(['/auth/register-provider', user.email]);
-    //         }
-    //       }
-    //     },
-    //   });
+    const userStorage = this.storage.get(KEY_USER) || '';
+    if (!userStorage) {
+      this.storage.clear();
+      this.router.navigate(['/auth']);
+    }
+    const user: { email: string } = JSON.parse(userStorage);
+    this.benefitService
+      .findBenefit(user.email)
+      .pipe(catchError(() => this.providerService.findProvider(user.email)))
+      .subscribe({
+        error: () => {
+          this.storage.clear();
+          this.router.navigate(['/auth']);
+          this.toast.showErrorSystem();
+        },
+        next: (response) => {
+          if ('body' in response) {
+            if (!response.birthDate) {
+              this.router.navigate(['/auth/register-benefit', user.email]);
+            }
+            if (!response.answeredForm) {
+              document.location.href = environment.form;
+            }
+          } else {
+            if (!response.bio) {
+              this.router.navigate(['/auth/register-provider', user.email]);
+              this.isProvider = true;
+            }
+          }
+        },
+      });
   }
 }

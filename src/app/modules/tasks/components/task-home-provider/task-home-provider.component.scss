@@ -1,0 +1,260 @@
+.head {
+  &__img {
+    height: 192px;
+  }
+}
+
+.profile {
+  &__description {
+    display: flex;
+    align-items: center;
+    margin: 35px 0 0 0;
+    padding: 0 10px;
+
+    justify-content: space-between;
+
+    button {
+      border: none;
+      outline: none;
+      background: linear-gradient(270deg, #c66720 0%, #f0a508 100%);
+      border-radius: 99px;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 18px;
+      color: #ffffff;
+      padding: 6px 24px;
+    }
+  }
+
+  &__img {
+    height: 55px;
+    margin-right: 15px;
+  }
+
+  &__text {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #1d1617;
+    margin: 0;
+
+    &--major {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 21px;
+      margin: 0;
+      background: linear-gradient(270deg, #c66720 0%, #f0a508 100%);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    &--minor {
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 18px;
+      color: #7b6f72;
+      margin: 0;
+    }
+  }
+
+  &__infos {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+
+  &__bio {
+    background: #ffffff;
+    box-shadow: 0px 10px 40px rgb(29 22 23 / 7%);
+    border-radius: 16px;
+    padding: 10px 20px;
+    margin-top: 15px;
+  }
+
+  &__bio-item {
+    padding: 11px;
+    background: #fff;
+    box-shadow: 0px 10px 40px rgb(29 22 23 / 7%);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 15px 15px 0;
+    flex: 1;
+
+    &:last-of-type {
+      margin: 0 0 15px 0;
+    }
+  }
+}
+
+.schedules {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(274.42deg, #92a3fd 0%, #9dceff 124.45%);
+    opacity: 0.2;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+
+  &__icon {
+    margin-right: 12px;
+    &--right {
+      margin-left: 12px;
+    }
+  }
+
+  &__text {
+    flex: 1;
+    margin: 0;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    color: #000;
+
+    &--right {
+      margin: 0;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 18px;
+      color: #000;
+    }
+  }
+}
+
+.benefit {
+  &__section {
+    margin-top: 20px;
+  }
+}
+
+.warning {
+  &__main {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    color: #1d1617;
+  }
+
+  &__btn {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    color: #7b6f72;
+
+    &--primary {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 18px;
+      color: #c66720;
+    }
+  }
+}
+
+.tasks {
+  &__group {
+    margin-bottom: 30px;
+  }
+
+  &__text {
+    &--container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &--btn {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 18px;
+      text-align: right;
+      color: #ada4a5;
+    }
+
+    &--title {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      color: #1d1617;
+    }
+
+    &--name {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 18px;
+      color: #1d1617;
+      margin: 0 0 3px 0;
+    }
+
+    &--sub {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 10px;
+      line-height: 15px;
+      color: #a4a9ad;
+      margin: 0 0 9px 0;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    margin: 15px 0 0 0;
+    padding: 0;
+  }
+
+  &__item {
+    display: flex;
+    padding: 10px 15px;
+    background: #fff;
+    box-shadow: 0px 10px 40px rgb(29 36 42 / 5%);
+    border-radius: 16px;
+  }
+
+  &__img {
+    flex: 0;
+    margin-right: 10px;
+  }
+
+  &__icon {
+    flex: 0;
+    width: 24px;
+    margin-left: 10px;
+  }
+
+  &__infos {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}

@@ -102,7 +102,7 @@ export class EditComponent implements OnInit {
       this.providerService.updateProvider(this.pageModel.email, bio).subscribe({
         error: () => this.toast.showErrorSystem(),
         next: () => {
-          this.router.navigate(['home/profile']);
+          this.router.navigate(['/home/profile']);
           this.toast.show('Biografia atualizado');
         },
       });
@@ -124,7 +124,7 @@ export class EditComponent implements OnInit {
           .subscribe({
             error: () => this.toast.showErrorSystem(),
             next: () => {
-              this.router.navigate(['home/profile']);
+              this.router.navigate(['/home/profile']);
               this.toast.show('Peso atualizado');
             },
           });

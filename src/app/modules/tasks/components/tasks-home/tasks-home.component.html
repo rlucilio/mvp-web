@@ -1,0 +1,19 @@
+<main class="container">
+  <header class="header" [ngStyle]="{'background': headerColor}">
+    <nav class="header__nav nav">
+      <button class="nav__btn">
+        <img src="../../../../../assets/icons/back-arrow.svg" class="nav__icon" />
+      </button>
+
+      <p class="nav__title">{{title}}</p>
+    </nav>
+
+    <main class="header__content">
+      <ng-content select="[task-header]"></ng-content>
+    </main>
+  </header>
+
+  <main class="content">
+    <ng-content select="[task-content]"></ng-content>
+  </main>
+</main>

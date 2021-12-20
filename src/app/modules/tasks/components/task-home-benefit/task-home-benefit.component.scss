@@ -1,0 +1,65 @@
+.tasks {
+  &__group {
+    margin-bottom: 30px;
+  }
+
+  &__text {
+    &--title {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      color: #1d1617;
+    }
+
+    &--name {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 18px;
+      color: #1d1617;
+      margin: 0 0 3px 0;
+    }
+
+    &--sub {
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 10px;
+      line-height: 15px;
+      color: #a4a9ad;
+      margin: 0 0 9px 0;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    margin: 15px 0 0 0;
+    padding: 0;
+  }
+
+  &__item {
+    display: flex;
+    padding: 10px 15px;
+    background: #fff;
+    box-shadow: 0px 10px 40px rgb(29 36 42 / 5%);
+    border-radius: 16px;
+  }
+
+  &__img {
+    flex: 0;
+    margin-right: 10px;
+  }
+
+  &__icon {
+    flex: 0;
+    width: 24px;
+    margin-left: 10px;
+  }
+
+  &__infos {
+    flex: 1;
+  }
+}

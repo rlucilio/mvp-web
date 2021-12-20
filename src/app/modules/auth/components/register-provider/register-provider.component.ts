@@ -53,7 +53,7 @@ export class RegisterProviderComponent implements OnInit {
   }
 
   private goToRegisteSuccess() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/home/main/first-access']);
   }
 
   private createForm() {

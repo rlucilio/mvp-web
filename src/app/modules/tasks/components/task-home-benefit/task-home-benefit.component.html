@@ -1,0 +1,53 @@
+<app-tasks-home [title]="'Minhas atividades'" [headerColor]="'#98BFFD'">
+  <header task-header>
+    <canvas #chart></canvas>
+  </header>
+  <main task-content class="tasks">
+
+    <section class="tasks__group">
+      <p class="tasks__text--title">Alimentaçao</p>
+      <ul class="tasks__list">
+        <li class="tasks__item">
+          <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
+          <div class="tasks__infos">
+            <p class="tasks__text--name">Beber 8 copos de agua</p>
+            <p class="tasks__text--sub">180 Calories Burn | 20minutes</p>
+            <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+          </div>
+          <img src="../../../../../assets/icons/btn-arrow.svg" class="tasks__icon">
+        </li>
+      </ul>
+    </section>
+
+    <section class="tasks__group">
+      <p class="tasks__text--title">Exercicios</p>
+      <ul class="tasks__list">
+        <li class="tasks__item" (click)="openDialogMarkDone()">
+          <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
+          <div class="tasks__infos">
+            <p class="tasks__text--name">Beber 8 copos de agua</p>
+            <p class="tasks__text--sub">180 Calories Burn | 20minutes</p>
+            <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+          </div>
+          <img src="../../../../../assets/icons/btn-arrow.svg" class="tasks__icon">
+        </li>
+      </ul>
+    </section>
+
+    <section class="tasks__group">
+      <p class="tasks__text--title">Hobbies & lifestyle</p>
+      <ul class="tasks__list">
+        <li class="tasks__item">
+          <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
+          <div class="tasks__infos">
+            <p class="tasks__text--name">Beber 8 copos de agua</p>
+            <p class="tasks__text--sub">180 Calories Burn | 20minutes</p>
+            <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+          </div>
+          <img src="../../../../../assets/icons/btn-arrow.svg" class="tasks__icon">
+        </li>
+      </ul>
+    </section>
+
+  </main>
+</app-tasks-home>

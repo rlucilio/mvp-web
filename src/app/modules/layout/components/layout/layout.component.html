@@ -13,7 +13,8 @@
       </li>
       <li class="menu__item menu__item--main">
         <a [routerLink]="['tasks']">
-          <img src="../../../../../assets/icons/task.svg" />
+          <img src="../../../../../assets/icons/task.svg" *ngIf="isProvider" />
+          <img src="../../../../../assets/icons/my-tasks.svg" *ngIf="!isProvider" />
         </a>
       </li>
       <li class="menu__item menu__item--chat">
