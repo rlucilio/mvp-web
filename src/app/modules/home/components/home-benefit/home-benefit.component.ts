@@ -56,7 +56,7 @@ export class HomeBenefitComponent implements OnInit, AfterViewInit {
 
     if (userStorage) {
       const user = JSON.parse(userStorage) as { email: string };
-      this.getBenefitDetails(user);
+      this.getBenefit(user);
       this.getSchedules(user);
     } else {
       this.toast.showErrorSystem();
@@ -88,7 +88,7 @@ export class HomeBenefitComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private getBenefitDetails(user: { email: string }) {
+  private getBenefit(user: { email: string }) {
     this.benefitService.findBenefit(user.email).subscribe({
       error: () => {
         this.toast.showErrorSystem();
@@ -165,9 +165,8 @@ export class HomeBenefitComponent implements OnInit, AfterViewInit {
     this.pageModel.tasks = [];
 
     for (const key in tasksGroup) {
-      const execLabel = `${tasksGroup[key].length} tarefas`;
-
-      const gain = `${tasksGroup[key][0].task.input.gain.value} ${tasksGroup[key][0].task.input.gain.label}`;
+      const execLabel = tasksGroup[key][0].task.input.gain.label2;
+      const gain = tasksGroup[key][0].task.input.gain.label;
 
       const result = tasksGroup[key].reduce(
         (result, curr) => (result += curr.result ? Number(curr.result) : 0),

@@ -35,6 +35,13 @@ export class TaskService {
     }, {} as any);
   }
 
+  groupTaskByType(array: Array<TasksResponse>): ResultGroupByString {
+    return array.reduce((result, curr) => {
+      (result[curr.task.type] = result[curr.task.type] || []).push(curr);
+      return result;
+    }, {} as any);
+  }
+
   groupTaskByDayWeek(array: Array<TasksResponse>): ResultGroupByNumber {
     return array.reduce((result, curr) => {
       const dayWeek = moment(curr.dateExpected, 'DD/MM/YYYY').isoWeekday();

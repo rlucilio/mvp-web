@@ -4,48 +4,54 @@
   </header>
   <main task-content class="tasks">
 
-    <section class="tasks__group">
-      <p class="tasks__text--title">Alimentaçao</p>
+    <section class="tasks__group" *ngIf="taskFoodList">
+      <p class="tasks__text--title">Alimentação</p>
       <ul class="tasks__list">
-        <li class="tasks__item">
-          <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
-          <div class="tasks__infos">
-            <p class="tasks__text--name">Beber 8 copos de agua</p>
-            <p class="tasks__text--sub">180 Calories Burn | 20minutes</p>
-            <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-          </div>
-          <img src="../../../../../assets/icons/btn-arrow.svg" class="tasks__icon">
-        </li>
+        <ng-container *ngFor="let task of taskWorkList">
+          <li class="tasks__item" (click)="markDone(task)">
+            <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
+            <div class="tasks__infos">
+              <p class="tasks__text--name">{{task.title}}</p>
+              <p class="tasks__text--sub">{{task.gain}} | {{task.execLabel}}</p>
+              <mat-progress-bar mode="determinate" [value]="task.percent"></mat-progress-bar>
+            </div>
+            <img src="../../../../../assets/icons/btn-arrow.svg" class="tasks__icon">
+          </li>
+        </ng-container>
       </ul>
     </section>
 
-    <section class="tasks__group">
+    <section class="tasks__group" *ngIf="taskWorkList">
       <p class="tasks__text--title">Exercicios</p>
       <ul class="tasks__list">
-        <li class="tasks__item" (click)="openDialogMarkDone()">
-          <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
-          <div class="tasks__infos">
-            <p class="tasks__text--name">Beber 8 copos de agua</p>
-            <p class="tasks__text--sub">180 Calories Burn | 20minutes</p>
-            <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-          </div>
-          <img src="../../../../../assets/icons/btn-arrow.svg" class="tasks__icon">
-        </li>
+        <ng-container *ngFor="let task of taskWorkList">
+          <li class="tasks__item" (click)="markDone(task)">
+            <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
+            <div class="tasks__infos">
+              <p class="tasks__text--name">{{task.title}}</p>
+              <p class="tasks__text--sub">{{task.gain}} | {{task.execLabel}}</p>
+              <mat-progress-bar mode="determinate" [value]="task.percent"></mat-progress-bar>
+            </div>
+            <img src="../../../../../assets/icons/btn-arrow.svg" class="tasks__icon">
+          </li>
+        </ng-container>
       </ul>
     </section>
 
-    <section class="tasks__group">
+    <section class="tasks__group" *ngIf="taskHobbiesList">
       <p class="tasks__text--title">Hobbies & lifestyle</p>
       <ul class="tasks__list">
-        <li class="tasks__item">
-          <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
-          <div class="tasks__infos">
-            <p class="tasks__text--name">Beber 8 copos de agua</p>
-            <p class="tasks__text--sub">180 Calories Burn | 20minutes</p>
-            <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-          </div>
-          <img src="../../../../../assets/icons/btn-arrow.svg" class="tasks__icon">
-        </li>
+        <ng-container *ngFor="let task of taskWorkList">
+          <li class="tasks__item" (click)="markDone(task)">
+            <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
+            <div class="tasks__infos">
+              <p class="tasks__text--name">{{task.title}}</p>
+              <p class="tasks__text--sub">{{task.gain}} | {{task.execLabel}}</p>
+              <mat-progress-bar mode="determinate" [value]="task.percent"></mat-progress-bar>
+            </div>
+            <img src="../../../../../assets/icons/btn-arrow.svg" class="tasks__icon">
+          </li>
+        </ng-container>
       </ul>
     </section>
 

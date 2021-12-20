@@ -31,7 +31,7 @@ export interface TasksResponse {
       };
       gain: {
         label: string;
-        value: number;
+        label2: string;
       };
     };
   };
