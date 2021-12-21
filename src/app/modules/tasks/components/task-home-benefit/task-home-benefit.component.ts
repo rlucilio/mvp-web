@@ -135,7 +135,7 @@ export class TaskHomeBenefitComponent implements OnInit, AfterViewInit {
     const tasksGroupType = this.taskService.groupTaskByType(res.plan.tasks);
 
     if (tasksGroupType['FOOD']) {
-      const tasksGroup = this.taskService.groupTaskByType(
+      const tasksGroup = this.taskService.groupTaskByName(
         tasksGroupType['FOOD']
       );
 
@@ -145,13 +145,22 @@ export class TaskHomeBenefitComponent implements OnInit, AfterViewInit {
         const gain = tasksGroup[key][0].task.input.gain.label;
 
         const result = tasksGroup[key].reduce(
-          (result, curr) => (result += curr.result ? Number(curr.result) : 0),
+          (result, curr) =>
+            (result += curr.result
+              ? typeof curr.result === 'boolean'
+                ? Number(curr.expected === curr.result)
+                : Number(curr.result)
+              : 0),
           0
         );
 
         const expected = tasksGroup[key].reduce(
           (result, curr) =>
-            (result += curr.expected ? Number(curr.expected) : 0),
+            (result += curr.expected
+              ? typeof curr.result === 'boolean'
+                ? 1
+                : Number(curr.expected)
+              : 0),
           0
         );
 
@@ -170,7 +179,7 @@ export class TaskHomeBenefitComponent implements OnInit, AfterViewInit {
     }
 
     if (tasksGroupType['LIFESTYLE']) {
-      const tasksGroup = this.taskService.groupTaskByType(
+      const tasksGroup = this.taskService.groupTaskByName(
         tasksGroupType['LIFESTYLE']
       );
 
@@ -180,13 +189,22 @@ export class TaskHomeBenefitComponent implements OnInit, AfterViewInit {
         const gain = tasksGroup[key][0].task.input.gain.label;
 
         const result = tasksGroup[key].reduce(
-          (result, curr) => (result += curr.result ? Number(curr.result) : 0),
+          (result, curr) =>
+            (result += curr.result
+              ? typeof curr.result === 'boolean'
+                ? Number(curr.expected === curr.result)
+                : Number(curr.result)
+              : 0),
           0
         );
 
         const expected = tasksGroup[key].reduce(
           (result, curr) =>
-            (result += curr.expected ? Number(curr.expected) : 0),
+            (result += curr.expected
+              ? typeof curr.result === 'boolean'
+                ? 1
+                : Number(curr.expected)
+              : 0),
           0
         );
 
@@ -205,7 +223,7 @@ export class TaskHomeBenefitComponent implements OnInit, AfterViewInit {
     }
 
     if (tasksGroupType['WORKOUTS']) {
-      const tasksGroup = this.taskService.groupTaskByType(
+      const tasksGroup = this.taskService.groupTaskByName(
         tasksGroupType['WORKOUTS']
       );
 
@@ -215,13 +233,22 @@ export class TaskHomeBenefitComponent implements OnInit, AfterViewInit {
         const gain = tasksGroup[key][0].task.input.gain.label;
 
         const result = tasksGroup[key].reduce(
-          (result, curr) => (result += curr.result ? Number(curr.result) : 0),
+          (result, curr) =>
+            (result += curr.result
+              ? typeof curr.result === 'boolean'
+                ? Number(curr.expected === curr.result)
+                : Number(curr.result)
+              : 0),
           0
         );
 
         const expected = tasksGroup[key].reduce(
           (result, curr) =>
-            (result += curr.expected ? Number(curr.expected) : 0),
+            (result += curr.expected
+              ? typeof curr.result === 'boolean'
+                ? 1
+                : Number(curr.expected)
+              : 0),
           0
         );
 
@@ -263,43 +290,71 @@ export class TaskHomeBenefitComponent implements OnInit, AfterViewInit {
           this.tasksResultGraph = [
             groupByDayWeek[0]
               ? groupByDayWeek[0].reduce(
-                  (result, curr) => (result += Number(curr.result)),
+                  (result, curr) =>
+                    (result +=
+                      typeof curr.result === 'boolean'
+                        ? Number(curr.expected === curr.result)
+                        : Number(curr.result)),
                   0
                 )
               : 0,
             groupByDayWeek[1]
               ? groupByDayWeek[1].reduce(
-                  (result, curr) => (result += Number(curr.result)),
+                  (result, curr) =>
+                    (result +=
+                      typeof curr.result === 'boolean'
+                        ? Number(curr.expected === curr.result)
+                        : Number(curr.result)),
                   0
                 )
               : 0,
             groupByDayWeek[2]
               ? groupByDayWeek[2].reduce(
-                  (result, curr) => (result += Number(curr.result)),
+                  (result, curr) =>
+                    (result +=
+                      typeof curr.result === 'boolean'
+                        ? Number(curr.expected === curr.result)
+                        : Number(curr.result)),
                   0
                 )
               : 0,
             groupByDayWeek[3]
               ? groupByDayWeek[3].reduce(
-                  (result, curr) => (result += Number(curr.result)),
+                  (result, curr) =>
+                    (result +=
+                      typeof curr.result === 'boolean'
+                        ? Number(curr.expected === curr.result)
+                        : Number(curr.result)),
                   0
                 )
               : 0,
             groupByDayWeek[4]
               ? groupByDayWeek[4].reduce(
-                  (result, curr) => (result += Number(curr.result)),
+                  (result, curr) =>
+                    (result +=
+                      typeof curr.result === 'boolean'
+                        ? Number(curr.expected === curr.result)
+                        : Number(curr.result)),
                   0
                 )
               : 0,
             groupByDayWeek[5]
               ? groupByDayWeek[5].reduce(
-                  (result, curr) => (result += Number(curr.result)),
+                  (result, curr) =>
+                    (result +=
+                      typeof curr.result === 'boolean'
+                        ? Number(curr.expected === curr.result)
+                        : Number(curr.result)),
                   0
                 )
               : 0,
             groupByDayWeek[6]
               ? groupByDayWeek[6].reduce(
-                  (result, curr) => (result += Number(curr.result)),
+                  (result, curr) =>
+                    (result +=
+                      typeof curr.result === 'boolean'
+                        ? Number(curr.expected === curr.result)
+                        : Number(curr.result)),
                   0
                 )
               : 0,

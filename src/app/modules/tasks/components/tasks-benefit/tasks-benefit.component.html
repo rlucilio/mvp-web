@@ -1,7 +1,7 @@
 <main class="container">
   <header class="header">
     <nav class="nav">
-      <button class="nav__btn">
+      <button class="nav__btn" (click)="backPage()">
         <img src="../../../../../assets/icons/close.svg" class="nav__icon" />
       </button>
 
@@ -10,53 +10,59 @@
   </header>
 
   <main class="tasks">
-    <section class="tasks__group">
+    <section class="tasks__group" *ngIf="listWork.length">
       <h3 class="tasks__title">Exercícios</h3>
 
       <ul class="tasks__list">
-        <li class="tasks__item">
-          <img class="tasks__img" src="../../../../../assets/imgs/personoids/phy1.svg">
-          <div class="tasks__text--container">
-            <p class="tasks__text">Warm Up</p>
-            <p class="tasks__text--sub">05:00</p>
-          </div>
-          <mat-slide-toggle color="primary" class="tasks__toggle"></mat-slide-toggle>
-        </li>
+        <ng-container *ngFor="let task of listWork">
+          <li class="tasks__item" (click)="toggleTask(task.task)">
+            <img class="tasks__img" src="../../../../../assets/imgs/personoids/phy1.svg">
+            <div class="tasks__text--container">
+              <p class="tasks__text">{{task.title}}</p>
+              <p class="tasks__text--sub">{{task.describe}}</p>
+            </div>
+            <mat-slide-toggle color="primary" class="tasks__toggle" [checked]="withTask(task.task)"></mat-slide-toggle>
+          </li>
+        </ng-container>
       </ul>
     </section>
 
-    <section class="tasks__group">
+    <section class="tasks__group" *ngIf="listFood.length">
       <h3 class="tasks__title">Alimentação</h3>
 
       <ul class="tasks__list">
-        <li class="tasks__item">
-          <img class="tasks__img" src="../../../../../assets/imgs/personoids/phy1.svg">
-          <div class="tasks__text--container">
-            <p class="tasks__text">Warm Up</p>
-            <p class="tasks__text--sub">05:00</p>
-          </div>
-          <mat-slide-toggle color="primary" class="tasks__toggle"></mat-slide-toggle>
-        </li>
+        <ng-container *ngFor="let task of listFood">
+          <li class="tasks__item" (click)="toggleTask(task.task)">
+            <img class="tasks__img" src="../../../../../assets/imgs/personoids/phy1.svg">
+            <div class="tasks__text--container">
+              <p class="tasks__text">{{task.title}}</p>
+              <p class="tasks__text--sub">{{task.describe}}</p>
+            </div>
+            <mat-slide-toggle color="primary" class="tasks__toggle" [checked]="withTask(task.task)"></mat-slide-toggle>
+          </li>
+        </ng-container>
       </ul>
     </section>
 
-    <section class="tasks__group">
+    <section class="tasks__group" *ngIf="listHobbies.length">
       <h3 class="tasks__title">Hobbies & Lifestyle</h3>
 
       <ul class="tasks__list">
-        <li class="tasks__item">
-          <img class="tasks__img" src="../../../../../assets/imgs/personoids/phy1.svg">
-          <div class="tasks__text--container">
-            <p class="tasks__text">Warm Up</p>
-            <p class="tasks__text--sub">05:00</p>
-          </div>
-          <mat-slide-toggle color="primary" class="tasks__toggle"></mat-slide-toggle>
-        </li>
+        <ng-container *ngFor="let task of listHobbies">
+          <li class="tasks__item" (click)="toggleTask(task.task)">
+            <img class="tasks__img" src="../../../../../assets/imgs/personoids/phy1.svg">
+            <div class="tasks__text--container">
+              <p class="tasks__text">{{task.title}}</p>
+              <p class="tasks__text--sub">{{task.describe}}</p>
+            </div>
+            <mat-slide-toggle color="primary" class="tasks__toggle" [checked]="withTask(task.task)"></mat-slide-toggle>
+          </li>
+        </ng-container>
       </ul>
     </section>
   </main>
 
-  <footer class="footer">
+  <!-- <footer class="footer">
     <app-btn>Guardar</app-btn>
-  </footer>
+  </footer> -->
 </main>

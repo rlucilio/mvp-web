@@ -68,6 +68,7 @@
 
   &__toggle {
     flex: 0;
+    pointer-events: none;
   }
 
   &__text {

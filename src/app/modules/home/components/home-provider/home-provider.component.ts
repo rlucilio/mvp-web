@@ -64,14 +64,20 @@ export class HomeProviderComponent implements OnInit {
     const result = !benefit.plan
       ? 0
       : benefit.plan.tasks.reduce(
-          (result, task) => (result += Number(task.result)),
+          (result, task) =>
+            (result +=
+              typeof task.result === 'boolean'
+                ? Number(task.expected === task.result)
+                : Number(task.result)),
           0
         );
 
     const expected = !benefit.plan
       ? 0
       : benefit.plan.tasks.reduce(
-          (result, task) => (result += Number(task.expected)),
+          (result, task) =>
+            (result +=
+              typeof task.result === 'boolean' ? 1 : Number(task.expected)),
           0
         );
 

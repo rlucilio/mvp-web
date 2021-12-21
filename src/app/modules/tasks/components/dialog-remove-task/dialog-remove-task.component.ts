@@ -5,7 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   selector: 'app-dialog-remove-task',
   template: ` <main class="content">
     <header class="nav">
-      <button class="nav__btn">
+      <button class="nav__btn" (click)="close()">
         <img src="../../../../../assets/icons/close.svg" />
       </button>
       <p class="nav__title">Agendar consulta</p>

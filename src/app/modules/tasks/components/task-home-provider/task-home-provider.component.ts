@@ -63,14 +63,20 @@ export class TaskHomeProviderComponent implements OnInit {
       const result = this.pageModel.benefit?.plan
         ? 0
         : this.pageModel.benefit.plan.tasks.reduce(
-            (result, task) => (result += Number(task.result)),
+            (result, task) =>
+              (result +=
+                typeof task.result === 'boolean'
+                  ? Number(task.expected === task.result)
+                  : Number(task.result)),
             0
           );
 
       const expected = !this.pageModel.benefit.plan
         ? 0
         : this.pageModel.benefit.plan.tasks.reduce(
-            (result, task) => (result += Number(task.expected)),
+            (result, task) =>
+              (result +=
+                typeof task.result === 'boolean' ? 1 : Number(task.expected)),
             0
           );
 
@@ -117,7 +123,7 @@ export class TaskHomeProviderComponent implements OnInit {
       );
 
       if (tasksGroupType['LIFESTYLE']) {
-        const tasksGroup = this.taskService.groupTaskByType(
+        const tasksGroup = this.taskService.groupTaskByName(
           tasksGroupType['LIFESTYLE']
         );
 
@@ -127,13 +133,22 @@ export class TaskHomeProviderComponent implements OnInit {
           const gain = tasksGroup[key][0].task.input.gain.label;
 
           const result = tasksGroup[key].reduce(
-            (result, curr) => (result += curr.result ? Number(curr.result) : 0),
+            (result, curr) =>
+              (result += curr.result
+                ? typeof curr.result === 'boolean'
+                  ? Number(curr.expected === curr.result)
+                  : Number(curr.result)
+                : 0),
             0
           );
 
           const expected = tasksGroup[key].reduce(
             (result, curr) =>
-              (result += curr.expected ? Number(curr.expected) : 0),
+              (result += curr.expected
+                ? typeof curr.result === 'boolean'
+                  ? 1
+                  : Number(curr.expected)
+                : 0),
             0
           );
 
@@ -166,7 +181,7 @@ export class TaskHomeProviderComponent implements OnInit {
       );
 
       if (tasksGroupType['WORKOUTS']) {
-        const tasksGroup = this.taskService.groupTaskByType(
+        const tasksGroup = this.taskService.groupTaskByName(
           tasksGroupType['WORKOUTS']
         );
 
@@ -176,13 +191,22 @@ export class TaskHomeProviderComponent implements OnInit {
           const gain = tasksGroup[key][0].task.input.gain.label;
 
           const result = tasksGroup[key].reduce(
-            (result, curr) => (result += curr.result ? Number(curr.result) : 0),
+            (result, curr) =>
+              (result += curr.result
+                ? typeof curr.result === 'boolean'
+                  ? Number(curr.expected === curr.result)
+                  : Number(curr.result)
+                : 0),
             0
           );
 
           const expected = tasksGroup[key].reduce(
             (result, curr) =>
-              (result += curr.expected ? Number(curr.expected) : 0),
+              (result += curr.expected
+                ? typeof curr.result === 'boolean'
+                  ? 1
+                  : Number(curr.expected)
+                : 0),
             0
           );
 
@@ -215,7 +239,7 @@ export class TaskHomeProviderComponent implements OnInit {
       );
 
       if (tasksGroupType['FOOD']) {
-        const tasksGroup = this.taskService.groupTaskByType(
+        const tasksGroup = this.taskService.groupTaskByName(
           tasksGroupType['FOOD']
         );
 
@@ -225,13 +249,22 @@ export class TaskHomeProviderComponent implements OnInit {
           const gain = tasksGroup[key][0].task.input.gain.label;
 
           const result = tasksGroup[key].reduce(
-            (result, curr) => (result += curr.result ? Number(curr.result) : 0),
+            (result, curr) =>
+              (result += curr.result
+                ? typeof curr.result === 'boolean'
+                  ? Number(curr.expected === curr.result)
+                  : Number(curr.result)
+                : 0),
             0
           );
 
           const expected = tasksGroup[key].reduce(
             (result, curr) =>
-              (result += curr.expected ? Number(curr.expected) : 0),
+              (result += curr.expected
+                ? typeof curr.result === 'boolean'
+                  ? 1
+                  : Number(curr.expected)
+                : 0),
             0
           );
 

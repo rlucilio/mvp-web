@@ -48,13 +48,14 @@ import { DialogFeedbackComponent } from '../dialog-feedback/dialog-feedback.comp
         <ng-container *ngIf="data.task.task.input.type === 'COUNT'">
           <section class="inp__count">
             <mat-slider
+              *ngIf="data.task.expected"
               class="count"
               color="primary"
               thumbLabel
               [displayWith]="formatLabel"
               step="1"
               [min]="data.task.task.input.count.min"
-              [min]="data.task.task.input.count.max"
+              [max]="data.task.expected.toString() | number"
               [(ngModel)]="result"
             ></mat-slider>
           </section>

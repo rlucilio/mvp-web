@@ -14,8 +14,40 @@ interface ResultGroupByString {
   [key: string]: TasksResponse[];
 }
 
+interface ResultGroup {
+  [key: string]: ResponseFindAllTasks[];
+}
+
 interface ResultGroupByNumber {
   [key: number]: TasksResponse[];
+}
+
+interface Input {
+  type: string;
+  label: string;
+  check: {
+    falseLabel: string;
+    trueLabel: string;
+  };
+  count: {
+    min: number;
+    max: number;
+    default: number;
+    multiplesLabel: string;
+    uniqueLabel: string;
+  };
+  gain: {
+    label: string;
+    label2: number;
+  };
+}
+
+export interface ResponseFindAllTasks {
+  type: string;
+  name: string;
+  description: string;
+  input: Input;
+  _id: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -35,9 +67,23 @@ export class TaskService {
     }, {} as any);
   }
 
+  groupTaskByName2(array: Array<ResponseFindAllTasks>): ResultGroup {
+    return array.reduce((result, curr) => {
+      (result[curr.name] = result[curr.name] || []).push(curr);
+      return result;
+    }, {} as any);
+  }
+
   groupTaskByType(array: Array<TasksResponse>): ResultGroupByString {
     return array.reduce((result, curr) => {
       (result[curr.task.type] = result[curr.task.type] || []).push(curr);
+      return result;
+    }, {} as any);
+  }
+
+  groupTaskByType2(array: Array<ResponseFindAllTasks>): ResultGroup {
+    return array.reduce((result, curr) => {
+      (result[curr.type] = result[curr.type] || []).push(curr);
       return result;
     }, {} as any);
   }
@@ -79,6 +125,43 @@ export class TaskService {
         startDate,
         endDate,
       })
+      .pipe(
+        first(),
+        finalize(() => this.spinner.hide())
+      );
+  }
+
+  getAllTasks() {
+    this.spinner.show();
+    return this.http.get<ResponseFindAllTasks[]>(this.URL).pipe(
+      first(),
+      finalize(() => this.spinner.hide())
+    );
+  }
+
+  removeTaskInPlan(email: string, task: string) {
+    this.spinner.show();
+    return this.http
+      .delete<{ needFeedBack: boolean }>(
+        `${this.URL}/plan/task?email=${email}&task=${task}`
+      )
+      .pipe(
+        first(),
+        finalize(() => this.spinner.hide())
+      );
+  }
+
+  addTask(
+    body: {
+      task: string;
+      email: string;
+      expected: number | boolean;
+      date: string;
+    }[]
+  ) {
+    this.spinner.show();
+    return this.http
+      .post<{ needFeedBack: boolean }>(`${this.URL}/plan`, body)
       .pipe(
         first(),
         finalize(() => this.spinner.hide())

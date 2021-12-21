@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -14,11 +15,15 @@ import { Chart } from 'chart.js';
   styleUrls: ['./tasks-home.component.scss'],
 })
 export class TasksHomeComponent implements OnInit {
-  constructor() {}
+  constructor(private readonly _location: Location) {}
 
   @Input() title?: string = 'Minhas atividades';
   @Input() headerColor?: string =
     'linear-gradient(270deg, #c58bf2 0%, #eea4ce 100%)';
 
   ngOnInit(): void {}
+
+  backPage() {
+    this._location.back();
+  }
 }

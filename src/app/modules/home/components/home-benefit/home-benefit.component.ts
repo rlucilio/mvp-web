@@ -113,43 +113,71 @@ export class HomeBenefitComponent implements OnInit, AfterViewInit {
           this.pageModel.tasksResultGraph = [
             groupByDayWeek[0]
               ? groupByDayWeek[0].reduce(
-                  (result, curr) => (result += Number(curr.result)),
+                  (result, curr) =>
+                    (result +=
+                      typeof curr.result === 'boolean'
+                        ? Number(curr.expected === curr.result)
+                        : Number(curr.result)),
                   0
                 )
               : 0,
             groupByDayWeek[1]
               ? groupByDayWeek[1].reduce(
-                  (result, curr) => (result += Number(curr.result)),
+                  (result, curr) =>
+                    (result +=
+                      typeof curr.result === 'boolean'
+                        ? Number(curr.expected === curr.result)
+                        : Number(curr.result)),
                   0
                 )
               : 0,
             groupByDayWeek[2]
               ? groupByDayWeek[2].reduce(
-                  (result, curr) => (result += Number(curr.result)),
+                  (result, curr) =>
+                    (result +=
+                      typeof curr.result === 'boolean'
+                        ? Number(curr.expected === curr.result)
+                        : Number(curr.result)),
                   0
                 )
               : 0,
             groupByDayWeek[3]
               ? groupByDayWeek[3].reduce(
-                  (result, curr) => (result += Number(curr.result)),
+                  (result, curr) =>
+                    (result +=
+                      typeof curr.result === 'boolean'
+                        ? Number(curr.expected === curr.result)
+                        : Number(curr.result)),
                   0
                 )
               : 0,
             groupByDayWeek[4]
               ? groupByDayWeek[4].reduce(
-                  (result, curr) => (result += Number(curr.result)),
+                  (result, curr) =>
+                    (result +=
+                      typeof curr.result === 'boolean'
+                        ? Number(curr.expected === curr.result)
+                        : Number(curr.result)),
                   0
                 )
               : 0,
             groupByDayWeek[5]
               ? groupByDayWeek[5].reduce(
-                  (result, curr) => (result += Number(curr.result)),
+                  (result, curr) =>
+                    (result +=
+                      typeof curr.result === 'boolean'
+                        ? Number(curr.expected === curr.result)
+                        : Number(curr.result)),
                   0
                 )
               : 0,
             groupByDayWeek[6]
               ? groupByDayWeek[6].reduce(
-                  (result, curr) => (result += Number(curr.result)),
+                  (result, curr) =>
+                    (result +=
+                      typeof curr.result === 'boolean'
+                        ? Number(curr.expected === curr.result)
+                        : Number(curr.result)),
                   0
                 )
               : 0,
@@ -169,12 +197,22 @@ export class HomeBenefitComponent implements OnInit, AfterViewInit {
       const gain = tasksGroup[key][0].task.input.gain.label;
 
       const result = tasksGroup[key].reduce(
-        (result, curr) => (result += curr.result ? Number(curr.result) : 0),
+        (result, curr) =>
+          (result += curr.result
+            ? typeof curr.result === 'boolean'
+              ? Number(curr.expected === curr.result)
+              : Number(curr.result)
+            : 0),
         0
       );
 
       const expected = tasksGroup[key].reduce(
-        (result, curr) => (result += curr.expected ? Number(curr.expected) : 0),
+        (result, curr) =>
+          (result += curr.expected
+            ? typeof curr.result === 'boolean'
+              ? 1
+              : Number(curr.expected)
+            : 0),
         0
       );
 
