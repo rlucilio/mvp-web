@@ -18,7 +18,7 @@ interface ResultGroupByNumber {
   [key: number]: TasksResponse[];
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class TaskService {
   private readonly URL = `${environment.urlServe}/tasks`;
   constructor(
@@ -64,6 +64,20 @@ export class TaskService {
         email,
         task,
         value,
+      })
+      .pipe(
+        first(),
+        finalize(() => this.spinner.hide())
+      );
+  }
+
+  startPlan(email: string, startDate: string, endDate: string) {
+    this.spinner.show();
+    return this.http
+      .post<{ needFeedBack: boolean }>(`${this.URL}/plan`, {
+        email,
+        startDate,
+        endDate,
       })
       .pipe(
         first(),

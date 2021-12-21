@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { finalize, first } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { FindBenefitResponse } from '../../benefit/services/benefit.service';
 
 interface ResponseFindProvider {
   name: string;
@@ -13,6 +14,7 @@ interface ResponseFindProvider {
   urlPhoto: string;
   phone: string;
   gender: string;
+  benefits: FindBenefitResponse[];
 }
 
 @Injectable()

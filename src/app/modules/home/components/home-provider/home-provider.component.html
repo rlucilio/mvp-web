@@ -2,7 +2,7 @@
   <header class="header-benefit">
     <h3 class="header-benefit__text">Bem-vindo de volta,</h3>
     <h3 class="header-benefit__text--focus">
-      Stefani Wong
+      {{pageModel.name}}
     </h3>
   </header>
 
@@ -10,21 +10,25 @@
 
     <section class="benefits__search">
       <img src="../../../../../assets/icons/search.svg" class="benefits__icon">
-      <input type="text" class="benefits__input">
+      <input type="text" class="benefits__input" (change)="$filterBenefit.next($event)">
     </section>
 
     <section class="benefits__content">
       <h3 class="benefits__title">Pacientes</h3>
       <ul class="benefits__list">
-        <li class="benefits__item">
-          <img src="../../../../../assets/imgs/profile.svg" class="benefits__img">
-          <div class="benefits__infos">
-            <p class="benefits__text--name">Stefani Wong</p>
-            <p class="benefits__text--sub">180 Calories Burn | 20minutes</p>
-            <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-          </div>
-          <img src="../../../../../assets/icons/btn-arrow.svg" class="benefits__icon--next">
-        </li>
+        <ng-container *ngFor="let benefit of benefits">
+          <li class="benefits__item" (click)="goToBenefit(benefit)">
+            <img src="../../../../../assets/imgs/profile.svg" class="benefits__img">
+            <div class="benefits__infos">
+              <p class="benefits__text--name">{{benefit.name}}</p>
+              <p class="benefits__text--sub">Plano:
+                {{benefit.plan ? benefit.plan.beginDate + ' - ' +benefit.plan.endDate : 'Destaivado'}}
+              </p>
+              <mat-progress-bar mode="determinate" [value]="getPercentage(benefit)"></mat-progress-bar>
+            </div>
+            <img src="../../../../../assets/icons/btn-arrow.svg" class="benefits__icon--next">
+          </li>
+        </ng-container>
       </ul>
     </section>
   </main>

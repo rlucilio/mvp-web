@@ -7,21 +7,21 @@
     <header class="profile">
       <section class="profile__description">
         <div>
-          <p class="profile__text">Esther Howard</p>
+          <p class="profile__text">{{this.pageModel.benefit?.name}}</p>
         </div>
-        <button>Ver perfil</button>
+        <!-- <button>Ver perfil</button> -->
       </section>
       <section class="profile__infos">
         <div class="profile__bio-item">
-          <p class="profile__text--major">123cm</p>
+          <p class="profile__text--major">{{weight}}cm</p>
           <span class="profile__text--minor">Altura</span>
         </div>
         <div class="profile__bio-item">
-          <p class="profile__text--major">60kg</p>
+          <p class="profile__text--major">{{height}}kg</p>
           <span class="profile__text--minor">Peso</span>
         </div>
         <div class="profile__bio-item">
-          <p class="profile__text--major">22</p>
+          <p class="profile__text--major">{{yearsBenefit}}</p>
           <span class="profile__text--minor">Anos</span>
         </div>
       </section>
@@ -30,70 +30,79 @@
     <main class="benefit">
       <header class="benefit__header">
         <h2 class="benefit__text--title">Progresso do plano</h2>
-        <mat-progress-bar mode="determinate" color="accent" value="40"></mat-progress-bar>
+        <mat-progress-bar mode="determinate" color="accent" [value]="percentage"></mat-progress-bar>
       </header>
 
       <section class="benefit__section schedules">
-        <li class="schedules__item">
-          <img src="../../../../../assets/icons/calendar.svg" class="schedules__icon" />
-          <p class="schedules__text">Enfermeiro(a)</p>
-          <p class="schedules__text--right">27/11, 09:00 AM</p>
-          <img src="../../../../../assets/icons/arrow-right.svg" class="schedules__icon--right" />
-        </li>
+        <ng-container *ngFor="let schedule of schedules">
+          <li class="schedules__item">
+            <img src="../../../../../assets/icons/calendar.svg" class="schedules__icon" />
+            <p class="schedules__text">{{schedule.provider.specialty}}</p>
+            <p class="schedules__text--right">{{formatDateSchedule(schedule.schedule.dateTime)}}</p>
+            <img src="../../../../../assets/icons/arrow-right.svg" class="schedules__icon--right" />
+          </li>
+        </ng-container>
       </section>
 
-      <section class="benefit__section warning" *ngIf="false">
+      <section class="benefit__section warning" *ngIf="!pageModel.benefit?.plan?.tasks?.length">
         <p class="warning__main">Voce ainda nao registrou nenhuma tarefa para esse paciente</p>
-        <p class="warning__btn">Para cadastrar uma nova tarefa <span class="warning__btn--primary">clique aqui</span>
+        <p class="warning__btn" (click)="goToTaskList()">Para cadastrar uma nova tarefa <span
+            class="warning__btn--primary">clique aqui</span>
         </p>
       </section>
 
-      <section class="benefit__section tasks">
-        <section class="tasks__group">
+      <section class="benefit__section tasks" *ngIf="pageModel.benefit?.plan?.tasks?.length">
+        <section class="tasks__group" *ngIf="listFood?.length">
           <div class="tasks__text--container">
             <p class="tasks__text--title">Alimentaçao</p>
-            <p class="tasks__text--btn">Editar</p>
+            <p class="tasks__text--btn" (click)="goToTaskList()">Editar</p>
           </div>
           <ul class="tasks__list">
-            <li class="tasks__item">
-              <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
-              <div class="tasks__infos">
-                <p class="tasks__text--name">Beber 8 copos de agua</p>
-                <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-              </div>
-            </li>
+            <ng-container *ngFor="let task of listFood">
+              <li class="tasks__item">
+                <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
+                <div class="tasks__infos">
+                  <p class="tasks__text--name">{{task.title}}</p>
+                  <mat-progress-bar mode="determinate" [value]="task.percent"></mat-progress-bar>
+                </div>
+              </li>
+            </ng-container>
           </ul>
         </section>
 
-        <section class="tasks__group">
+        <section class="tasks__group" *ngIf="listHobbies?.length">
           <div class="tasks__text--container">
             <p class="tasks__text--title">Hobbies & lifestyle</p>
-            <p class="tasks__text--btn">Editar</p>
+            <p class="tasks__text--btn" (click)="goToTaskList()">Editar</p>
           </div>
           <ul class="tasks__list">
-            <li class="tasks__item">
-              <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
-              <div class="tasks__infos">
-                <p class="tasks__text--name">Beber 8 copos de agua</p>
-                <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-              </div>
-            </li>
+            <ng-container *ngFor="let task of listHobbies">
+              <li class="tasks__item">
+                <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
+                <div class="tasks__infos">
+                  <p class="tasks__text--name">{{task.title}}</p>
+                  <mat-progress-bar mode="determinate" [value]="task.percent"></mat-progress-bar>
+                </div>
+              </li>
+            </ng-container>
           </ul>
         </section>
 
-        <section class="tasks__group">
+        <section class="tasks__group" *ngIf="listWork?.length">
           <div class="tasks__text--container">
             <p class="tasks__text--title">Exercicios</p>
-            <p class="tasks__text--btn">Editar</p>
+            <p class="tasks__text--btn" (click)="goToTaskList()">Editar</p>
           </div>
           <ul class="tasks__list">
-            <li class="tasks__item">
-              <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
-              <div class="tasks__infos">
-                <p class="tasks__text--name">Beber 8 copos de agua</p>
-                <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
-              </div>
-            </li>
+            <ng-container *ngFor="let task of listWork">
+              <li class="tasks__item">
+                <img src="../../../../../assets/imgs/personoids/phy1.svg" class="tasks__img">
+                <div class="tasks__infos">
+                  <p class="tasks__text--name">{{task.title}}</p>
+                  <mat-progress-bar mode="determinate" [value]="task.percent"></mat-progress-bar>
+                </div>
+              </li>
+            </ng-container>
           </ul>
         </section>
       </section>

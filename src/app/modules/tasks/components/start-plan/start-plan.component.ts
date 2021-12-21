@@ -1,12 +1,18 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { FindBenefitResponse } from 'src/app/core/benefit/services/benefit.service';
+import { KEY_BENEFIT_STORAGE } from 'src/app/core/shared/constants';
+import { ToastService } from 'src/app/core/shared/services/services/toast.service';
+import { StorageService } from 'src/app/core/storage/services/storage.service';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-start-plan',
   template: `
     <main class="content">
       <header class="nav">
-        <button class="nav__btn">
+        <button class="nav__btn" (click)="close()">
           <img src="../../../../../assets/icons/close.svg" />
         </button>
         <p class="nav__title">Agendar consulta</p>
@@ -21,8 +27,18 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
           <p class="datepick__title">Escolha a duração do plano</p>
           <section class="datepick__container">
             <mat-date-range-input [rangePicker]="picker">
-              <input matStartDate placeholder="Começo" readonly />
-              <input matEndDate placeholder="Fim" readonly />
+              <input
+                [(ngModel)]="starDate"
+                matStartDate
+                placeholder="Começo"
+                readonly
+              />
+              <input
+                [(ngModel)]="endDate"
+                matEndDate
+                placeholder="Fim"
+                readonly
+              />
             </mat-date-range-input>
             <mat-datepicker-toggle
               matSuffix
@@ -34,7 +50,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
       </main>
 
       <footer class="footer">
-        <app-btn [color]="'PRIMARY'" (click)="close()">Iniciar plano</app-btn>
+        <app-btn [color]="'PRIMARY'">Iniciar plano</app-btn>
       </footer>
     </main>
   `,
@@ -126,14 +142,35 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   ],
 })
 export class StartPlanComponent implements OnInit {
+  starDate?: string;
+  endDate?: string;
   constructor(
     private readonly dialogRef: MatDialogRef<StartPlanComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {}
+    @Inject(MAT_DIALOG_DATA) public data: FindBenefitResponse,
+    private readonly taskService: TaskService,
+    private readonly toast: ToastService,
+    private readonly storage: StorageService,
+    private readonly router: Router
   ) {}
 
   ngOnInit(): void {}
 
   close() {
     this.dialogRef.close();
+  }
+
+  startPlan() {
+    if (this.starDate && this.endDate) {
+      this.taskService
+        .startPlan(this.data.email, this.starDate, this.endDate)
+        .subscribe({
+          error: () => this.toast.showErrorSystem(),
+          next: () => {
+            this.dialogRef.close();
+            this.storage.set(KEY_BENEFIT_STORAGE, JSON.stringify(this.data));
+            this.router.navigate(['/tasks/provider']);
+          },
+        });
+    }
   }
 }

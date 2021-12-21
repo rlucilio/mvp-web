@@ -1,5 +1,5 @@
 export const KEY_ACCESS_TOKEN = 'access_token';
-export const KEY_USER_INFO = 'user_info';
+export const KEY_BENEFIT_STORAGE = 'benefit_info';
 export const KEY_USER = 'user';
 export const REGEX_EMAIL =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/;

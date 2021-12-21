@@ -18,6 +18,30 @@ export interface ResponseSchedule {
   };
 }
 
+export interface GetSchedulesResponseByBenefit {
+  schedule: {
+    _id: string;
+    status: string;
+    room: string;
+    updateDate: string;
+    insertDate: string;
+    dateTime: string;
+    provider: string;
+    cod: string;
+    __v: number;
+    benefit: string;
+  };
+  provider: {
+    _id: string;
+    updateDate: string;
+    insertDate: string;
+    specialty: string;
+    user: string;
+    __v: number;
+    bio: string;
+  };
+}
+
 @Injectable()
 export class ScheduleService {
   private readonly URL = `${environment.urlServe}/schedule`;
@@ -48,31 +72,9 @@ export class ScheduleService {
 
   getScheduleByBenefit(email: string) {
     return this.http
-      .get<
-        {
-          schedule: {
-            _id: string;
-            status: string;
-            room: string;
-            updateDate: string;
-            insertDate: string;
-            dateTime: string;
-            provider: string;
-            cod: string;
-            __v: number;
-            benefit: string;
-          };
-          provider: {
-            _id: string;
-            updateDate: string;
-            insertDate: string;
-            specialty: string;
-            user: string;
-            __v: number;
-            bio: string;
-          };
-        }[]
-      >(`${this.URL}/benefit?email=${email}`)
+      .get<GetSchedulesResponseByBenefit[]>(
+        `${this.URL}/benefit?email=${email}`
+      )
       .pipe(
         first(),
         finalize(() => this.spinner.hide())

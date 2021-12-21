@@ -12,7 +12,7 @@
         <a [routerLink]="['dash']" class="menu__link" routerLinkActive="menu__link--active"></a>
       </li>
       <li class="menu__item menu__item--main">
-        <a [routerLink]="['tasks']">
+        <a (click)="goToTask()">
           <img src="../../../../../assets/icons/task.svg" *ngIf="isProvider" />
           <img src="../../../../../assets/icons/my-tasks.svg" *ngIf="!isProvider" />
         </a>

@@ -19,4 +19,12 @@ export class LayoutComponent implements OnInit {
   goToSchedule() {
     this.router.navigateByUrl('/schedule/marked');
   }
+
+  goToTask() {
+    if (this.isProvider) {
+      this.router.navigate(['/tasks/provider']);
+    } else {
+      this.router.navigate(['/tasks/benefit']);
+    }
+  }
 }
