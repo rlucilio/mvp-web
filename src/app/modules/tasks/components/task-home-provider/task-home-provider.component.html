@@ -28,6 +28,17 @@
     </header>
 
     <main class="benefit">
+      <section class="benefit__section plan" (click)="startPlan()">
+        <div class="plan__div">
+          <p class="plan__text">Início</p>
+          <p class="plan__text--sub">{{this.pageModel.benefit?.plan?.beginDate}}</p>
+        </div>
+
+        <div class="Término">
+          <p class="plan__text">Término</p>
+          <p class="plan__text--sub">{{this.pageModel.benefit?.plan?.endDate}}</p>
+        </div>
+      </section>
       <header class="benefit__header">
         <h2 class="benefit__text--title">Progresso do plano</h2>
         <mat-progress-bar mode="determinate" color="accent" [value]="percentage"></mat-progress-bar>

@@ -258,3 +258,21 @@
     justify-content: space-around;
   }
 }
+
+.plan {
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(274.42deg, #92a3fd 0%, #9dceff 124.45%);
+  opacity: 0.2;
+  border-radius: 16px;
+  padding: 15px;
+  align-items: center;
+
+  &__text {
+    margin: 0;
+    margin-bottom: 10px;
+    &--sub {
+      margin: 0;
+    }
+  }
+}

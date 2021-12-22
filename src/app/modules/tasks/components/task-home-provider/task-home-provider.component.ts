@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { BenefitService } from 'src/app/core/benefit/services/benefit.service';
@@ -11,6 +12,7 @@ import {
   ScheduleService,
 } from 'src/app/modules/schedule/services/schedule.service';
 import { TaskService } from '../../services/task.service';
+import { StartPlanComponent } from '../start-plan/start-plan.component';
 
 @Component({
   selector: 'app-task-home-provider',
@@ -28,7 +30,8 @@ export class TaskHomeProviderComponent implements OnInit {
     private readonly scheduleService: ScheduleService,
     private readonly taskService: TaskService,
     private readonly router: Router,
-    private readonly toast: ToastService
+    private readonly toast: ToastService,
+    private readonly dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -290,5 +293,15 @@ export class TaskHomeProviderComponent implements OnInit {
 
   goToTaskList() {
     this.router.navigate(['/home/tasks/provider/benefit']);
+  }
+
+  startPlan() {
+    this.dialog
+      .open(StartPlanComponent, {
+        width: '315px',
+        data: this.pageModel.benefit,
+      })
+      .afterClosed()
+      .subscribe(() => this.ngOnInit());
   }
 }
