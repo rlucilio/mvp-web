@@ -309,18 +309,16 @@ export class HomeBenefitComponent implements OnInit, AfterViewInit {
   }
 
   markDone(task: TaskPageModel) {
-    if (task.percent <= 100) {
-      this.dialog
-        .open(DialogTaskComponent, {
-          width: '315px',
-          data: task,
-        })
-        .afterClosed()
-        .subscribe(() => {
-          this.ngOnInit();
-          this.ngAfterViewInit();
-        });
-    }
+    this.dialog
+      .open(DialogTaskComponent, {
+        width: '315px',
+        data: task,
+      })
+      .afterClosed()
+      .subscribe(() => {
+        this.ngOnInit();
+        this.ngAfterViewInit();
+      });
   }
 
   goToRoom(url?: { specialty: string; dateTime: string; link: string }) {
