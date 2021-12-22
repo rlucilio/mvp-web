@@ -150,7 +150,7 @@ export class DialogTaskComponent implements OnInit {
 
   markDone() {
     const userStorage = this.storage.get(KEY_USER);
-    if (userStorage && this.result) {
+    if (userStorage && this.result !== undefined) {
       const user = JSON.parse(userStorage) as { email: string };
       this.taskService
         .markTask(user.email, this.data.id, this.result)

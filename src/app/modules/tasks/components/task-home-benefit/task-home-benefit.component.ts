@@ -143,27 +143,13 @@ export class TaskHomeBenefitComponent implements OnInit, AfterViewInit {
         const execLabel = tasksGroup[key][0].task.input.gain.label2;
         const gain = tasksGroup[key][0].task.input.gain.label;
 
-        const result = tasksGroup[key].reduce(
-          (result, curr) =>
-            (result += curr.result
-              ? typeof curr.result === 'boolean'
-                ? Number(curr.expected === curr.result)
-                : Number(curr.result)
-              : 0),
-          0
-        );
+        const total = tasksGroup[key].length;
 
-        const expected = tasksGroup[key].reduce(
-          (result, curr) =>
-            (result += curr.expected
-              ? typeof curr.result === 'boolean'
-                ? 1
-                : Number(curr.expected)
-              : 0),
-          0
-        );
+        const result = tasksGroup[key].filter(
+          (task) => task.status !== 'WAIT'
+        ).length;
 
-        const percent = (100 * result) / expected;
+        const percent = (100 * result) / total;
 
         this.taskFoodList.push({
           title: tasksGroup[key][0].task.input.label,
@@ -187,27 +173,13 @@ export class TaskHomeBenefitComponent implements OnInit, AfterViewInit {
         const execLabel = tasksGroup[key][0].task.input.gain.label2;
         const gain = tasksGroup[key][0].task.input.gain.label;
 
-        const result = tasksGroup[key].reduce(
-          (result, curr) =>
-            (result += curr.result
-              ? typeof curr.result === 'boolean'
-                ? Number(curr.expected === curr.result)
-                : Number(curr.result)
-              : 0),
-          0
-        );
+        const total = tasksGroup[key].length;
 
-        const expected = tasksGroup[key].reduce(
-          (result, curr) =>
-            (result += curr.expected
-              ? typeof curr.result === 'boolean'
-                ? 1
-                : Number(curr.expected)
-              : 0),
-          0
-        );
+        const result = tasksGroup[key].filter(
+          (task) => task.status !== 'WAIT'
+        ).length;
 
-        const percent = (100 * result) / expected;
+        const percent = (100 * result) / total;
 
         this.taskHobbiesList.push({
           title: tasksGroup[key][0].task.input.label,
@@ -231,27 +203,13 @@ export class TaskHomeBenefitComponent implements OnInit, AfterViewInit {
         const execLabel = tasksGroup[key][0].task.input.gain.label2;
         const gain = tasksGroup[key][0].task.input.gain.label;
 
-        const result = tasksGroup[key].reduce(
-          (result, curr) =>
-            (result += curr.result
-              ? typeof curr.result === 'boolean'
-                ? Number(curr.expected === curr.result)
-                : Number(curr.result)
-              : 0),
-          0
-        );
+        const total = tasksGroup[key].length;
 
-        const expected = tasksGroup[key].reduce(
-          (result, curr) =>
-            (result += curr.expected
-              ? typeof curr.result === 'boolean'
-                ? 1
-                : Number(curr.expected)
-              : 0),
-          0
-        );
+        const result = tasksGroup[key].filter(
+          (task) => task.status !== 'WAIT'
+        ).length;
 
-        const percent = (100 * result) / expected;
+        const percent = (100 * result) / total;
 
         this.taskWorkList.push({
           title: tasksGroup[key][0].task.input.label,
