@@ -17,14 +17,22 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {}
 
   goToSchedule() {
-    this.router.navigateByUrl('/schedule/marked');
+    if (this.isProvider) {
+      this.toast.show('Em desenvolvimento');
+    } else {
+      this.router.navigateByUrl('/home/schedule');
+    }
   }
 
   goToTask() {
     if (this.isProvider) {
-      this.router.navigate(['/tasks/provider']);
+      this.router.navigate(['/home/tasks/provider']);
     } else {
-      this.router.navigate(['/tasks/benefit']);
+      this.router.navigate(['/home/tasks/benefit']);
     }
+  }
+
+  goToDash() {
+    this.toast.show('Em desenvolvimento');
   }
 }

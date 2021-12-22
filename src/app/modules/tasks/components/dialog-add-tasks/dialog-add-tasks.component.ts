@@ -2,9 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { Moment } from 'moment';
-import { FindBenefitResponse } from 'src/app/core/benefit/services/benefit.service';
+import { FindBenefitResponse } from 'src/app/core/benefit/services/responses-benefit';
 import { ToastService } from 'src/app/core/shared/services/services/toast.service';
-import { ResponseFindAllTasks, TaskService } from '../../services/task.service';
+import { ResponseGetAllTasks, TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-dialog-add-tasks',
@@ -22,7 +22,7 @@ import { ResponseFindAllTasks, TaskService } from '../../services/task.service';
           {{ data.task.input.label }}
         </p>
 
-        <ng-container *ngIf="data.task.type === 'CHECK'">
+        <ng-container *ngIf="data.task.input.type.type === 'CHECK'">
           <p class="main__text">Qual valor é esperado:</p>
           <section class="inp__choose">
             <mat-radio-group
@@ -32,16 +32,16 @@ import { ResponseFindAllTasks, TaskService } from '../../services/task.service';
               [(ngModel)]="expected"
             >
               <mat-radio-button value="sim" class="choose__item">{{
-                data.task.input.check.trueLabel
+                data.task.input.type.check?.trueLabel
               }}</mat-radio-button>
               <mat-radio-button value="não" class="choose__item">{{
-                data.task.input.check.falseLabel
+                data.task.input.type.check?.falseLabel
               }}</mat-radio-button>
             </mat-radio-group>
           </section>
         </ng-container>
 
-        <ng-container *ngIf="data.task.type === 'COUNT'">
+        <ng-container *ngIf="data.task.input.type.type === 'COUNT'">
           <p class="main__text">Quantidade:</p>
           <section class="inp__count">
             <mat-slider
@@ -51,8 +51,8 @@ import { ResponseFindAllTasks, TaskService } from '../../services/task.service';
               thumbLabel
               [displayWith]="formatLabel"
               step="1"
-              [min]="data.task.input.count.min"
-              [min]="data.task.input.count.max"
+              [min]="data.task.input.type.count?.min"
+              [max]="data.task.input.type.count?.max"
               aria-label="units"
             ></mat-slider>
           </section>
@@ -183,7 +183,7 @@ export class DialogAddTasksComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA)
     public data: {
       benefit: FindBenefitResponse;
-      task: ResponseFindAllTasks;
+      task: ResponseGetAllTasks;
     }
   ) {}
 
@@ -193,13 +193,9 @@ export class DialogAddTasksComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  formatLabel(value: number) {
-    if (value > 1) {
-      return `${value} ${this.data.task.input.count.multiplesLabel}`;
-    } else {
-      return `1 ${this.data.task.input.count.uniqueLabel}`;
-    }
-  }
+  formatLabel = (value: number) => {
+    return `${value}x`;
+  };
 
   addTask() {
     if (this.predSelected && this.expected !== undefined) {
@@ -259,7 +255,7 @@ export class DialogAddTasksComponent implements OnInit {
     const now = moment(new Date());
     const lastDate = moment(this.data.benefit.plan.endDate, 'DD/MM/YYYY');
     const dates = [];
-    while (now.isSameOrBefore(lastDate)) {
+    while (now.isBefore(lastDate)) {
       if (fnVerifyDay(now.isoWeekday())) {
         dates.push(now.format('DD/MM/YYYY'));
         now.add(1, 'days');

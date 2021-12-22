@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs';
+import { catchError, tap } from 'rxjs';
 import { BenefitService } from 'src/app/core/benefit/services/benefit.service';
 import { ProviderService } from 'src/app/core/provider/services/provider.service';
 import { KEY_USER } from 'src/app/core/shared/constants';
@@ -32,11 +32,18 @@ export class HomeComponent implements OnInit {
     const user: { email: string } = JSON.parse(userStorage);
     this.benefitService
       .findBenefit(user.email)
-      .pipe(catchError(() => this.providerService.findProvider(user.email)))
+      .pipe(
+        catchError(() =>
+          this.providerService
+            .findProvider(user.email)
+            .pipe(tap(() => (this.isProvider = true)))
+        )
+      )
       .subscribe({
         error: () => {
           this.storage.clear();
           this.router.navigate(['/auth']);
+
           this.toast.showErrorSystem();
         },
         next: (response) => {

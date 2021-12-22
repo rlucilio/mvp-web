@@ -2,14 +2,12 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import {
-  BenefitService,
-  FindBenefitResponse,
-} from 'src/app/core/benefit/services/benefit.service';
+import { BenefitService } from 'src/app/core/benefit/services/benefit.service';
+import { FindBenefitResponse } from 'src/app/core/benefit/services/responses-benefit';
 import { KEY_BENEFIT_STORAGE } from 'src/app/core/shared/constants';
 import { ToastService } from 'src/app/core/shared/services/services/toast.service';
 import { StorageService } from 'src/app/core/storage/services/storage.service';
-import { ResponseFindAllTasks, TaskService } from '../../services/task.service';
+import { ResponseGetAllTasks, TaskService } from '../../services/task.service';
 import { DialogAddTasksComponent } from '../dialog-add-tasks/dialog-add-tasks.component';
 
 @Component({
@@ -19,7 +17,7 @@ import { DialogAddTasksComponent } from '../dialog-add-tasks/dialog-add-tasks.co
 })
 export class TasksBenefitComponent implements OnInit {
   pageModel: {
-    tasks?: ResponseFindAllTasks[];
+    tasks?: ResponseGetAllTasks[];
     benefit?: FindBenefitResponse;
   } = {};
 
@@ -168,7 +166,7 @@ export class TasksBenefitComponent implements OnInit {
     }
   }
 
-  withTask(task: ResponseFindAllTasks) {
+  withTask(task: ResponseGetAllTasks) {
     if (this.pageModel.benefit) {
       const taskFind = this.pageModel.benefit.plan.tasks.find(
         (t) => t.task._id === task._id
@@ -184,7 +182,7 @@ export class TasksBenefitComponent implements OnInit {
     this._location.back();
   }
 
-  toggleTask(task: ResponseFindAllTasks) {
+  toggleTask(task: ResponseGetAllTasks) {
     if (this.pageModel.benefit?.email) {
       if (this.withTask(task)) {
         this.taskService

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { finalize, first } from 'rxjs';
-import { TasksResponse } from 'src/app/core/benefit/services/benefit.service';
+import { TaskElement } from 'src/app/core/benefit/services/responses-benefit';
 import { environment } from 'src/environments/environment';
 
 interface ResultGroupBy<T> {
@@ -11,43 +11,58 @@ interface ResultGroupBy<T> {
 }
 
 interface ResultGroupByString {
-  [key: string]: TasksResponse[];
+  [key: string]: TaskElement[];
 }
 
 interface ResultGroup {
-  [key: string]: ResponseFindAllTasks[];
+  [key: string]: ResponseGetAllTasks[];
 }
 
 interface ResultGroupByNumber {
-  [key: number]: TasksResponse[];
+  [key: number]: TaskElement[];
 }
 
-interface Input {
+export interface ResponseGetAllTasks {
+  _id: string;
+  input: ResponseGetAllTasksInput;
+  description: string;
+  name: string;
+  type: string;
+  __v: number;
+}
+
+export interface ResponseGetAllTasksInput {
+  type: ResponseGetAllTasksType;
+  label: string;
+  check: ResponseGetAllTasksCheck | null;
+  count: ResponseGetAllTasksCount | null;
+  gain: ResponseGetAllTasksGain;
+}
+
+export interface ResponseGetAllTasksCheck {
+  falseLabel: string;
+  trueLabel: string;
+}
+
+export interface ResponseGetAllTasksCount {
+  min: number;
+  max: number;
+  default: number;
+  multiplesLabel: string;
+  uniqueLabel: string;
+}
+
+export interface ResponseGetAllTasksGain {
+  label: string;
+  label2: string;
+}
+
+export interface ResponseGetAllTasksType {
   type: string;
   label: string;
-  check: {
-    falseLabel: string;
-    trueLabel: string;
-  };
-  count: {
-    min: number;
-    max: number;
-    default: number;
-    multiplesLabel: string;
-    uniqueLabel: string;
-  };
-  gain: {
-    label: string;
-    label2: number;
-  };
-}
-
-export interface ResponseFindAllTasks {
-  type: string;
-  name: string;
-  description: string;
-  input: Input;
-  _id: string;
+  check: ResponseGetAllTasksCheck | null;
+  count: ResponseGetAllTasksCount | null;
+  gain: ResponseGetAllTasksGain;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -60,35 +75,35 @@ export class TaskService {
 
   getTasksByBenefit(email: string) {}
 
-  groupTaskByName(array: Array<TasksResponse>): ResultGroupByString {
+  groupTaskByName(array: Array<TaskElement>): ResultGroupByString {
     return array.reduce((result, curr) => {
       (result[curr.task.name] = result[curr.task.name] || []).push(curr);
       return result;
     }, {} as any);
   }
 
-  groupTaskByName2(array: Array<ResponseFindAllTasks>): ResultGroup {
+  groupTaskByName2(array: Array<ResponseGetAllTasks>): ResultGroup {
     return array.reduce((result, curr) => {
       (result[curr.name] = result[curr.name] || []).push(curr);
       return result;
     }, {} as any);
   }
 
-  groupTaskByType(array: Array<TasksResponse>): ResultGroupByString {
+  groupTaskByType(array: Array<TaskElement>): ResultGroupByString {
     return array.reduce((result, curr) => {
       (result[curr.task.type] = result[curr.task.type] || []).push(curr);
       return result;
     }, {} as any);
   }
 
-  groupTaskByType2(array: Array<ResponseFindAllTasks>): ResultGroup {
+  groupTaskByType2(array: Array<ResponseGetAllTasks>): ResultGroup {
     return array.reduce((result, curr) => {
       (result[curr.type] = result[curr.type] || []).push(curr);
       return result;
     }, {} as any);
   }
 
-  groupTaskByDayWeek(array: Array<TasksResponse>): ResultGroupByNumber {
+  groupTaskByDayWeek(array: Array<TaskElement>): ResultGroupByNumber {
     return array.reduce((result, curr) => {
       const dayWeek = moment(curr.dateExpected, 'DD/MM/YYYY').isoWeekday();
       (result[dayWeek] = result[dayWeek] || []).push(curr);
@@ -133,13 +148,13 @@ export class TaskService {
 
   getAllTasks() {
     this.spinner.show();
-    return this.http.get<ResponseFindAllTasks[]>(this.URL).pipe(
+    return this.http.get<ResponseGetAllTasks[]>(this.URL).pipe(
       first(),
       finalize(() => this.spinner.hide())
     );
   }
 
-  removeTaskInPlan(email: string, task: string) {
+  removeTaskInPlan(task: string, email: string) {
     this.spinner.show();
     return this.http
       .delete<{ needFeedBack: boolean }>(
@@ -161,7 +176,7 @@ export class TaskService {
   ) {
     this.spinner.show();
     return this.http
-      .post<{ needFeedBack: boolean }>(`${this.URL}/plan`, body)
+      .post<{ needFeedBack: boolean }>(`${this.URL}/plan/task`, body)
       .pipe(
         first(),
         finalize(() => this.spinner.hide())

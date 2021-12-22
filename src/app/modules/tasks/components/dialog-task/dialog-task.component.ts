@@ -16,7 +16,7 @@ import { DialogFeedbackComponent } from '../dialog-feedback/dialog-feedback.comp
   template: `
     <main class="content">
       <header class="nav">
-        <button class="nav__btn" (click)="close()" )>
+        <button class="nav__btn" (click)="close()">
           <img src="../../../../../assets/icons/close.svg" />
         </button>
         <p class="nav__title">Atualização da tarefa</p>
@@ -27,7 +27,7 @@ import { DialogFeedbackComponent } from '../dialog-feedback/dialog-feedback.comp
           {{ data.task.task.input.label }}
         </p>
 
-        <ng-container *ngIf="data.task.task.input.type === 'CHECK'">
+        <ng-container *ngIf="data.task.task.input.type.type === 'CHECK'">
           <section class="inp__choose">
             <mat-radio-group
               class="choose__group"
@@ -36,16 +36,16 @@ import { DialogFeedbackComponent } from '../dialog-feedback/dialog-feedback.comp
               [(ngModel)]="result"
             >
               <mat-radio-button [value]="true" class="choose__item">{{
-                data.task.task.input.check.trueLabel
+                data.task.task.input.check?.trueLabel
               }}</mat-radio-button>
               <mat-radio-button [value]="false" class="choose__item">{{
-                data.task.task.input.check.falseLabel
+                data.task.task.input.check?.falseLabel
               }}</mat-radio-button>
             </mat-radio-group>
           </section>
         </ng-container>
 
-        <ng-container *ngIf="data.task.task.input.type === 'COUNT'">
+        <ng-container *ngIf="data.task.task.input.type.type === 'COUNT'">
           <section class="inp__count">
             <mat-slider
               *ngIf="data.task.expected"
@@ -170,11 +170,7 @@ export class DialogTaskComponent implements OnInit {
     }
   }
 
-  formatLabel(value: number) {
-    if (value > 1) {
-      return `${value} ${this.data.task.task.input.count.multiplesLabel}`;
-    } else {
-      return `1 ${this.data.task.task.input.count.uniqueLabel}`;
-    }
-  }
+  formatLabel = (value: number) => {
+    return `${value}x`;
+  };
 }

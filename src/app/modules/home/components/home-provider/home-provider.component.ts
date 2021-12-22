@@ -8,7 +8,7 @@ import {
   map,
   Subject,
 } from 'rxjs';
-import { FindBenefitResponse } from 'src/app/core/benefit/services/benefit.service';
+import { FindBenefitResponse } from 'src/app/core/benefit/services/responses-benefit';
 import { ProviderService } from 'src/app/core/provider/services/provider.service';
 import { KEY_BENEFIT_STORAGE, KEY_USER } from 'src/app/core/shared/constants';
 import { ToastService } from 'src/app/core/shared/services/services/toast.service';
@@ -41,14 +41,14 @@ export class HomeProviderComponent implements OnInit {
     this.$filterBenefit
       .pipe(
         map((event) => (event.target as HTMLInputElement).value),
-        debounceTime(400),
+        debounceTime(100),
         distinctUntilChanged()
       )
       .subscribe((value: string) => (this.filterBenefit = value));
 
     const userStorage = this.storage.get(KEY_USER) || '';
 
-    if (userStorage) this.router.navigate(['/auth/login']);
+    if (!userStorage) this.router.navigate(['/auth/login']);
     const user: { email: string } = JSON.parse(userStorage);
 
     this.providerService.findProvider(user.email).subscribe({
@@ -87,7 +87,7 @@ export class HomeProviderComponent implements OnInit {
   goToBenefit(benefit: FindBenefitResponse) {
     if (benefit.plan) {
       this.storage.set(KEY_BENEFIT_STORAGE, JSON.stringify(benefit));
-      this.router.navigate(['/tasks/provider']);
+      this.router.navigate(['/home/tasks/provider']);
     } else {
       this.dialog.open(StartPlanComponent, {
         width: '315px',
@@ -101,7 +101,7 @@ export class HomeProviderComponent implements OnInit {
       return this.pageModel.benefits?.filter((benefit) =>
         benefit.name
           .toUpperCase()
-          .includes(this.filterBenefit?.toUpperCase() || '')
+          .includes(this.filterBenefit?.toUpperCase().trim() || '')
       );
     } else {
       return this.pageModel.benefits ? this.pageModel.benefits : [];

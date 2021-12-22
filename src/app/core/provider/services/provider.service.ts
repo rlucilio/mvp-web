@@ -3,20 +3,7 @@ import { Injectable } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { finalize, first } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { FindBenefitResponse } from '../../benefit/services/benefit.service';
-
-interface ResponseFindProvider {
-  name: string;
-  specialty: string;
-  bio: string;
-  email: string;
-  state: string;
-  urlPhoto: string;
-  phone: string;
-  gender: string;
-  benefits: FindBenefitResponse[];
-}
-
+import { ResponseFindProvider } from './responses';
 @Injectable()
 export class ProviderService {
   private readonly BASE_URL = `${environment.urlServe}/provider`;

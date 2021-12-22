@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -9,11 +10,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 import * as moment from 'moment';
-import {
-  BenefitService,
-  FindBenefitResponse,
-  TasksResponse,
-} from 'src/app/core/benefit/services/benefit.service';
+import { BenefitService } from 'src/app/core/benefit/services/benefit.service';
+import { FindBenefitResponse } from 'src/app/core/benefit/services/responses-benefit';
 import { KEY_USER } from 'src/app/core/shared/constants';
 import { ToastService } from 'src/app/core/shared/services/services/toast.service';
 import { StorageService } from 'src/app/core/storage/services/storage.service';
@@ -42,7 +40,8 @@ export class TaskHomeBenefitComponent implements OnInit, AfterViewInit {
     private readonly toast: ToastService,
     private readonly router: Router,
     private readonly taskService: TaskService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly _location: Location
   ) {}
 
   ngOnInit(): void {
@@ -69,14 +68,13 @@ export class TaskHomeBenefitComponent implements OnInit, AfterViewInit {
             {
               data: this.tasksResultGraph,
               backgroundColor: (ctx) => {
-                if ((ctx.raw as number) > 50) {
+                if (ctx.dataIndex % 2 === 0) {
                   return this.createCompleteColor();
                 } else {
                   return this.createWaitColor();
                 }
               },
               borderWidth: 0,
-              borderRadius: Number.MAX_SAFE_INTEGER,
             },
           ],
         },
@@ -86,14 +84,15 @@ export class TaskHomeBenefitComponent implements OnInit, AfterViewInit {
               display: false,
             },
           },
+          backgroundColor: 'green',
           scales: {
             y: {
               beginAtZero: true,
-              display: false,
+              display: true,
             },
             x: {
               grid: {
-                display: false,
+                display: true,
                 lineWidth: 0,
               },
             },
@@ -276,6 +275,11 @@ export class TaskHomeBenefitComponent implements OnInit, AfterViewInit {
       },
       next: (res) => {
         if (res.plan) {
+          if (!res.plan.tasks.length) {
+            this.toast.show('Plano sem tarefas ainda');
+            this._location.back();
+          }
+
           this.getTasks(res);
 
           const lastWeek = moment(new Date()).subtract(1, 'week');
@@ -359,17 +363,30 @@ export class TaskHomeBenefitComponent implements OnInit, AfterViewInit {
                 )
               : 0,
           ];
+        } else {
+          this.toast.show('Plano não iniciado!');
+          this._location.back();
         }
+
+        setTimeout(() => {
+          this.ngAfterViewInit();
+        }, 1000);
       },
     });
   }
 
   markDone(task: TaskPageModel) {
-    if (task.percent >= 100) {
-      this.dialog.open(DialogTaskComponent, {
-        width: '315px',
-        data: task,
-      });
+    if (task.percent <= 100) {
+      this.dialog
+        .open(DialogTaskComponent, {
+          width: '315px',
+          data: task,
+        })
+        .afterClosed()
+        .subscribe(() => {
+          this.ngOnInit();
+          this.ngAfterViewInit();
+        });
     }
   }
 }

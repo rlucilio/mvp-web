@@ -68,7 +68,7 @@ import { StorageService } from 'src/app/core/storage/services/storage.service';
       </main>
 
       <footer>
-        <app-btn>Concluir</app-btn>
+        <app-btn (click)="sendFeedBack()">Concluir</app-btn>
       </footer>
     </main>
   `,

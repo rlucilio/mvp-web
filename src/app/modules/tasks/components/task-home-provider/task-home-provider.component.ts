@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import {
-  BenefitService,
-  FindBenefitResponse,
-} from 'src/app/core/benefit/services/benefit.service';
+import { BenefitService } from 'src/app/core/benefit/services/benefit.service';
+import { FindBenefitResponse } from 'src/app/core/benefit/services/responses-benefit';
 import { KEY_BENEFIT_STORAGE } from 'src/app/core/shared/constants';
 import { ToastService } from 'src/app/core/shared/services/services/toast.service';
 import { StorageService } from 'src/app/core/storage/services/storage.service';
@@ -291,6 +289,6 @@ export class TaskHomeProviderComponent implements OnInit {
   }
 
   goToTaskList() {
-    this.router.navigate(['/tasks/provider/benefit']);
+    this.router.navigate(['/home/tasks/provider/benefit']);
   }
 }

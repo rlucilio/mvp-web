@@ -18,7 +18,7 @@
       </ng-container>
     </section>
 
-    <section class="benefit-section tasks" *ngIf="pageModel.tasks">
+    <section class="benefit-section tasks" *ngIf="pageModel.tasks?.length">
       <header class="tasks__header">
         <h3 class="tasks__title">Metas diárias</h3>
         <span class="tasks__title--link" (click)="goToPageTask()">ver todas</span>
@@ -44,7 +44,7 @@
       </main>
     </section>
 
-    <section class="benefit-section chart">
+    <section class="benefit-section chart" *ngIf="pageModel.tasksResultGraph && pageModel.tasks?.length">
       <header class="chart__header">
         <h3 class="chart__title">Progresso das atividades</h3>
       </header>

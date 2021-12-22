@@ -9,10 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 import * as moment from 'moment';
-import {
-  BenefitService,
-  FindBenefitResponse,
-} from 'src/app/core/benefit/services/benefit.service';
+import { BenefitService } from 'src/app/core/benefit/services/benefit.service';
+import { FindBenefitResponse } from 'src/app/core/benefit/services/responses-benefit';
 import { KEY_USER } from 'src/app/core/shared/constants';
 import { ToastService } from 'src/app/core/shared/services/services/toast.service';
 import { StorageService } from 'src/app/core/storage/services/storage.service';
@@ -182,6 +180,9 @@ export class HomeBenefitComponent implements OnInit, AfterViewInit {
                 )
               : 0,
           ];
+          setTimeout(() => {
+            this.ngAfterViewInit();
+          }, 1000);
         }
       },
     });
@@ -255,7 +256,6 @@ export class HomeBenefitComponent implements OnInit, AfterViewInit {
                 }
               },
               borderWidth: 0,
-              borderRadius: Number.MAX_SAFE_INTEGER,
             },
           ],
         },
@@ -269,11 +269,11 @@ export class HomeBenefitComponent implements OnInit, AfterViewInit {
           scales: {
             y: {
               beginAtZero: true,
-              display: false,
+              display: true,
             },
             x: {
               grid: {
-                display: false,
+                display: true,
                 lineWidth: 0,
               },
             },
@@ -309,11 +309,17 @@ export class HomeBenefitComponent implements OnInit, AfterViewInit {
   }
 
   markDone(task: TaskPageModel) {
-    if (task.percent >= 100) {
-      this.dialog.open(DialogTaskComponent, {
-        width: '315px',
-        data: task,
-      });
+    if (task.percent <= 100) {
+      this.dialog
+        .open(DialogTaskComponent, {
+          width: '315px',
+          data: task,
+        })
+        .afterClosed()
+        .subscribe(() => {
+          this.ngOnInit();
+          this.ngAfterViewInit();
+        });
     }
   }
 

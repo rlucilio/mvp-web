@@ -42,6 +42,11 @@ const routes: Routes = [
           import('../tasks/tasks.module').then((m) => m.TasksModule),
       },
       {
+        path: 'schedule',
+        loadChildren: () =>
+          import('../schedule/schedule.module').then((m) => m.ScheduleModule),
+      },
+      {
         path: '',
         redirectTo: 'main/first-access',
         pathMatch: 'full',

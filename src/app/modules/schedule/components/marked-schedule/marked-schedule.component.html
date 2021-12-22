@@ -2,10 +2,7 @@
   <header class="header">
     <nav class="nav">
       <button class="nav__btn" (click)="backPage()">
-        <img
-          src="../../../../../assets/icons/back-arrow.svg"
-          class="nav__icon"
-        />
+        <img src="../../../../../assets/icons/back-arrow.svg" class="nav__icon" />
       </button>
 
       <p class="nav__title">Consultas</p>
@@ -16,18 +13,11 @@
 
   <main class="content">
     <ul class="schedules">
-      <li
-        class="schedules__item"
-        (click)="openRoom(nurseSchedule)"
-        [class]="{
+      <li class="schedules__item" (click)="openRoom(nurseSchedule)" [class]="{
           'schedules__item--disabled': !nurseSchedule,
           schedules__item: nurseSchedule
-        }"
-      >
-        <img
-          src="../../../../../assets/icons/calendar.svg"
-          class="schedules__icon"
-        />
+        }">
+        <img src="../../../../../assets/icons/calendar.svg" class="schedules__icon" />
         <p class="schedules__text">Enfermeiro(a)</p>
         <p class="schedules__text--right">{{ nurseSchedule?.dateTime }}</p>
       </li>
@@ -54,56 +44,34 @@
         >
       </li> -->
 
-      <li
-        (click)="openRoom(nutriSchedule)"
-        [class]="{
+      <li (click)="openRoom(nutriSchedule)" [class]="{
           'schedules__item--disabled': !nutriSchedule,
           schedules__item: nutriSchedule
-        }"
-      >
-        <img
-          src="../../../../../assets/icons/calendar.svg"
-          class="schedules__icon"
-        />
+        }">
+        <img src="../../../../../assets/icons/calendar.svg" class="schedules__icon" />
         <p class="schedules__text">Nutricionista</p>
         <p class="schedules__text--right" *ngIf="!passedWithCoach">
           {{ nutriSchedule?.dateTime }}
         </p>
-        <a
-          *ngIf="passedWithCoach"
-          class="schedules__text--link"
-          (click)="
-            goToSchedule('/schedule/list?specialty=Nutricionista&first=false')
-          "
-          >clique aqui para escolher a data</a
-        >
+        <a *ngIf="passedWithCoach" class="schedules__text--link" (click)="
+            goToSchedule('/home/schedule/list?specialty=Nutricionista&first=false')
+          ">clique aqui para escolher a data</a>
       </li>
 
-      <li
-        (click)="openRoom(educatorSchedule)"
-        [class]="{
+      <li (click)="openRoom(educatorSchedule)" [class]="{
           'schedules__item--disabled': !educatorSchedule,
           schedules__item: educatorSchedule
-        }"
-      >
-        <img
-          src="../../../../../assets/icons/calendar.svg"
-          class="schedules__icon"
-        />
+        }">
+        <img src="../../../../../assets/icons/calendar.svg" class="schedules__icon" />
         <p class="schedules__text">Educador físico</p>
         <p class="schedules__text--right" *ngIf="!passedWithCoach">
           {{ educatorSchedule?.dateTime }}
         </p>
-        <a
-          *ngIf="passedWithCoach"
-          class="schedules__text--link"
-          (click)="
+        <a *ngIf="passedWithCoach" class="schedules__text--link" (click)="
             goToSchedule(
-              '/schedule/list?specialty=Educador%20físico&first=false'
+              '/home/schedule/list?specialty=Educador%20físico&first=false'
             )
-          "
-          >clique aqui para escolher a data</a
-        >
+          ">clique aqui para escolher a data</a>
       </li>
     </ul>
   </main>

@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { FindBenefitResponse } from 'src/app/core/benefit/services/benefit.service';
+import * as moment from 'moment';
+import { FindBenefitResponse } from 'src/app/core/benefit/services/responses-benefit';
 import { KEY_BENEFIT_STORAGE } from 'src/app/core/shared/constants';
 import { ToastService } from 'src/app/core/shared/services/services/toast.service';
 import { StorageService } from 'src/app/core/storage/services/storage.service';
@@ -50,7 +51,9 @@ import { TaskService } from '../../services/task.service';
       </main>
 
       <footer class="footer">
-        <app-btn [color]="'PRIMARY'">Iniciar plano</app-btn>
+        <app-btn [color]="'PRIMARY'" (click)="startPlan()"
+          >Iniciar plano</app-btn
+        >
       </footer>
     </main>
   `,
@@ -142,8 +145,8 @@ import { TaskService } from '../../services/task.service';
   ],
 })
 export class StartPlanComponent implements OnInit {
-  starDate?: string;
-  endDate?: string;
+  starDate?: Date;
+  endDate?: Date;
   constructor(
     private readonly dialogRef: MatDialogRef<StartPlanComponent>,
     @Inject(MAT_DIALOG_DATA) public data: FindBenefitResponse,
@@ -161,14 +164,17 @@ export class StartPlanComponent implements OnInit {
 
   startPlan() {
     if (this.starDate && this.endDate) {
+      const startDateFmt = moment(this.starDate).format('DD/MM/YYYY');
+      const endDateFmt = moment(this.endDate).format('DD/MM/YYYY');
+
       this.taskService
-        .startPlan(this.data.email, this.starDate, this.endDate)
+        .startPlan(this.data.email, startDateFmt, endDateFmt)
         .subscribe({
           error: () => this.toast.showErrorSystem(),
           next: () => {
             this.dialogRef.close();
             this.storage.set(KEY_BENEFIT_STORAGE, JSON.stringify(this.data));
-            this.router.navigate(['/tasks/provider']);
+            this.router.navigate(['/home/tasks/provider']);
           },
         });
     }

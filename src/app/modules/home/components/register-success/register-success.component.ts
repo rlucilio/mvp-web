@@ -17,6 +17,7 @@ import { ScheduleService } from 'src/app/modules/schedule/services/schedule.serv
 export class RegisterSuccessComponent implements OnInit {
   public nameBenefit?: string;
   hiddenMarkSchedule = false;
+  isProvider = false;
   constructor(
     private readonly router: Router,
     private readonly storage: StorageService,
@@ -41,6 +42,7 @@ export class RegisterSuccessComponent implements OnInit {
           this.hiddenMarkSchedule = true;
           return this.providerService.findProvider(user.email).pipe(
             tap(() => {
+              this.isProvider = true;
               this.storage.set(
                 KEY_USER,
                 JSON.stringify({
@@ -48,7 +50,7 @@ export class RegisterSuccessComponent implements OnInit {
                   provider: true,
                 })
               );
-              this.router.navigate(['/main/provider']);
+              this.router.navigateByUrl('/home/main/provider');
             })
           );
         })
@@ -72,15 +74,19 @@ export class RegisterSuccessComponent implements OnInit {
             })
           );
           this.nameBenefit = response.name;
+
+          if (!this.isProvider) {
+            this.schedule
+              .getScheduleByBenefit(user.email)
+              .subscribe((response) => {
+                this.hiddenMarkSchedule = !!(response.length > 0);
+                if (this.hiddenMarkSchedule) {
+                  this.router.navigate(['/home/main/benefit']);
+                }
+              });
+          }
         },
       });
-
-    this.schedule.getScheduleByBenefit(user.email).subscribe((response) => {
-      this.hiddenMarkSchedule = !!(response.length > 0);
-      if (this.hiddenMarkSchedule) {
-        this.router.navigate(['/main/benefit']);
-      }
-    });
   }
 
   goToLogin() {
@@ -89,7 +95,7 @@ export class RegisterSuccessComponent implements OnInit {
 
   goToSchedule() {
     this.router.navigateByUrl(
-      '/schedule/list?specialty=Enfermeira(o)&first=true'
+      '/home/schedule/list?specialty=Enfermeira(o)&first=true'
     );
   }
 }

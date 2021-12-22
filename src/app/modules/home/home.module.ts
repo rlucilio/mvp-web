@@ -16,6 +16,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScheduleService } from '../schedule/services/schedule.service';
 import { HomeBenefitComponent } from './components/home-benefit/home-benefit.component';
 import { HomeProviderComponent } from './components/home-provider/home-provider.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { HomeProviderComponent } from './components/home-provider/home-provider.
     FormsModule,
     ReactiveFormsModule,
     MatProgressBarModule,
+    MatDialogModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
   providers: [ScheduleService],
 })

@@ -3,65 +3,8 @@ import { Injectable } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { finalize, first } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { FindBenefitResponse } from './responses-benefit';
 
-export interface TasksResponse {
-  result?: number | boolean;
-  expected: number | boolean;
-  dateExpected: string;
-  updateDate: Date;
-  status: 'STARTED' | 'WAIT' | 'FINISH';
-  task: {
-    _id: string;
-    type: string;
-    name: string;
-    description: string;
-    input: {
-      type: string;
-      label: string;
-      check: {
-        falseLabel: string;
-        trueLabel: string;
-      };
-      count: {
-        min: number;
-        max: number;
-        default: number;
-        multiplesLabel: string;
-        uniqueLabel: string;
-      };
-      gain: {
-        label: string;
-        label2: string;
-      };
-    };
-  };
-}
-
-export interface FindBenefitResponse {
-  answeredForm: boolean;
-  questions: {
-    question: string;
-    answer: string;
-  }[];
-  birthDate: string;
-  body: {
-    weight: number;
-    height: number;
-  }[];
-  emotional: {
-    npsEmotional: number;
-  }[];
-  email: string;
-  gender: string;
-  name: string;
-  phone: string;
-  urlPhoto: string;
-  plan: {
-    beginDate: string;
-    endDate: string;
-    tasks: TasksResponse[];
-  };
-}
 @Injectable()
 export class BenefitService {
   private readonly BASE_URL = `${environment.urlServe}/benefit`;

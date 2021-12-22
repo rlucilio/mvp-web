@@ -1,4 +1,4 @@
-import { TasksResponse } from 'src/app/core/benefit/services/benefit.service';
+import { TaskElement } from 'src/app/core/benefit/services/responses-benefit';
 
 export interface TaskPageModel {
   title: string;
@@ -7,5 +7,5 @@ export interface TaskPageModel {
   id: string;
   execLabel: string;
   percent: number;
-  task: TasksResponse;
+  task: TaskElement;
 }

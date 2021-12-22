@@ -9,7 +9,7 @@
         <a [routerLink]="['main']" class="menu__link" routerLinkActive="menu__link--active"></a>
       </li>
       <li class="menu__item menu__item--dash">
-        <a [routerLink]="['dash']" class="menu__link" routerLinkActive="menu__link--active"></a>
+        <a (click)="goToDash()" class="menu__link" routerLinkActive="menu__link--active"></a>
       </li>
       <li class="menu__item menu__item--main">
         <a (click)="goToTask()">
@@ -18,7 +18,7 @@
         </a>
       </li>
       <li class="menu__item menu__item--chat">
-        <a [routerLink]="['/schedule']" class="menu__link" routerLinkActive="menu__link--active"></a>
+        <a (click)="goToSchedule()" class="menu__link" routerLinkActive="menu__link--active"></a>
       </li>
       <li class="menu__item menu__item--profile">
         <a [routerLink]="['profile']" class="menu__link" routerLinkActive="menu__link--active"></a>
